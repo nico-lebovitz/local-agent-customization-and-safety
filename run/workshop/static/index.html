@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Inside the agent · Workshop</title>
+    <link rel="stylesheet" href="/static/studio.css" />
+  </head>
+  <body>
+    <a class="skip" href="#observe">Skip to the demo</a>
+    <header class="top">
+      <a class="brand" href="#observe"
+        ><span class="brand-mark">↗</span> INSIDE THE AGENT
+        <span class="brand-sub">/ WORKSHOP</span></a
+      ><span id="health" class="status">Checking local models…</span>
+    </header>
+    <nav class="journey" aria-label="Walkthrough">
+      <a href="#observe" class="active"><span>01</span> Choose a task</a><i>→</i
+      ><a href="#vss"><span>02</span> Inside VSS</a><i>→</i
+      ><a href="#follow"><span>03</span> Follow the agent</a><i>→</i
+      ><a href="#failure"><span>04</span> Find the failure</a><i>→</i
+      ><a href="#learn"><span>05</span> Watch it learn</a>
+      <div id="scroll-progress"></div>
+    </nav>
+    <main>
+      <section id="observe" class="chapter">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">01 / OBSERVE & ASK</p>
+            <h1>A question becomes<br /><em>a sequence of actions.</em></h1>
+          </div>
+          <p class="intro">
+            Choose a scene. Give the agent a task.<br />Then watch the models
+            and tools work together.
+          </p>
+        </div>
+        <div class="scenario-heading">
+          <h2>Start with a scene</h2>
+          <span>Scroll to explore <b>↔</b></span>
+        </div>
+        <div
+          id="scenarios"
+          class="scenarios"
+          aria-label="Choose a scenario"
+        ></div>
+        <div class="launch-grid">
+          <div class="video-wrap">
+            <video
+              id="scene-video"
+              controls
+              muted
+              playsinline
+              preload="metadata"
+              aria-label="Selected observation video"
+            ></video>
+            <div class="video-caption">
+              <span id="scene-label">Observation</span><span>LOCAL VIDEO</span>
+            </div>
+            <p id="video-error" hidden>
+              Video unavailable. Recorded observations can still be used.
+            </p>
+          </div>
+          <div class="task-panel">
+            <p class="eyebrow">WHAT SHOULD THE AGENT DO?</p>
+            <div id="tasks" class="task-options">
+              <button data-task="describe" aria-pressed="true" class="selected">
+                <span class="task-icon">◎</span
+                ><span
+                  ><strong>Describe the scene</strong
+                  ><small>A general question · base model</small></span
+                ><span>↗</span></button
+              ><button data-task="triage" aria-pressed="false">
+                <span class="task-icon">◇</span
+                ><span
+                  ><strong>Classify the observation</strong
+                  ><small>A specialized question · specialist</small></span
+                ><span>↗</span></button
+              ><button data-task="draft" aria-pressed="false">
+                <span class="task-icon">≡</span
+                ><span
+                  ><strong>Prepare a draft report</strong
+                  ><small>Coordinate both models</small></span
+                ><span>↗</span>
+              </button>
+            </div>
+            <details>
+              <summary>Customize the task</summary>
+              <label for="task-text">Agent instruction</label
+              ><textarea id="task-text" rows="3" maxlength="1500"></textarea
+              ><label for="perception">Observation source</label
+              ><select id="perception">
+                <option value="recorded">Recorded VSS description</option>
+                <option value="live">
+                  Live VSS · requires running service
+                </option>
+              </select>
+            </details>
+            <button id="run" class="primary" disabled>
+              Run the agent <span>↗</span>
+            </button>
+            <p class="caption">
+              Live local inference. Recorded descriptions are used by default.
+              Reports remain drafts for human review.
+            </p>
+            <p id="launch-message" role="status"></p>
+          </div>
+        </div>
+        <details class="evidence-drawer">
+          <summary>What makes the specialist different?</summary>
+          <p>
+            The specialist uses the existing LoRA adapter. These are saved
+            evaluation results, not scores from the run above.
+          </p>
+          <div id="adapter-scores" class="score-grid"></div>
+        </details>
+      </section>
+      <section id="vss" class="chapter">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">02 / INSIDE VSS</p>
+            <h2>From video to<br /><em>an observation.</em></h2>
+          </div>
+          <p class="intro">
+            VSS is Video Search and Summarization.<br />Explore how its
+            components work together.
+          </p>
+        </div>
+        <div class="route-panel">
+          <div class="panel-heading">
+            <h3>Explore the live architecture</h3>
+            <span class="badge">ILLUSTRATED WALKTHROUGH</span>
+          </div>
+          <p>
+            Press play to follow your selected clip through VSS. This is an
+            illustrated example, not a live trace.
+          </p>
+          <div
+            id="vss-components"
+            class="vss-components"
+            aria-label="VSS components"
+          ></div>
+          <div class="vss-transport">
+            <button id="vss-play">▶ Play walkthrough</button
+            ><button id="vss-back" aria-label="Previous VSS step">← Back</button
+            ><button id="vss-next">Next →</button
+            ><button id="vss-reset">↺ Reset</button>
+          </div>
+          <div class="vss-stage" id="vss-stage" data-step="0">
+            <div class="vss-screen">
+              <video
+                id="vss-video"
+                controls
+                muted
+                playsinline
+                preload="metadata"
+                poster="/static/posters/civil-market.jpg"
+                src="/api/clips/civil-market"
+                aria-label="Selected scene in the VSS walkthrough"
+              ></video>
+              <div class="vss-scan" aria-hidden="true"></div>
+              <span id="vss-clip-label" class="vss-screen-label"
+                >SELECTED CLIP · CIVILIAN MARKET</span
+              >
+              <div id="vss-overlay" class="vss-overlay"></div>
+            </div>
+            <div class="vss-transform" aria-live="polite">
+              <span class="eyebrow">WHAT MOVES BETWEEN COMPONENTS</span>
+              <div class="vss-payload">
+                <small>IN</small><strong id="vss-input"></strong>
+              </div>
+              <div class="vss-operation">
+                <span aria-hidden="true">↓</span><span id="vss-action"></span
+                ><span aria-hidden="true">↓</span>
+              </div>
+              <div class="vss-payload vss-output">
+                <small>OUT</small><strong id="vss-output"></strong>
+              </div>
+            </div>
+          </div>
+          <label class="slider-label" for="vss-step"
+            ><span>Follow the observation</span
+            ><output id="vss-position">1 / 5</output></label
+          ><input id="vss-step" type="range" min="0" max="4" value="0" />
+          <article class="vss-detail" aria-live="polite">
+            <p id="vss-role" class="eyebrow"></p>
+            <h3 id="vss-title"></h3>
+            <p id="vss-description"></p>
+            <div class="vss-example">
+              <span>EXAMPLE · ILLUSTRATIVE</span>
+              <p id="vss-example"></p>
+            </div>
+          </article>
+        </div>
+        <div class="vss-path">
+          <strong id="vss-source-title"></strong>
+          <p id="vss-connection" role="status">Checking VSS API…</p>
+          <p id="vss-source-detail"></p>
+          <a href="#perception" class="quiet-link" id="vss-source-link"
+            >Change observation source ↑</a
+          >
+        </div>
+        <details class="evidence-drawer">
+          <summary>What supports VSS behind the scenes?</summary>
+          <p>
+            VST manages video access: clips, snapshots, and the video list. The
+            local deployment also includes stream and sensor services, Redis and
+            PostgreSQL, and Phoenix for VSS tracing. NVIDIA NIM services serve
+            the Nano and Cosmos models.
+          </p>
+          <p>
+            This walkthrough covers the installed base profile. Search and
+            alerts are separate profiles. The workshop agent uses NeMo Relay for
+            its own traces, shown in the next section.
+          </p>
+        </details>
+      </section>
+      <section id="follow" class="chapter">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">03 / ROUTE & EXECUTE</p>
+            <h2>See the decisions.<br /><em>Follow the evidence.</em></h2>
+          </div>
+          <div class="section-aside">
+            <span id="run-mode" class="badge">READY TO EXPLORE</span>
+            <p id="run-status" role="status">
+              Run a task above or explore a saved run.
+            </p>
+          </div>
+        </div>
+        <div class="toolbar">
+          <label for="saved-run">Saved execution</label
+          ><select id="saved-run">
+            <option value="">Choose a recorded run…</option></select
+          ><button id="load-run" disabled>Explore run ↗</button
+          ><a id="download" class="quiet-link" hidden>Download trace ↓</a>
+        </div>
+        <div class="route-panel">
+          <div class="panel-heading">
+            <h3>The request takes a route</h3>
+            <span id="route-caption">Explicit task routes · preview</span>
+          </div>
+          <div class="route-map" id="route-map" data-route="base">
+            <div class="route-origin">
+              <span class="node-symbol">↗</span><strong>Agent</strong
+              ><small>Chooses the next tool</small>
+            </div>
+            <div class="connector">→</div>
+            <div class="router-node">
+              <span class="eyebrow">NEMO</span><strong>Switchyard</strong
+              ><small>Routes the model call</small>
+            </div>
+            <div class="branches">
+              <button id="base-node" class="model-node" aria-pressed="true">
+                <span>01</span>
+                <div>
+                  <strong>Base model</strong><small>Reason & write</small>
+                </div>
+                <b>↗</b></button
+              ><button
+                id="specialist-node"
+                class="model-node"
+                aria-pressed="false"
+              >
+                <span>02</span>
+                <div>
+                  <strong>Specialist</strong
+                  ><small>Classify observations</small>
+                </div>
+                <b>↗</b>
+              </button>
+            </div>
+          </div>
+          <p id="route-detail" class="route-detail">
+            workshop-reason → base. Select a model to explore its role.
+          </p>
+        </div>
+        <div class="route-panel tool-shelf">
+          <div class="panel-heading">
+            <h3>The orchestrator chooses a tool</h3>
+            <span class="badge">TOOL CATALOG + RECORDED CHOICE</span>
+          </div>
+          <div class="tool-orchestrator">
+            <div>
+              <span class="eyebrow">ORCHESTRATOR · BASE MODEL</span>
+              <h3>Task + evidence + previous results</h3>
+              <p>
+                Code limits the allowed actions. The model chooses the next one,
+                a tool runs, and its result returns to the loop.
+              </p>
+            </div>
+            <span class="tool-loop" aria-hidden="true">↻</span>
+          </div>
+          <div
+            id="tool-shelf"
+            class="tool-cards"
+            aria-label="Explore the agent tools"
+          ></div>
+          <div class="tool-choice" aria-live="polite">
+            <span class="eyebrow">CHOICE AT THIS POINT IN THE TRACE</span>
+            <h3 id="tool-choice-title">Waiting for an agent decision</h3>
+            <p id="tool-choice-reason">
+              Run a task or load a saved execution, then scrub the timeline.
+            </p>
+            <p id="tool-evidence-state"></p>
+          </div>
+          <div class="tool-explainer">
+            <span class="eyebrow"
+              >EXPLORE A TOOL · CLICKING DOES NOT EXECUTE IT</span
+            >
+            <h3 id="tool-info-title"></h3>
+            <p id="tool-info-description"></p>
+            <div class="tool-io">
+              <div>
+                <small>REQUIRES</small>
+                <p id="tool-info-input"></p>
+              </div>
+              <span aria-hidden="true">→</span>
+              <div>
+                <small>RETURNS</small>
+                <p id="tool-info-output"></p>
+              </div>
+            </div>
+          </div>
+          <p class="caption">
+            Finish is a controller action, not a tool. It ends the run without
+            releasing a report. Switchyard routes model calls; the orchestrator
+            chooses tools.
+          </p>
+        </div>
+        <div class="trace-top">
+          <div>
+            <h3>One step at a time</h3>
+            <p id="trace-count">Your execution timeline will appear here.</p>
+          </div>
+          <div>
+            <button id="trace-play" disabled>▶ Play trace</button
+            ><button id="trace-end" disabled>Jump to end ⇥</button>
+          </div>
+        </div>
+        <div id="timeline" class="timeline" aria-label="Execution steps">
+          <div class="empty-state">
+            <span>◎ → ◇ → ≡</span>
+            <p>
+              A real trace will show the actions taken, including rejected
+              calls.
+            </p>
+          </div>
+        </div>
+        <label class="slider-label" for="trace-step"
+          ><span>Scrub through the execution</span
+          ><output id="trace-position">0 / 0</output></label
+        ><input
+          id="trace-step"
+          type="range"
+          min="0"
+          max="0"
+          value="0"
+          disabled
+        />
+        <div class="inspector-grid">
+          <article class="inspector">
+            <p id="event-kind" class="eyebrow">SELECT A STEP</p>
+            <h3 id="event-title">What happened here?</h3>
+            <p id="event-summary">
+              Click a timeline card or move the slider to inspect a decision.
+            </p>
+            <details>
+              <summary>Input, output & Relay evidence</summary>
+              <pre id="event-json">No event selected.</pre>
+            </details>
+          </article>
+          <article class="outcome">
+            <p class="eyebrow">RUN RESULT</p>
+            <h3 id="outcome-title">Waiting for a task</h3>
+            <div id="outcome-fields"></div>
+            <p id="outcome-text">
+              The final observation, classification, or draft appears here.
+            </p>
+            <details>
+              <summary>Full execution record</summary>
+              <pre id="run-json">No run loaded.</pre>
+            </details>
+          </article>
+        </div>
+      </section>
+      <section id="failure" class="chapter">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">04 / INSPECT A FAILURE</p>
+            <h2>One missing step.<br /><em>A very different result.</em></h2>
+          </div>
+          <p class="intro">
+            Classification needs evidence first.<br />Compare two recorded agent
+            executions.
+          </p>
+        </div>
+        <div class="failure-grid">
+          <article class="failure-card">
+            <span class="badge amber">RECORDED FAILURE</span>
+            <h3>It tried to classify too soon.</h3>
+            <div id="bad-sequence" class="sequence"></div>
+            <p id="failure-reason">Loading the original rejected call…</p>
+            <button id="inspect-failure" disabled>
+              Inspect the failed trace ↗
+            </button>
+          </article>
+          <article class="success-card">
+            <span class="badge">RECORDED CORRECTED RUN</span>
+            <h3>Collect evidence, then classify.</h3>
+            <div id="good-sequence" class="sequence"></div>
+            <p>
+              This run uses tighter action constraints. That was a workflow fix,
+              not an RL weight update.
+            </p>
+            <button id="inspect-success" disabled>
+              Inspect the corrected trace ↗
+            </button>
+          </article>
+        </div>
+        <div class="bridge-note">
+          <span>↓</span>
+          <p>
+            <strong>Use the failure to define a useful reward.</strong><br />The
+            next experiment scores new tool plans in Gym. The saved trace is
+            evidence for the rule, not RL training data.
+          </p>
+          <a href="#learn">Follow the learning loop ↓</a>
+        </div>
+      </section>
+      <section id="learn" class="chapter">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">05 / REWARD & IMPROVE</p>
+            <h2>Move the slider.<br /><em>Watch the policy change.</em></h2>
+          </div>
+          <div class="section-aside">
+            <span class="badge blue">RECORDED TRAINING PLAYBACK</span>
+            <p>
+              Real CPU updates. A tiny plan-selection policy.<br />Lightning
+              weights are unchanged.
+            </p>
+          </div>
+        </div>
+        <div class="learning-flow">
+          <span>Sample a plan</span><i>→</i><span>Gym checks it</span><i>→</i
+          ><span>RL updates weights</span><i>→</i><span>Try again</span>
+        </div>
+        <p id="training-error" role="status"></p>
+        <div class="learning-grid">
+          <article class="chart-panel">
+            <div class="panel-heading">
+              <h3>Expected reward</h3>
+              <span id="reward-value">—</span>
+            </div>
+            <svg
+              id="reward-chart"
+              viewBox="0 0 600 220"
+              role="img"
+              aria-label="Expected reward across training steps"
+            >
+              <path d="M40 20V190H580" class="axis" />
+              <path d="M40 105H580M40 20H580" class="grid-line" />
+              <text x="10" y="25">1</text>
+              <text x="10" y="195">0</text>
+              <text x="40" y="215">START</text>
+              <text x="532" y="215">40 UPDATES</text>
+              <path id="reward-area" />
+              <path id="reward-line" />
+              <line id="chart-cursor" y1="20" y2="190" />
+              <circle id="chart-dot" r="6" />
+            </svg>
+            <div class="scrubber">
+              <button id="training-play" disabled>▶ Play updates</button
+              ><strong id="training-position">Step 0 / 40</strong
+              ><button id="training-reset" disabled>Reset ↺</button>
+            </div>
+            <label class="sr-only" for="training-step">Training step</label
+            ><input
+              id="training-step"
+              type="range"
+              min="0"
+              max="40"
+              value="0"
+              disabled
+            />
+            <p class="caption">
+              Expected reward over this small training environment. This is not
+              a held-out benchmark.
+            </p>
+          </article>
+          <article class="policy-panel">
+            <div class="panel-heading">
+              <h3>Which plan would it choose?</h3>
+              <label
+                ><span class="sr-only">Task intent</span
+                ><select id="training-intent">
+                  <option value="draft">Draft report</option>
+                  <option value="triage">Classify</option>
+                  <option value="describe">Describe</option>
+                </select></label
+              >
+            </div>
+            <div id="probabilities"></div>
+            <p class="caption">
+              Probability of each fixed tool plan at the selected update.
+            </p>
+          </article>
+        </div>
+        <div class="sample-panel">
+          <div>
+            <p class="eyebrow">INSIDE THE SELECTED UPDATE</p>
+            <h3>A sampled attempt</h3>
+            <div class="segmented">
+              <button id="rewarded" aria-pressed="true">Rewarded</button
+              ><button id="rejected" aria-pressed="false">Rejected</button>
+            </div>
+          </div>
+          <div>
+            <div id="sample-sequence" class="sequence"></div>
+            <p id="sample-detail">
+              Move past step 0 to inspect a fresh sampled attempt.
+            </p>
+          </div>
+        </div>
+        <details class="evidence-drawer">
+          <summary>Experiment details & raw evidence</summary>
+          <p id="training-details"></p>
+          <a href="/api/training-demo/download">Download training artifact ↓</a>
+          <pre id="sample-json">No training step selected.</pre>
+        </details>
+      </section>
+    </main>
+    <footer>
+      <span>MODEL → TOOL → AGENT → TRACE → LEARNING</span
+      ><a href="/static/classic.html">Original detailed demo ↗</a
+      ><small id="versions"></small>
+    </footer>
+    <script type="module" src="/static/studio.js"></script>
+  </body>
+</html>

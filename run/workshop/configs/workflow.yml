@@ -1,0 +1,17 @@
+functions:
+  perceive:
+    _type: workshop_tool
+    action: perceive
+  triage:
+    _type: workshop_tool
+    action: triage
+  draft:
+    _type: workshop_tool
+    action: draft
+  request_review:
+    _type: workshop_tool
+    action: request_review
+workflow:
+  _type: workshop_agent
+  tool_names: [perceive, triage, draft, request_review]
+  max_steps: 8

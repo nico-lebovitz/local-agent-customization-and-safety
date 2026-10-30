@@ -1,0 +1,1807 @@
+{
+ "pack": "jisr-watchfloor",
+ "scenario": "EXERCISE NORTHERN SENTINEL (fictional, unclassified)",
+ "system_prompt": "You are a JISR watch-floor triage assistant for EXERCISE NORTHERN SENTINEL. For each observation return a JSON object with exactly these fields:\n- activity_type: one of armour_movement, mech_infantry_movement, dismounted_patrol, wheeled_logistics_convoy, engineer_activity, recovery_operation, air_defence_emplacement, artillery_emplacement, field_fortification, obstacle_emplacement, radar_emission, comms_emission, jamming_indicator, rotary_wing_transit, fixed_wing_transit, uav_transit, airfield_activity, maritime_patrol, amphibious_activity, port_handling, harbour_obstruction, bridge_damage, road_obstruction, rail_activity, power_infrastructure, pipeline_activity, civil_displacement, civil_gathering, humanitarian_convoy, checkpoint_activity, no_significant_activity\n- sensor_quality: one of CLEAR, DEGRADED, UNKNOWN\n- confidence: one of CONFIRMED, PROBABLE, POSSIBLE\n- routing: one of J2-ANALYSIS, J3-CURRENT-OPS, CIMIC, ARCHIVE\nRules: a single uncorroborated source can never be CONFIRMED. A degraded or unclear feed caps confidence at POSSIBLE. If the observation reports nothing of note, use no_significant_activity and route to ARCHIVE - do not invent an activity that is not described.\nReturn only the JSON object, no other text.",
+ "items": [
+  {
+   "id": "sdg-4320",
+   "observation": "At 0930Z, a clean and unobstructed sensor feed at the NORTHGATE substation reported tracked vehicles moving eastbound, with a confirmed count of four, and the report was independently verified by a second source.",
+   "gold": {
+    "activity_type": "armour_movement",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-2005",
+   "observation": "the sky above PORT KALDA is clear and unobstructed at 0930Z a fixed antenna array is rotated across the sector emissions detected on the high frequency band the sensor feed is clean clear and unobstructed no corroborating report",
+   "gold": {
+    "activity_type": "radar_emission",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-3138",
+   "observation": "0930Z: Small squad observed on VYRNA RIDGE, three figures spaced five meters apart, moving at deliberate pace with intermittent pauses. Feed degraded: frames dropping and image obscured by atmospheric interference, second independent source confirms track continuity despite feed instability.",
+   "gold": {
+    "activity_type": "dismounted_patrol",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-2030",
+   "observation": "at 0415z the video feed from vyrna ridge shows three helicopters descending to low altitude, frames stuttering and dropping as smoke obscures the approach. no other reports have come through.",
+   "gold": {
+    "activity_type": "rotary_wing_transit",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-0381",
+   "observation": "0620Z grey-hulled vessel underway on a patrol pattern observed at KESTREL BRIDGE sensor feed clean clear and unobstructed no corroborating report",
+   "gold": {
+    "activity_type": "maritime_patrol",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-0019",
+   "observation": "0620Z. Movement observed on MSR AMBER: four silhouettes spaced ten meters apart, moving with synchronized, deliberate pace. Forwarded from unattributed source, provenance unknown; second independent source confirms the sighting.",
+   "gold": {
+    "activity_type": "dismounted_patrol",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-1210",
+   "observation": "camera feed from msr amber dropped frames at 2240z showing four armored wheeled vehicles passing a roadside woodline with visible figures clambering on the rear decks second source synchronized timestamp corroborates the disjointed movement pattern",
+   "gold": {
+    "activity_type": "mech_infantry_movement",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-5879",
+   "observation": "2240Z. A distinct drone silhouette overflew from the west, maintaining a consistent altitude of approximately 1,500 feet above ground level as it passed MSR AMBER. The sensor feed originates from an unattributed source; provenance is unknown and there is no corroborating report to confirm the observation.",
+   "gold": {
+    "activity_type": "fixed_wing_transit",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-5212",
+   "observation": "0620Z. Clean, clear, unobstructed sensor feed detects a structural member severed at JENSEN CORRIDOR. No corroborating report available.",
+   "gold": {
+    "activity_type": "bridge_damage",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J3-CURRENT-OPS"
+   }
+  },
+  {
+   "id": "sdg-5225",
+   "observation": "2026-11-15T1145Z | Clear, unobstructed feed shows a cluster of flat wagons positioned on a section of track undergoing ballast tamping operations; a second independent feed source confirms the clean, clear condition and the presence of the rolling stock configuration at WAYPOINT SIERRA.",
+   "gold": {
+    "activity_type": "rail_activity",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J3-CURRENT-OPS"
+   }
+  },
+  {
+   "id": "sdg-3831",
+   "observation": "Ahead at the Cormorant coastal strip, two aid vehicles sit parked beside a row of stacked pallets sealed with green tape. Nearby, three aid workers in blue vests are bent over a small cart unloading bags of rice. The feed originates from an unattributed source with no established provenance, and there is no corroborating report to confirm the details.",
+   "gold": {
+    "activity_type": "humanitarian_convoy",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   }
+  },
+  {
+   "id": "sdg-1882",
+   "observation": "At 0930Z, the CORMORANT coastal strip feed is degraded, showing intermittent frame drops and obscured details. A second independent source confirms the valve assembly has stalled with visible residue at the connection point.",
+   "gold": {
+    "activity_type": "pipeline_activity",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   }
+  },
+  {
+   "id": "sdg-2530",
+   "observation": "the visual feed from KESTREL BRIDGE shows a hangar bay crowded with aircraft silhouettes and ground crew moving in tight clusters, the frames are dropping and the image is obscured by static, a second independent feed confirms the presence of aircraft and personnel at the same location at 0415Z",
+   "gold": {
+    "activity_type": "airfield_activity",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-0206",
+   "observation": "camera feed at 0305z, valve housing partially obscured by fog, frames dropping continuously. leak detected spraying from lower manifold, no secondary report to confirm.",
+   "gold": {
+    "activity_type": "pipeline_activity",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   }
+  },
+  {
+   "id": "sdg-4477",
+   "observation": "At 1710Z, the camera feed from MSR AMBER showed cranes actively swinging containers onto a quay, all movement visible against a clean, clear, and unobstructed sensor background with no corroborating report available.",
+   "gold": {
+    "activity_type": "port_handling",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J3-CURRENT-OPS"
+   }
+  },
+  {
+   "id": "sdg-5211",
+   "observation": "Aerial feed from an unestablished source shows a length of support structure lying across a waterway; severed members are visible at both ends. Time 1420Z. A second independent feed confirms the same severed structure in the same position.",
+   "gold": {
+    "activity_type": "bridge_damage",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   }
+  },
+  {
+   "id": "sdg-2308",
+   "observation": "The visual channel is clean, clear and unobstructed. At 1145Z, a formation of landing craft is observed moving inland from the shoreline, their bows pushing through shallow water as they prepare to disembark vehicles onto the beach.",
+   "gold": {
+    "activity_type": "amphibious_activity",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-1228",
+   "observation": "The Hill 412 feed at 0305Z is clean, clear and unobstructed. A column of fuel bowsers moves south along the ridge track.",
+   "gold": {
+    "activity_type": "wheeled_logistics_convoy",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-3844",
+   "observation": "clean clear unobstructed feed at 0620z shows two tracked vehicles moving north across vyRNA ridge with no corroborating report",
+   "gold": {
+    "activity_type": "armour_movement",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-2341",
+   "observation": "At 0930Z, the feed from Waypoint Sierra is clean, clear and unobstructed. A landslide has buried the entire thoroughfare, leaving only the uppermost edges of crushed earth visible against the treeline.",
+   "gold": {
+    "activity_type": "road_obstruction",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J3-CURRENT-OPS"
+   }
+  },
+  {
+   "id": "sdg-1270",
+   "observation": "1420Z. The thermal sensor tracks a squad moving upslope; the feed is heavily degraded, dropping frames and freezing on granular soil texture. Deep grooves and layered dirt banks are visible in the brief clear moments, but the view is otherwise obstructed by motion blur and signal loss. No follow-up or corroborating traffic is detected.",
+   "gold": {
+    "activity_type": "field_fortification",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-4537",
+   "observation": "1710Z. CLEAR AND UNOBSTRUCTED FEED shows a dense crowd of men, women, and children moving through the open-air market stalls at the DELTA rail junction, each carrying bags and bundles as they navigate the packed walkways. A second independent source confirms the feed integrity and the accurate depiction of the scene.",
+   "gold": {
+    "activity_type": "civil_gathering",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "CIMIC"
+   }
+  },
+  {
+   "id": "sdg-5306",
+   "observation": "1145Z. Two optical feeds from VYRNA RIDGE show a long column of heavy cargo vehicles moving east on the main supply route; frames are dropping and the image is obscured, but a second IR sensor on the ridge confirms the column's presence and steady movement.",
+   "gold": {
+    "activity_type": "wheeled_logistics_convoy",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-4401",
+   "observation": "A rotating antenna array, fixed to the platform, detected a steady pulse pattern in the lower frequency range. The signal feed is clean, clear, and unobstructed, with a second independent source confirming the pattern.",
+   "gold": {
+    "activity_type": "radar_emission",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-0315",
+   "observation": "2240Z. terrain ahead of delta rail junction features crude wire strung between low-profile ditches and dragon's teeth arrayed in a grid pattern, freshly laid and unattributed; a secondary optical feed at 2241Z confirms the same wire and dragon's teeth pattern across the approach.",
+   "gold": {
+    "activity_type": "obstacle_emplacement",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-1327",
+   "observation": "1145Z. A small unmanned aircraft loiters in the north-western sector of JENSEN CORRIDOR, its engine note irregular and its outline indistinct against the overcast. Forwarded from an unestablished source with unknown provenance. No corroborating report available.",
+   "gold": {
+    "activity_type": "uav_transit",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-3399",
+   "observation": "2026-05-20 1145Z\nThe feed, originating from an unestablished source with unknown provenance, shows plant equipment including tracked excavators and bulldozers actively grading and moving loose soil in the vicinity of the NORTHGATE substation. No corroborating report is available to support this assessment.",
+   "gold": {
+    "activity_type": "engineer_activity",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-4398",
+   "observation": "0930Z NORTHGATE. Sensor feed degraded, obscured by intermittent static, dropping several frames. Wire and earth moving equipment visible laying linear barriers across the north approach. No corroborating report available.",
+   "gold": {
+    "activity_type": "obstacle_emplacement",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-5071",
+   "observation": "A forward operator logged a column of tanker trucks moving eastbound along MSR AMBER at 2240Z, with the sensor feed originating from an unattributed source and no corroborating report available to verify the material.",
+   "gold": {
+    "activity_type": "wheeled_logistics_convoy",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-4703",
+   "observation": "0305Z. Forwarded from an unattributed, unverified feed with provenance unknown. Sensor shows a grey-hulled vessel underway, engine noise consistent with a slow transit, operating a track parallel to the CORMORANT coastal strip shoreline. No corroborating report available.",
+   "gold": {
+    "activity_type": "maritime_patrol",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-2511",
+   "observation": "The sensor feed shows four unmarked aircraft hovering low over the southern approach to MSR AMBER at 0305Z. The feed originates from an unattributed source with provenance unknown, and no corroborating report exists.",
+   "gold": {
+    "activity_type": "rotary_wing_transit",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-0939",
+   "observation": "The video feed, forwarded from an unestablished source with provenance unknown, shows a dense crowd of ordinary people assembled at the DELTA rail junction; a second independent source has just confirmed the scene is real-time.",
+   "gold": {
+    "activity_type": "civil_gathering",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   }
+  },
+  {
+   "id": "sdg-0373",
+   "observation": "At 0930Z the sensor feed is clean, clear, and unobstructed; a flight of transport aircraft is parked in a tight dispersal pattern along the CORMORANT coastal strip, their ground crews visible moving between the jets as fuelling and arming stations operate in real time, with no corroborating report available.",
+   "gold": {
+    "activity_type": "airfield_activity",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-4514",
+   "observation": "At 1145Z, the forward sensor over the CORMORANT coastal strip captured a degraded feed of intact pylons and undamaged substation transformers, but frames were dropping and visibility was partially obstructed; a second independent source confirmed the structural integrity of the observed switchgear.",
+   "gold": {
+    "activity_type": "power_infrastructure",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   }
+  },
+  {
+   "id": "sdg-2129",
+   "observation": "Feed clean, clear, unobstructed. Hill 412 0305Z. Pedestrians and vehicles moving away from the perimeter at slow, steady pace. Second source confirms match.",
+   "gold": {
+    "activity_type": "civil_displacement",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "CIMIC"
+   }
+  },
+  {
+   "id": "sdg-0478",
+   "observation": "1420Z. WAYPOINT SIERRA. Live feed degraded: dropped frames, pixelated zones obscuring details. Queues of civilian vehicles halted at a barrier; uniformed personnel checking documents through rolled-down windows. No corroborating report available.",
+   "gold": {
+    "activity_type": "checkpoint_activity",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   }
+  },
+  {
+   "id": "sdg-5033",
+   "observation": "The thermal feed at 0415Z is clean and unobstructed, displaying a precise row of civilian vehicles queued along the Cormorant coastal strip; individual windows are down, and uniformed personnel are methodically inspecting folded documents held by the drivers. A second independent sensor source confirms the identical layout and timing of the queue.",
+   "gold": {
+    "activity_type": "checkpoint_activity",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "CIMIC"
+   }
+  },
+  {
+   "id": "sdg-2803",
+   "observation": "sensor feed: digital ghost from unattributed drone, provenance unknown. 0415z view of KESTREL BRIDGE reveals a scuttled hull jammed across the narrow channel, blocking passage. second independent feed from overhead optics confirms the blockage persists.",
+   "gold": {
+    "activity_type": "harbour_obstruction",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   }
+  },
+  {
+   "id": "sdg-3954",
+   "observation": "At 2240Z, a fleet of turboprop aircraft passed over KESTREL BRIDGE from the north at a rough altitude of 1,800 feet, but the feed is heavily degraded, dropping frames and obscuring detail; a second independent source confirms the track.",
+   "gold": {
+    "activity_type": "fixed_wing_transit",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-1928",
+   "observation": "The optical feed from the NORTHGATE substation displays an unobstructed, clean picture of tracked vehicles transporting soldiers, with activity noted at 0305Z. A second independent feed corroborates the same distinct image of vehicles and personnel at the exact same time.",
+   "gold": {
+    "activity_type": "mech_infantry_movement",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-5869",
+   "observation": "1420z observation from the delta rail junction, sensor feed clean and clear unobstructed. helicopters holding orbit at 3000 feet, ground movement observed transiting the junction.",
+   "gold": {
+    "activity_type": "rotary_wing_transit",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-1547",
+   "observation": "[FEED: Forwarded from unattributed sensor network, provenance unknown.]\n0305Z, DELTA rail junction: Three helicopters inbound, orbiting at 1500 meters, heading south-east. A second independent source confirms this activity.",
+   "gold": {
+    "activity_type": "rotary_wing_transit",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-4494",
+   "observation": "1145Z sensor feed from NORTHGATE substation shows a span dropped from tower six, cables splayed across the hardstand, frames intermittently obscuring the image; no corroborating report available.",
+   "gold": {
+    "activity_type": "bridge_damage",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   }
+  },
+  {
+   "id": "sdg-3158",
+   "observation": "At 0930Z, the PORT KALDA observation feed is partially obstructed and dropping frames, showing excavators and dozers reshaping and clearing the surrounding terrain with no corroborating report available.",
+   "gold": {
+    "activity_type": "engineer_activity",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-4374",
+   "observation": "The system and its associated radar vehicle are visible on Hill 412 at 1710Z, but the feed is completely obscured by heavy rain and partially obstructed by tree lines, dropping multiple frames. No other reports corroborate this sighting.",
+   "gold": {
+    "activity_type": "air_defence_emplacement",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-5622",
+   "observation": "1145Z. The coastal feed from the CORMORANT strip is dropping frames and partially obstructed, rendering the track unstable.",
+   "gold": {
+    "activity_type": "jamming_indicator",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-1730",
+   "observation": "1710Z: camera view of a launcher and its support vehicle positioned on the CORMORANT coastal strip; feed degraded, intermittent frames and motion blur obstructing detail. second sensor line-of-sight corroborates the siting.",
+   "gold": {
+    "activity_type": "air_defence_emplacement",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-1059",
+   "observation": "sensor feed lost lock at delta rail junction. second source confirms the interference, provenance unknown.",
+   "gold": {
+    "activity_type": "jamming_indicator",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-0058",
+   "observation": "At 0415Z the Northern Grid camera feed shows the gravel apron in front of the substation partly obscured by early morning haze; a dark silhouette of a towed howitzer is visible, its barrel slewed left, with two ammunition crates stacked beside its trail, and the feed is clearly degraded, frames dropping intermittently; an adjacent high-angle drone sensor independently confirms the silhouette and crates are present.",
+   "gold": {
+    "activity_type": "artillery_emplacement",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-5367",
+   "observation": "stationary array reads backscatter from 100khz to 30mhz, timestamped 0930z, forwarded from unestablished source, provenance unknown, no corroborating report",
+   "gold": {
+    "activity_type": "radar_emission",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-5439",
+   "observation": "At 1420Z, an unattributed feed from WAYPOINT SIERRA observed cranes hoisting twenty-foot containers onto a cargo deck, with no supporting intelligence reports available to confirm the source or destination of the material.",
+   "gold": {
+    "activity_type": "port_handling",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   }
+  },
+  {
+   "id": "sdg-3811",
+   "observation": "TERSE AUTOMATED SENSOR CAPTION - FORWARDED FROM UNATTRIBUTED SOURCE, PROVENANCE UNKNOWN. VISIBILITY LIMITED BY LIGHT CONDITIONS. SINGLE SOURCE OBSERVES FAMILIES ON FOOT AND PRIVATE CARS, LOADED WITH GEAR, MOVING AWAY FROM THE NORTHGATE SUBSTATION AREA AT 1420Z. SECOND INDEPENDENT FEED CONFIRMS SIMILAR CIVILIAN FLOW PATTERN.",
+   "gold": {
+    "activity_type": "civil_displacement",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   }
+  },
+  {
+   "id": "sdg-0824",
+   "observation": "clean, clear, unobstructed sky above northgate substation at 0305z; two heavy lift helicopters orbiting at 1200 feet with magnetic heading 090, confirmed by independent optical feed",
+   "gold": {
+    "activity_type": "rotary_wing_transit",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-1354",
+   "observation": "0930Z. Cranes are visible moving containers onto a docked vessel; the feed is obscured, dropping frames, and partially obstructed, making detail indistinct. A second source on the opposite bank independently confirms containers are being shifted onto the vessel deck.",
+   "gold": {
+    "activity_type": "port_handling",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   }
+  },
+  {
+   "id": "sdg-0429",
+   "observation": "clean clear unobstructed sensor feed at 0415Z showing two flatbed wagons positioned on a junction siding with loading ramps positioned adjacent to each wagon while track maintenance crews are working on the ballast between the main line and the siding no corroborating report",
+   "gold": {
+    "activity_type": "rail_activity",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J3-CURRENT-OPS"
+   }
+  },
+  {
+   "id": "sdg-2010",
+   "observation": "1145Z\nThe sensor at Vyrna Ridge recorded a fragmented series of high-frequency pulses and carrier waves, obscured by intermittent signal loss and dropped frames. A second independent feed corroborated the presence of moving mast structures against the horizon, though both streams suffered from significant visual degradation.",
+   "gold": {
+    "activity_type": "comms_emission",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-1130",
+   "observation": "1924Z. JENSEN CORRIDOR: high-contrast thermal view shows a mid-span support severed, deck plating buckled inward, and structural members hanging by fragments. Feed is heavily degraded, frames dropping intermittently and image obscured by smoke. Second source confirms structural failure at same coordinates.",
+   "gold": {
+    "activity_type": "bridge_damage",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   }
+  },
+  {
+   "id": "sdg-5935",
+   "observation": "The unestablished feed shows a main supply route section cleared by a mid-span drop, with pavement fragments scattered across a cratered surface and exposed reinforcing rods bent at irregular angles, 2240Z.",
+   "gold": {
+    "activity_type": "bridge_damage",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   }
+  },
+  {
+   "id": "sdg-2449",
+   "observation": "0620Z. Clean, clear, and unobstructed sensor feed reveals a transporter-erector launcher with its dedicated radar vehicle positioned on flat terrain at PORT KALDA. A second independent source confirms the observation.",
+   "gold": {
+    "activity_type": "air_defence_emplacement",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-1006",
+   "observation": "A single, grainy frame shows a towed armored hull resting atop a flatbed at WAYPOINT SIERRA, the sensor feed dropping frames erratically at 1420Z and offering no corroborating report to verify the status of the tow.",
+   "gold": {
+    "activity_type": "recovery_operation",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-4022",
+   "observation": "2026-10-28 0930Z\nThe sensor feed is intermittently dropping frames and pixelating, obscuring the view ahead; a ridge of exposed rebar and shattered concrete from an abandoned armored transport juts into the frame, completely blocking the path forward.",
+   "gold": {
+    "activity_type": "road_obstruction",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   }
+  },
+  {
+   "id": "sdg-2862",
+   "observation": "A camera feed from the Northgate substation at 0930Z shows a crowded street market, but the video quality is severely degraded, with frequent frame drops and intermittent blurring that obscures individual movement. No corroborating report confirms the situation on the ground.",
+   "gold": {
+    "activity_type": "civil_gathering",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   }
+  },
+  {
+   "id": "sdg-3193",
+   "observation": "Feed is clean and unobstructed at 2240Z. A second independent source confirms wire and ditches laid across the Northgate approach.",
+   "gold": {
+    "activity_type": "obstacle_emplacement",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-1076",
+   "observation": "At 0620Z over HILL 412, the sensor feed is clean, clear, and unobstructed. A large, swept-wing silhouette is observed moving from the west to the east at an altitude of approximately 8,000 feet, with no corroborating report received.",
+   "gold": {
+    "activity_type": "fixed_wing_transit",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-2566",
+   "observation": "0620Z\nThe sensor feed from the CORMORANT coastal strip was obscured, dropping frames and intermittently cutting out entirely, revealing only fragmented motion against the shoreline. A silhouette of a scuttled hull was visible half-submerged in the shallow water, its deck listing heavily to port.",
+   "gold": {
+    "activity_type": "harbour_obstruction",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   }
+  },
+  {
+   "id": "sdg-1511",
+   "observation": "0620Z. A feed entry forwarded from an unestablished, unattributed source, with provenance unknown, shows a machine excavating earth and depositing it into a reinforced structure, the sensor condition offering no basis for trust or verification. No corroborating report exists.",
+   "gold": {
+    "activity_type": "field_fortification",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-4459",
+   "observation": "0620Z. A grey-hulled vessel transiting at slow speed along the eastern edge of the NORTHGATE substation perimeter, executing a repetitive port-to-starboard heading change every three minutes. The data originates from an unattributed source with provenance unknown; a second independent feed confirms the vessel’s presence and movement pattern.",
+   "gold": {
+    "activity_type": "maritime_patrol",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-1904",
+   "observation": "At 0305Z, sensor input from the DELTA rail junction shows a tight cluster of marked aid vehicles and uniformed workers moving pallets of relief supplies across the yard; the feed is clean, clear, and unobstructed, and a second independent source confirms the activity.",
+   "gold": {
+    "activity_type": "humanitarian_convoy",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "CIMIC"
+   }
+  },
+  {
+   "id": "sdg-2453",
+   "observation": "At 0305Z, a truck-mounted radar system and an associated missile platform are observed sited at the NORTHGATE substation, their positions clearly defined against the horizon; the sensor feed is clean, clear and unobstructed, and there is no corroborating report.",
+   "gold": {
+    "activity_type": "air_defence_emplacement",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-5534",
+   "observation": "At 0930Z, the degraded feed from the northern sector shows a ridgeline obscured by heavy atmosphere; frames drop intermittently, and shapes remain partially blocked by terrain, preventing clear identification of the ground forces advancing in that direction.",
+   "gold": {
+    "activity_type": "mech_infantry_movement",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-2486",
+   "observation": "1145Z CORMORANT coastal strip; antenna array rotating azimuth 320, feed obscured by heavy sea clutter and partial wave obstruction, frames dropping at irregular intervals; no corroborating report available.",
+   "gold": {
+    "activity_type": "radar_emission",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-1802",
+   "observation": "0415Z: The visual feed from KESTREL BRIDGE shows a small, propeller-driven aircraft executing a low-altitude orbit; the image quality is heavily degraded, dropping frames and partially obstructed, making identification of specific markings impossible. A second independent optical sensor confirms the presence of the aircraft in the same airspace.",
+   "gold": {
+    "activity_type": "uav_transit",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-5767",
+   "observation": "2240Z. Tracked vehicles moving at speed, one heading northeast toward the NORTHGATE substation, another northeast with visible track patterns, total count observed: two. Forwarded from an unattributed source; provenance unknown. No corroborating report available.",
+   "gold": {
+    "activity_type": "armour_movement",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-2854",
+   "observation": "1145Z. CORMORANT coastal strip. Feed degraded: frames dropping, image intermittently obscuring static. Ordinary people on foot and in private cars moving away from the strip, no weaponry observed. No corroborating report.",
+   "gold": {
+    "activity_type": "civil_displacement",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   }
+  },
+  {
+   "id": "sdg-1641",
+   "observation": "The video feed from NORTHGATE substation at 0415Z is clean, clear, and unobstructed. A second independent source confirms the valve assembly at the discharge point is intact.",
+   "gold": {
+    "activity_type": "pipeline_activity",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J3-CURRENT-OPS"
+   }
+  },
+  {
+   "id": "sdg-0138",
+   "observation": "0415Z. The feed is dropping frames and image quality is obscured; visibility is intermittent, but a grey-hulled vessel is observed moving through the waypoint area. A second independent feed confirms the grey-hulled vessel is maintaining a consistent heading at that location.",
+   "gold": {
+    "activity_type": "maritime_patrol",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-3452",
+   "observation": "At 0305Z, the optical feed from PORT KALDA displays the horizon unobstructed, showing masts silhouetted against the sky and a bank of dishes precisely tracking the sky, while the high-frequency transmissions drift across the spectral band; no corroborating report is present.",
+   "gold": {
+    "activity_type": "comms_emission",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-3416",
+   "observation": "At 2240Z, the clean, clear and unobstructed feed shows towed howitzers being laid in position on the coastal plain, ammunition crates stacked nearby in preparation for live-fire. A second independent feed confirms the exact same activity at the same time.",
+   "gold": {
+    "activity_type": "artillery_emplacement",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-5445",
+   "observation": "0620Z. The camera feed registered a scuttled vessel with its bow embedded in the shingle bank, the clear, clear, unobstructed sensor recording the wreckage in sharp detail; there was no corroborating report to confirm the circumstances of the grounding.",
+   "gold": {
+    "activity_type": "harbour_obstruction",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J3-CURRENT-OPS"
+   }
+  },
+  {
+   "id": "sdg-2497",
+   "observation": "clear interference detected at 0415z. second source confirms.",
+   "gold": {
+    "activity_type": "jamming_indicator",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-3218",
+   "observation": "At 0620Z, the radar track at the DELTA rail junction dropped frames and the feed became partially obstructed, resulting in a momentary loss of lock; a second independent feed corroborated the degradation with identical signal loss.",
+   "gold": {
+    "activity_type": "jamming_indicator",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-5108",
+   "observation": "trenches being dug and reinforced near berms with revetments the sensor feed is clean and clear unobstructed 1145z no corroborating report",
+   "gold": {
+    "activity_type": "field_fortification",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-0155",
+   "observation": "The observation feed from the unattributed sensor shows six open-top containers being shifted from a dockside staging area to a waiting transport trailer on the western berth of the JENSEN CORRIDOR at 1420Z, with a second independent feed corroborating the exact movements and timestamps.",
+   "gold": {
+    "activity_type": "port_handling",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   }
+  },
+  {
+   "id": "sdg-1072",
+   "observation": "The sensor feed registered clean, clear unobstructed imagery of an overflight pattern at 0415Z over PORT KALDA, showing multiple aircraft crossing a defined corridor; a second independent source corroborates the unobstructed observation.",
+   "gold": {
+    "activity_type": "fixed_wing_transit",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-5861",
+   "observation": "KESTREL BRIDGE 1145Z. RADAR FEED IS CLEAR, CLEAR AND UNOBSTRUCTED. NO CORROBORATING REPORT.",
+   "gold": {
+    "activity_type": "jamming_indicator",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-3753",
+   "observation": "The feed is clean, clear and unobstructed. At 1710Z on MSR AMBER, cranes are seen swinging loads and rows of containers are being repositioned along the quay. A second independent source confirms the activity.",
+   "gold": {
+    "activity_type": "port_handling",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J3-CURRENT-OPS"
+   }
+  },
+  {
+   "id": "sdg-5555",
+   "observation": "1145Z. Forwarded from an unattributed source with provenance unknown; second independent source confirms. Plant equipment, specifically excavators and dozers, observed shaping and clearing ground within the Jensen Corridor.",
+   "gold": {
+    "activity_type": "engineer_activity",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-1470",
+   "observation": "1420Z. The feed is degraded, dropping frames and obscuring detail; a column of dark silhouettes moves east along the ridge, but the intermittent obstruction makes identification of individual vehicles impossible.",
+   "gold": {
+    "activity_type": "wheeled_logistics_convoy",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-3863",
+   "observation": "At 1145Z, the feed from an unattributed source shows a small group of soldiers on foot moving deliberately and spaced across VYRNA RIDGE with no corroborating report available.",
+   "gold": {
+    "activity_type": "dismounted_patrol",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-3620",
+   "observation": "0930Z. A small group of soldiers is seen moving deliberately on foot through the JENSEN CORRIDOR, spaced out and unobstructed. The feed is clean, clear, and unobstructed.",
+   "gold": {
+    "activity_type": "dismounted_patrol",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-4999",
+   "observation": "The feed, originating from an unattributed source with provenance unknown, indicates that at 0930Z, a pylon near the substation was partially toppled and its crossarms were snapped, while the switchgear enclosures at the PORT KALDA facility remained structurally intact.",
+   "gold": {
+    "activity_type": "power_infrastructure",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   }
+  },
+  {
+   "id": "sdg-1607",
+   "observation": "At 2240Z, a forward-looking sonar feed from an unattributed source shows a scuttled hull blocking the main shipping channel at the DELTA rail junction, with no corroborating report available to verify the incident.",
+   "gold": {
+    "activity_type": "harbour_obstruction",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   }
+  },
+  {
+   "id": "sdg-1746",
+   "observation": "1710Z. The video feed from WAYPOINT SIERRA is severely degraded, displaying intermittent blackouts and blocky artifacts that obscure the ground detail. The imagery shows earth moving equipment pushing loose soil into linear depressions, with tarps and sandbags being systematically arranged along the edges to strengthen the barriers. A second independent source, operating on a separate frequency, corroborates the presence of reinforced earthworks at this location.",
+   "gold": {
+    "activity_type": "field_fortification",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-1487",
+   "observation": "0620Z. A disabled heavy vehicle is being winched onto a flatbed trailer at the NORTHGATE substation. The observation originates from an unattributed source with provenance unknown, and there is no corroborating report.",
+   "gold": {
+    "activity_type": "recovery_operation",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-3602",
+   "observation": "At 0415Z, the corridor feed shows a column of tracked vehicles moving north, but the feed is severely degraded with frames dropping and the image obscured. A second source confirms the column's presence and direction.",
+   "gold": {
+    "activity_type": "armour_movement",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-4675",
+   "observation": "An unmarked radar feed detects a silhouette passing high overhead from the northeast at 1710Z. The feed is forwarded from an unattributed source with provenance unknown, and a second independent sensor confirms the passage over NORTHGATE substation.",
+   "gold": {
+    "activity_type": "fixed_wing_transit",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-0331",
+   "observation": "0620Z. Mid-rise masts and dishes visible on VYRNA RIDGE; horizontal polarizations detected on wideband sweep. Sensor feed condition: forwarded from unattributed source; provenance unknown. Second independent feed confirms identical geometry and signal characteristics.",
+   "gold": {
+    "activity_type": "comms_emission",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-2954",
+   "observation": "1710Z: Degraded feed. Camera on the northern ridge drops frames every 4.2 seconds. One clear frame shows a freshly laid series of concrete blocks and coiled wire blocking the single-track line approaching the DELTA rail junction. 1712Z: Independent feed from the eastern repeater confirms the blocked track; same concrete blocks and wire visible, synchronized to the same timestamp.",
+   "gold": {
+    "activity_type": "obstacle_emplacement",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-2802",
+   "observation": "At 1145Z, the VYRNA RIDGE sensor channel is partially obstructed, dropping frames; a second independent source confirms a scuttled hull blocking the approach.",
+   "gold": {
+    "activity_type": "harbour_obstruction",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   }
+  },
+  {
+   "id": "sdg-1325",
+   "observation": "A small, engine-driven aircraft patrols the sky above the DELTA rail junction at 0415Z, its profile clearly visible against the dawn haze; the sensor feed is clean, clear and unobstructed, yet there is no corroborating report to validate the track.",
+   "gold": {
+    "activity_type": "uav_transit",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-4834",
+   "observation": "KESTREL BRIDGE 2240Z. Main feed is obscured, dropping frames and partially obstructed. A second independent source confirms the vegetation clearance and track passing.",
+   "gold": {
+    "activity_type": "engineer_activity",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-0178",
+   "observation": "Feed dropping frames, eastbound mainline at DELTA rail junction 1710Z shows heavy earth and twisted rails blocking the track; independent thermal feed confirms mass movement debris covering the embankment.",
+   "gold": {
+    "activity_type": "road_obstruction",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   }
+  },
+  {
+   "id": "sdg-0467",
+   "observation": "raw feed from unattributed sensor, provenance unknown. 2240z over port kalda: aid workers moving between marked aid vehicles, loading and unloading pallets of relief supplies. second independent source confirms the scene.",
+   "gold": {
+    "activity_type": "humanitarian_convoy",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   }
+  },
+  {
+   "id": "sdg-5772",
+   "observation": "At 0930Z, the thermal imager on Vyrna Ridge captured a continuous column of tracked vehicles with infantry dismounts visible in the open hatches, moving west along the ridgeline crest. The sensor feed is clean, clear and unobstructed.",
+   "gold": {
+    "activity_type": "mech_infantry_movement",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-3551",
+   "observation": "A remote field sensor logged rolling stock positioned on flat wagons at a location designated MSR AMBER at 2240Z, but the feed originated from an unattributed source with unknown provenance and has not been corroborated by secondary reporting.",
+   "gold": {
+    "activity_type": "rail_activity",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   }
+  },
+  {
+   "id": "sdg-4414",
+   "observation": "At 0620Z, the antenna array on Hill 412 remains visible but the feed is significantly degraded, frames dropping intermittently and the signal obscured by static. No corroborating report has been received.",
+   "gold": {
+    "activity_type": "comms_emission",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-5175",
+   "observation": "A stationary aerial observation recorded an open bay at the NORTHGATE substation, revealing a transport aircraft positioned on a dispersal pattern with its boarding ladder lowered; the imagery is forwarded from an unattributed source with provenance unknown, and there is no corroborating report.",
+   "gold": {
+    "activity_type": "airfield_activity",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-0435",
+   "observation": "A forward sensor feed from an unattributed source reports that Hill 412, observed at 1145Z, shows two intact pylons supporting damaged substation transformers and exposed switchgear, with a second independent feed corroborating the structural damage assessment.",
+   "gold": {
+    "activity_type": "power_infrastructure",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   }
+  },
+  {
+   "id": "sdg-0881",
+   "observation": "2026-10-24T17:10:00Z | Sensor feed is clean, clear and unobstructed, showing VYRNA RIDGE with high fidelity. A second independent source confirms a scuttled hull blocking the waterway entrance.",
+   "gold": {
+    "activity_type": "harbour_obstruction",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J3-CURRENT-OPS"
+   }
+  },
+  {
+   "id": "sdg-4753",
+   "observation": "0930Z log: Visual feed clean, clear and unobstructed. NORTHGATE substation pylons and intact transformer banks observed from observation post. Second source confirms synchronization.",
+   "gold": {
+    "activity_type": "power_infrastructure",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J3-CURRENT-OPS"
+   }
+  },
+  {
+   "id": "sdg-5716",
+   "observation": "0620Z. Camera one feed clean, clear, unobstructed. One high-tension pylon section snapped at the crossarm base, crossarms splayed outward, substation transformers exposed and resting on the concrete pad.",
+   "gold": {
+    "activity_type": "power_infrastructure",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J3-CURRENT-OPS"
+   }
+  },
+  {
+   "id": "sdg-0862",
+   "observation": "0930Z. grey-hulled vessel underway at HILL 412. feed partially obstructed, dropping frames. no corroborating report.",
+   "gold": {
+    "activity_type": "maritime_patrol",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-0700",
+   "observation": "VYRNA RIDGE at 0415Z. Feed is clean, clear, unobstructed. A crowd of people milling through a market stall arrangement, carrying bundles and stopping to converse. No corroborating report.",
+   "gold": {
+    "activity_type": "civil_gathering",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "CIMIC"
+   }
+  },
+  {
+   "id": "sdg-5116",
+   "observation": "the thermal grid at waypoint sierra shows a continuous pattern of raised ridges at 1145z the feed is clean clear and unobstructed there is no corroborating report",
+   "gold": {
+    "activity_type": "obstacle_emplacement",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-3510",
+   "observation": "At 0415Z, the forward observer at PORT KALDA reports the feed is severely degraded, frames dropping intermittently. A brief visual shows dark shapes moving across the shoreline, but details are obscured by static and partial obstruction.",
+   "gold": {
+    "activity_type": "amphibious_activity",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-5950",
+   "observation": "1710Z observation at the NORTHGATE substation: sensor feed is degraded and intermittently dropping frames while rolling stock moves onto flat wagons under partial obstruction, with no corroborating report available to confirm the status.",
+   "gold": {
+    "activity_type": "rail_activity",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   }
+  },
+  {
+   "id": "sdg-2187",
+   "observation": "At 1420Z, an unattributed sensor feed detected a column of fuel bowsers and cargo trucks moving northbound along the coastal access road toward PORT KALDA. A second independent feed corroborated the observation of the same vehicle movement and timing.",
+   "gold": {
+    "activity_type": "wheeled_logistics_convoy",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-1716",
+   "observation": "At 1710Z, the camera feed is clean, clear and unobstructed, showing excavators and dozers shaping the ground along the coastal strip. No other reports corroborate this activity.",
+   "gold": {
+    "activity_type": "engineer_activity",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-4142",
+   "observation": "0415Z. The feed is corrupted, frames dropping and motion blurred; visibility through the sensor is severely degraded. A line of heavy barrels is being traversed into firing positions along the shoreline, with crates of linked rounds stacked beside them.",
+   "gold": {
+    "activity_type": "artillery_emplacement",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-0374",
+   "observation": "0415Z. Degraded feed, frames dropping intermittently. A silhouette of a swept-wing aircraft visible on the dispersal pad, engine cowling partially obscured by shadow and pixelation; a ground crew member in a high-visibility vest adjusting a refuelling probe beneath the wing.",
+   "gold": {
+    "activity_type": "airfield_activity",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-4145",
+   "observation": "[1710Z] Trench lines extend unbroken from the northern approach, berms layered with fresh earth and small blast-revetments already stacked at the forward edge. The sensor feed is clean, clear and unobstructed. A second independent source confirms the continuous reinforcement activity.",
+   "gold": {
+    "activity_type": "field_fortification",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-2943",
+   "observation": "At 0305Z, a black-and-white thermal feed from the KESTREL BRIDGE sensor suite showed towed howitzers being laid in, with ammunition crates stacked nearby on the exposed track. The sensor feed carries no attribution and provenance is unknown.",
+   "gold": {
+    "activity_type": "artillery_emplacement",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-1935",
+   "observation": "2026-05-20 11:45:00Z | A convoy of armored vehicles with visible infantry units moving along the ridgeline of HILL 412; the feed was forwarded from an unattributed source with provenance unknown, and no corroborating report was available to confirm the observation.",
+   "gold": {
+    "activity_type": "mech_infantry_movement",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-5759",
+   "observation": "1420Z. Radio traffic and metallic clinking audible over the feed. A line of civilian sedans queues at the MSR Amber barrier; uniformed personnel check documents through the open driver-side window. The feed originates from an unattributed source with provenance unknown. No corroborating report available.",
+   "gold": {
+    "activity_type": "checkpoint_activity",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   }
+  },
+  {
+   "id": "sdg-0059",
+   "observation": "1710Z. Forwarded from unattributed source, provenance unknown. Sensor feed clearly shows towed howitzers with ammunition crates staged at the NORTHGATE substation. A second independent source confirms the sighting.",
+   "gold": {
+    "activity_type": "artillery_emplacement",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-4680",
+   "observation": "The electro-optical feed at Hill 412 displays a small, high-wing aircraft loitering at 1,200 feet, its single-cylinder engine humming steadily; the imagery is clean, clear, and unobstructed, and the second independent camera platform confirms the same profile at 1420Z.",
+   "gold": {
+    "activity_type": "uav_transit",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-5448",
+   "observation": "The sensor feed is clean, clear and unobstructed. A steel girder is cleanly severed at mid-span, the deck planking exposed and twisted. A second independent source confirms the feed condition and the structural break at 0930Z.",
+   "gold": {
+    "activity_type": "bridge_damage",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J3-CURRENT-OPS"
+   }
+  },
+  {
+   "id": "sdg-4438",
+   "observation": "raw stream dropping frames at 2240z. motion over hill 412 from the west at estimated 800 feet, gaps in coverage obscuring the path.",
+   "gold": {
+    "activity_type": "fixed_wing_transit",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-2722",
+   "observation": "0305Z: Sensor array stationary, azimuth sweep active. Feed partially obstructed, frames dropping intermittently. Independent replay source corroborates persistent gap in telemetry.",
+   "gold": {
+    "activity_type": "radar_emission",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-1232",
+   "observation": "1420Z: The sensor feed is clean, clear and unobstructed. Heavy plant equipment shapes ground and clears vegetation along the corridor. A second independent source confirms the feed and the clearing activity.",
+   "gold": {
+    "activity_type": "engineer_activity",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-5484",
+   "observation": "The flow sensor at DELTA rail junction indicates steady forward velocity with no anomaly spike. Feed is clean, clear and unobstructed.",
+   "gold": {
+    "activity_type": "pipeline_activity",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J3-CURRENT-OPS"
+   }
+  },
+  {
+   "id": "sdg-4747",
+   "observation": "2025-10-27T0415Z\nA feed from an unattributed source, provenance unknown, shows flat wagons positioned on a siding adjacent to the NORTHGATE substation, each bearing a single container of modular infrastructure; a second independent source confirms the rolling stock presence and track configuration.",
+   "gold": {
+    "activity_type": "rail_activity",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   }
+  },
+  {
+   "id": "sdg-0300",
+   "observation": "At 0305Z, the sensor feed is clean, clear and unobstructed. Towed and self-propelled guns are being laid in, with ammunition crates staged nearby at KESTREL BRIDGE. There is no corroborating report.",
+   "gold": {
+    "activity_type": "artillery_emplacement",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-5671",
+   "observation": "At 1145Z, a camera feed from PORT KALDA shows flat-bottomed vessels beaching on the sand, their hulls settling as ramps deploy onto the shoreline. Personnel in tactical gear are seen moving inland from the water's edge. The feed is forwarded from an unattributed source with provenance unknown; there is no corroborating report.",
+   "gold": {
+    "activity_type": "amphibious_activity",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-0307",
+   "observation": "a surveillance platform detects freshly displaced earth and reinforcement netting around the northgate substation at 0930Z. the feed originates from an unattributed source with unknown provenance; a second independent feed corroborates the activity.",
+   "gold": {
+    "activity_type": "field_fortification",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-1146",
+   "observation": "The feed from the corridor junction is currently degraded, obscuring the view of the eastbound tracks. A second independent source confirms the rolling stock and loading operations are visible despite the obstruction.",
+   "gold": {
+    "activity_type": "rail_activity",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   }
+  },
+  {
+   "id": "sdg-4317",
+   "observation": "0620Z. MSR AMBER. The sensor feed is clean, clear, and unobstructed, revealing a steady queue of civilian vehicles approaching a security barrier where personnel are inspecting individual passenger documents with routine thoroughness. No corroborating report is available to support this feed.",
+   "gold": {
+    "activity_type": "checkpoint_activity",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "CIMIC"
+   }
+  },
+  {
+   "id": "sdg-5252",
+   "observation": "At 0305Z, a clean, clear and unobstructed sensor feed captures families on foot and in loaded private cars moving away from the Delta rail junction. No corroborating report accompanies this movement.",
+   "gold": {
+    "activity_type": "civil_displacement",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "CIMIC"
+   }
+  },
+  {
+   "id": "sdg-2544",
+   "observation": "At 2240Z, the satellite sensor feed over WAYPOINT SIERRA shows landing craft making way toward the shoreline with their bow ramps deployed; a second independent sensor confirmation of the same vessels and beach preparation is available and the feed is clean, clear and unobstructed.",
+   "gold": {
+    "activity_type": "amphibious_activity",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-3256",
+   "observation": "clear sensor feed tracks a grey-hulled vessel sailing on a straight course, reaching waypoint sierra at 1710z; a second independent source confirms the contact",
+   "gold": {
+    "activity_type": "maritime_patrol",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-2735",
+   "observation": "0620Z. Feed from unattributed source. Hill 412. Sensor detects two vertical masts with associated dishes and one vehicle-mounted array scanning the ridgeline. No corroborating report available.",
+   "gold": {
+    "activity_type": "comms_emission",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-1674",
+   "observation": "0305Z. KEISTREL BRIDGE feed is degraded, frames dropping and image slightly out of focus. Queues of civilian sedans are visible approaching the crossing, occupants leaning forward as uniformed personnel inspect folded documents through the driver-side window. A secondary feed from the overpass corroborates the queuing pattern and document inspection, though resolution is lower.",
+   "gold": {
+    "activity_type": "checkpoint_activity",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   }
+  },
+  {
+   "id": "sdg-5906",
+   "observation": "At 1145Z, the degraded feed from the CORMORANT coastal strip shows vehicles crossing the shoreline with visible jitter and intermittent frame loss, and a second independent source corroborates the movement.",
+   "gold": {
+    "activity_type": "amphibious_activity",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-5990",
+   "observation": "1710Z. Camera 2 view of Hill 412: the feed is degraded, obscuring details and dropping frames. A solitary figure walks along a treeline, moving away from the aid pallets left on the ground; a second figure pauses briefly near a marked aid vehicle before continuing on foot.",
+   "gold": {
+    "activity_type": "humanitarian_convoy",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   }
+  },
+  {
+   "id": "sdg-2651",
+   "observation": "A forward observation post captured at 0620Z a convoy of wheeled armored vehicles crossing KESTREL BRIDGE, each vehicle transporting a visible infantry squad with full combat gear; the assessment of this activity as an isolated probe is reinforced by a second unattributed feed corroborating the same bridge crossing at the exact time.",
+   "gold": {
+    "activity_type": "mech_infantry_movement",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-5146",
+   "observation": "2025-10-24 1710Z - Visual tracking sensors near the CORMORANT coastal strip capture a medium-lift aircraft descending through 1,200 feet with a southerly heading, its rotor disk clearly visible against the low cloud deck. The video feed is degraded, dropping frames intermittently and partially obstructed by atmospheric haze, yet a second independent observation platform corroborates the aircraft's position and descent rate without discrepancy.",
+   "gold": {
+    "activity_type": "rotary_wing_transit",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-0387",
+   "observation": "At 2240Z the NORTHGATE substation feed shows landing craft moving toward the shoreline and vehicles embarking from the beach. The feed originates from an unattributed source with provenance unknown. A second independent source confirms the landing craft movement.",
+   "gold": {
+    "activity_type": "amphibious_activity",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-5383",
+   "observation": "interference spikes across vhf band at northgate substation 0620z provenance unknown source unattributed no corroborating report",
+   "gold": {
+    "activity_type": "jamming_indicator",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-2695",
+   "observation": "At 2240Z, a stationary launcher and its associated radar vehicle are sited at KESTREL BRIDGE; the sensor feed originates from an unattributed source with provenance unknown, and there is no corroborating report to confirm the observation.",
+   "gold": {
+    "activity_type": "air_defence_emplacement",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-4851",
+   "observation": "A radar-equipped launch platform and its associated vehicle were observed sited at a coastal facility, with the event timestamped at 1420Z; the assessment originates from an unattributed feed with unverified provenance, and a second independent feed corroborates the observation.",
+   "gold": {
+    "activity_type": "air_defence_emplacement",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-4283",
+   "observation": "0620Z: Visual feed from unestablished source confirms leak observed at valve assembly near DELTA rail junction; second independent feed corroborates observation.",
+   "gold": {
+    "activity_type": "pipeline_activity",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   }
+  },
+  {
+   "id": "sdg-1722",
+   "observation": "1145Z\nThe primary feed from Waypoint Sierra degrades sharply; frames drop and the image becomes a blurred mosaic of terrain, rendering detail unintelligible. A second independent feed, logged simultaneously, captures a heavy vehicle being pulled across the snow by a winch cable, its chassis scraping the surface as it is hauled from the field.",
+   "gold": {
+    "activity_type": "recovery_operation",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-1569",
+   "observation": "clear, clean feed at 1145z shows three f-15s on a sunlit dispersal with crew refueling and arming, second sensor source confirms exact details",
+   "gold": {
+    "activity_type": "airfield_activity",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-3815",
+   "observation": "msr amber 0305z sensor feed from unattributed source shows families walking along the road edge and cars loaded with luggage moving steadily away from the forward operating base no corroborating report available",
+   "gold": {
+    "activity_type": "civil_displacement",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   }
+  },
+  {
+   "id": "sdg-5123",
+   "observation": "At 1420Z, a rotating antenna array on the CORMORANT coastal strip detected a consistent carrier signal drifting across the lower VHF spectrum. The observation was forwarded from an unattributed source with provenance unknown. A second independent monitoring post on the same strip confirmed the signal pattern.",
+   "gold": {
+    "activity_type": "radar_emission",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-1903",
+   "observation": "forged feed from unestablished source with provenance unknown\ncamera at waypoint sierra 0620z shows crowd of ordinary people in square buying and selling vegetables and textiles",
+   "gold": {
+    "activity_type": "civil_gathering",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   }
+  },
+  {
+   "id": "sdg-4342",
+   "observation": "At 0930Z, the thermal sensor on Hill 412 detects a small group of soldiers on foot moving with deliberate spacing, though the feed is heavily degraded, showing obscured detail and frequent frame drops that limit clear observation.",
+   "gold": {
+    "activity_type": "dismounted_patrol",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-1435",
+   "observation": "forwarded from an unattributed source with unknown provenance. a civilian vehicle queues at a barrier, a man hands a folded paper to a guard, the scene illuminated by a single streetlamp at 0415Z. a second independent sensor feed confirms the same vehicle and barrier position.",
+   "gold": {
+    "activity_type": "checkpoint_activity",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   }
+  },
+  {
+   "id": "sdg-2905",
+   "observation": "At 0415Z, the electro-optical sensor feed from NORTHGATE substation is clean, clear and unobstructed, showing a long column of fuel bowsers moving east on the main supply route. A second independent sensor node confirmed the identical column in real time.",
+   "gold": {
+    "activity_type": "wheeled_logistics_convoy",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-3807",
+   "observation": "At 1420Z, a stationary leak was observed at a valve assembly on a right-of-way, expanding a visible sheen across the snowpack. The sensor feed was forwarded from an unestablished source with provenance unknown and there is no corroborating report.",
+   "gold": {
+    "activity_type": "pipeline_activity",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   }
+  },
+  {
+   "id": "sdg-2646",
+   "observation": "1710Z: Degraded feed, dropping frames, partially obscured. The view from NORTHGATE substation shows three tracked vehicles moving east, but the image wavers and stalls frequently.",
+   "gold": {
+    "activity_type": "armour_movement",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-1243",
+   "observation": "At 0305Z, an unattributed sensor feed reports a stationary disabled vehicle being lifted and towed onto MSR AMBER, with a second independent source confirming the observation.",
+   "gold": {
+    "activity_type": "recovery_operation",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-1086",
+   "observation": "2026-05-20 1145Z. A small aircraft is visible loitering over the treeline beyond the NORTHGATE substation, its engine note a low, rhythmic drone obscured by static; however, the feed is heavily degraded, dropping frames intermittently and obscuring the profile, and there is no corroborating report to confirm the sighting.",
+   "gold": {
+    "activity_type": "uav_transit",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-0698",
+   "observation": "A degraded radio feed of MSR AMBER at 0415Z shows a congested market area filled with stationary individuals moving through a dense cluster of stalls and temporary shelters. The signal is intermittently dropping frames, and a second independent observation confirms the same pattern of dense pedestrian movement.",
+   "gold": {
+    "activity_type": "civil_gathering",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   }
+  },
+  {
+   "id": "sdg-3880",
+   "observation": "At 0305Z, a clean and clear unobstructed sensor feed from the CORMORANT coastal strip captured an image of a stationary transport vehicle being hoisted upward by a suspended cable, its motion tracked with absolute mechanical precision; a second independent feed, equally clean and clear, independently verified the hoisting trajectory moments later.",
+   "gold": {
+    "activity_type": "recovery_operation",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-5029",
+   "observation": "The sensor feed from the NORTHGATE substation at 0415Z is clean, clear, and unobstructed. It reveals marked aid vehicles delivering pallets of relief supplies to uniformed aid workers distributing to ordinary civilians gathered at a distribution point. No corroborating report exists.",
+   "gold": {
+    "activity_type": "humanitarian_convoy",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "CIMIC"
+   }
+  },
+  {
+   "id": "sdg-2339",
+   "observation": "Feed received 0930Z from unattributed source. Secondary confirmation received. Route into PORT KALDA blocked by collapsed overpass and overturned cargo trucks.",
+   "gold": {
+    "activity_type": "road_obstruction",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   }
+  },
+  {
+   "id": "sdg-5849",
+   "observation": "At 0930Z, the MSR AMBER observation shows three masts and a dish array, all tracking cleanly with unobstructed transmissions. A second independent feed corroborates the clarity and lack of interference.",
+   "gold": {
+    "activity_type": "comms_emission",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-1838",
+   "observation": "sensor feed is partially obstructed, frames dropping; cranes are rotating slowly against the quay, containers shifting with each gust as dusk falls over VYRNA RIDGE at 2240Z",
+   "gold": {
+    "activity_type": "port_handling",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   }
+  },
+  {
+   "id": "sdg-3057",
+   "observation": "At 0415Z, a clean and unobstructed sensor feed over KESTREL BRIDGE captured a second independent source confirming a route blocked by heavy timber and overturned armor, with debris strewn across the crossing.",
+   "gold": {
+    "activity_type": "road_obstruction",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J3-CURRENT-OPS"
+   }
+  },
+  {
+   "id": "sdg-3971",
+   "observation": "The visual feed from HILL 412 shows a row of transport aircraft parked on compacted earth, their engines shut down and ground crew in utilitarian attire moving between them. One crew chief is actively refueling a wing tank from a portable bowser while another guides an arming crew positioning live munitions on a centerline hardpoint. This observation was forwarded from an unattributed source with provenance unknown, and a second independent feed confirms the same scene. 1420Z.",
+   "gold": {
+    "activity_type": "airfield_activity",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-1456",
+   "observation": "2024-09-10 1145Z NORTHGATE substation feed is clean, clear, and unobstructed; a small group of soldiers on foot is observed spaced apart and moving deliberately across the clearing. A second independent source confirms the presence and movement of the group.",
+   "gold": {
+    "activity_type": "dismounted_patrol",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-4290",
+   "observation": "0305Z on Hill 412. The thermal feed is heavily degraded, dropping frames every eight seconds, obscuring the ridge line. A second independent optical channel confirms the movement of people and vehicles moving away from the sector.",
+   "gold": {
+    "activity_type": "civil_displacement",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   }
+  },
+  {
+   "id": "sdg-0723",
+   "observation": "At 0415Z, tracked vehicles with associated signatures are moving northbound toward Hill 412, data forwarded from an unattributed source with provenance unknown; a second independent source confirms the presence of the same column in the sector.",
+   "gold": {
+    "activity_type": "armour_movement",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-3106",
+   "observation": "degraded feed, frames dropping mid-stream as a stack of unmarked pallets shifts in the open yard; a second independent source confirms the obscured view, showing ordinary people moving between aid vehicles at the northgate substation at 1420z",
+   "gold": {
+    "activity_type": "humanitarian_convoy",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   }
+  },
+  {
+   "id": "sdg-4203",
+   "observation": "A propeller-driven aircraft with a high-aspect-ratio wing was observed loitering at low altitude, its distinctive single-engine hum audible from the NORTHGATE substation, 0930Z; the feed originates from an unattributed relay node with provenance unknown, and the pattern was independently confirmed by a second passive acoustic feed from the valley ridge.",
+   "gold": {
+    "activity_type": "uav_transit",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-0663",
+   "observation": "0415Z: A section of the ridge visible through the feed shows a steep incline sheared clean of vegetation, with broken earthworks and exposed rebar forming an unstable scarp face. The material was forwarded from an unattributed source with provenance unknown, and no corroborating report is available.",
+   "gold": {
+    "activity_type": "road_obstruction",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   }
+  },
+  {
+   "id": "sdg-3318",
+   "observation": "1710Z WAYPOINT SIERRA. Substation transformers intact, bushings undamaged; however, sensor feed is obscured and dropping frames, making visual confirmation partial and unreliable. No corroborating report received.",
+   "gold": {
+    "activity_type": "power_infrastructure",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   }
+  },
+  {
+   "id": "sdg-0765",
+   "observation": "clean and clear unobstructed feed: at 0415Z the disabled vehicle is being lifted clear of the ground near the northgate substation, no corroborating report",
+   "gold": {
+    "activity_type": "recovery_operation",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   }
+  },
+  {
+   "id": "sdg-3199",
+   "observation": "Report received 1420Z. Visual confirms heavy wire and wooden stakes laid across the primary approach in the Jensen Corridor, oriented to block vehicle movement. Provenance is unknown, forwarded from an unattributed source; no corroborating report available.",
+   "gold": {
+    "activity_type": "obstacle_emplacement",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   }
+  }
+ ]
+}

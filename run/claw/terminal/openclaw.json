@@ -1,0 +1,85 @@
+{
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "vllm": {
+        "baseUrl": "http://127.0.0.1:18790/v1",
+        "apiKey": "local-only",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "nvidia/NVIDIA-Nemotron-Nano-9B-v2-FP8",
+            "name": "Local Nemotron controller",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 131072,
+            "maxTokens": 4096
+          }
+        ]
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "workspace": "/home/sandbox/workspace",
+      "model": {
+        "primary": "vllm/nvidia/NVIDIA-Nemotron-Nano-9B-v2-FP8"
+      },
+      "models": {
+        "vllm/nvidia/NVIDIA-Nemotron-Nano-9B-v2-FP8": {
+          "params": {
+            "extra_body": {
+              "chat_template_kwargs": {
+                "enable_thinking": false
+              }
+            }
+          },
+          "streaming": false
+        }
+      },
+      "timeoutSeconds": 300,
+      "skipBootstrap": true
+    }
+  },
+  "tools": {
+    "profile": "minimal",
+    "alsoAllow": [
+      "read",
+      "exec",
+      "process"
+    ],
+    "exec": {
+      "host": "gateway",
+      "security": "full",
+      "ask": "off"
+    },
+    "deny": [
+      "message",
+      "sessions_spawn",
+      "sessions_send",
+      "browser",
+      "web_search",
+      "web_fetch",
+      "write",
+      "edit",
+      "apply_patch",
+      "gateway",
+      "cron"
+    ],
+    "toolSearch": false
+  },
+  "gateway": {
+    "mode": "local"
+  },
+  "skills": {
+    "allowBundled": []
+  }
+}

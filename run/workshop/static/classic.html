@@ -1,0 +1,1401 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Observation to action · NVIDIA workshop</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <header>
+      <a class="brand" href="#start"
+        ><span class="brandmark"></span> NVIDIA
+        <span class="brand-sub">/ THE AGENT WORKSHOP</span></a
+      ><span class="live-state" id="health">Checking local services…</span>
+    </header>
+    <aside>
+      <div class="nav-label">THE WALKTHROUGH</div>
+      <nav aria-label="Workshop chapters">
+        <a href="#start">01 <span>The system</span></a
+        ><a href="#specialize">02 <span>Teach the task</span></a
+        ><a href="#employ">03 <span>Employ the agent</span></a
+        ><a href="#observe">04 <span>Inspect the behavior</span></a
+        ><a href="#improve">05 <span>Improve with evidence</span></a>
+      </nav>
+      <div class="sidebar-note">
+        EXERCISE NORTHERN SENTINEL<br />Fictional · unclassified<br /><br />One
+        Spark. Local inference.<br />Human approval.
+      </div>
+    </aside>
+    <main>
+      <section id="start" class="hero">
+        <div class="eyebrow">01 / THE SYSTEM</div>
+        <h1>From observation to <em>accountable action.</em></h1>
+        <p class="lede">
+          Follow a video observation through perception, specialist analysis,
+          agent decisions and human review—then use the execution evidence to
+          improve the agent.
+        </p>
+        <div class="toolkit-intro">
+          <span class="card-kicker"
+            >NVIDIA AGENT TOOLKIT / THE OVERALL STACK</span
+          >
+          <p>
+            Models provide intelligence. Tools and skills give the agent
+            capabilities. The harness coordinates the work, and OpenShell
+            provides the runtime controls. Relay, Gym and RL help us observe,
+            evaluate and improve behavior.
+          </p>
+        </div>
+        <div class="system-overview">
+          <article>
+            <span class="num">01 / PERCEPTION</span>
+            <h3>NVIDIA VSS</h3>
+            <p>
+              The Video Search and Summarization blueprint turns video into a
+              scene description that the agent can use as evidence.
+            </p>
+            <span class="system-handoff">Video → observation</span>
+          </article>
+          <article>
+            <span class="num">02 / REASONING + SPECIALIZATION</span>
+            <h3>Lightning + the LoRA adapter</h3>
+            <p>
+              The base model chooses actions and drafts text. Your trained
+              adapter supplies the organization’s activity categories,
+              confidence grades and destinations.
+            </p>
+            <span class="system-handoff">Observation → structured triage</span>
+          </article>
+          <article>
+            <span class="num">03 / EXECUTION + ACCESS</span>
+            <h3>Agent harness + OpenShell</h3>
+            <p>
+              The harness manages prompts, state and tool calls. In the target
+              deployment, OpenShell surrounds it and enforces access to models,
+              tools and mounted data.
+            </p>
+            <span class="system-handoff">Task → policy-controlled actions</span>
+          </article>
+          <article>
+            <span class="num">04 / MODEL ROUTING</span>
+            <h3>NeMo Switchyard</h3>
+            <p>
+              Directs model requests to the right capability. This workshop uses
+              explicit routes: base model for reasoning and drafting; adapter
+              for specialist triage.
+            </p>
+            <span class="system-handoff"
+              >Model request → base or specialist</span
+            >
+          </article>
+          <article>
+            <span class="num">05 / OBSERVABILITY</span>
+            <h3>NeMo Relay</h3>
+            <p>
+              Records model and tool events so we can inspect choices, timings
+              and failures. Those traces help identify behaviors that need
+              better tests or training.
+            </p>
+            <span class="system-handoff">Execution → inspectable evidence</span>
+          </article>
+          <article>
+            <span class="num">06 / EVALUATION + LEARNING</span>
+            <h3>NeMo Gym + NeMo RL</h3>
+            <p>
+              Gym verifies behavior in repeatable tasks and returns rewards. RL
+              uses those rewards to train a candidate policy, which must be
+              evaluated and approved before deployment.
+            </p>
+            <span class="system-handoff"
+              >Verified rewards → candidate policy</span
+            >
+          </article>
+        </div>
+        <p class="caption">
+          The walkthrough combines live agent tools, recorded traces and a real
+          CPU teaching experiment. OpenShell deployment and agent-invoked
+          learning skills are shown as the target architecture.
+        </p>
+        <a class="next" href="#specialize"
+          >First, see what the specialist was taught <span>↓</span></a
+        >
+      </section>
+      <section id="specialize">
+        <div class="eyebrow">02 / TEACH THE TASK</div>
+        <h2>Teach Lightning the reporting task.</h2>
+        <p class="section-intro">
+          The Lightning LoRA adapter maps observations to four required fields:
+          activity type, sensor quality, confidence and routing. Explore the
+          rules it follows, how it was trained and which systems use its output.
+        </p>
+
+        <div class="learning-cards" aria-label="Explore the specialist">
+          <button
+            class="learning-card"
+            data-dialog="rules-dialog"
+            aria-haspopup="dialog"
+          >
+            <span class="card-kicker">01 / THE SPECIFICATION</span
+            ><strong>Classification and routing rules</strong
+            ><span
+              >Confidence limits, 31 activity types and the destination for
+              every category.</span
+            ><span class="card-link"
+              >View categories and confidence rules
+              <b aria-hidden="true">↗</b></span
+            >
+          </button>
+          <button
+            class="learning-card"
+            data-dialog="training-dialog"
+            aria-haspopup="dialog"
+          >
+            <span class="card-kicker">02 / THE TRAINING</span
+            ><strong>How the Lightning adapter was trained</strong
+            ><span
+              >See how labeled observations, supervised fine-tuning and LoRA
+              weights teach Lightning the reporting vocabulary.</span
+            ><span class="card-link"
+              >View supervised LoRA training <b aria-hidden="true">↗</b></span
+            >
+          </button>
+          <button
+            class="learning-card"
+            data-dialog="tools-dialog"
+            aria-haspopup="dialog"
+          >
+            <span class="card-kicker">03 / THE TOOLKIT</span
+            ><strong>What each NVIDIA component does</strong
+            ><span
+              >Understand the roles of VSS, the agent harness, OpenShell,
+              Switchyard, Relay, Gym and RL.</span
+            ><span class="card-link"
+              >View component roles and connections
+              <b aria-hidden="true">↗</b></span
+            >
+          </button>
+        </div>
+        <div class="schema">
+          <div>
+            <code>activity_type</code><span>31 permitted categories</span>
+          </div>
+          <div>
+            <code>sensor_quality</code><span>CLEAR · DEGRADED · UNKNOWN</span>
+          </div>
+          <div>
+            <code>confidence</code><span>CONFIRMED · PROBABLE · POSSIBLE</span>
+          </div>
+          <div>
+            <code>routing</code
+            ><span>Validated destination from a lookup table</span>
+          </div>
+        </div>
+        <div class="callout">
+          One source cannot establish corroboration. Degraded or unknown feeds
+          cap confidence at POSSIBLE. Every report remains a draft for human
+          review.
+        </div>
+        <div class="section-title">
+          <h3>What the existing adapter learned</h3>
+          <span class="pill">RECORDED EVALUATION</span>
+        </div>
+        <div class="metrics" id="metrics"></div>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Model</th>
+                <th>Prompt / precision</th>
+                <th>Weighted score</th>
+                <th>All fields correct</th>
+                <th>U1 / U2 failures</th>
+              </tr>
+            </thead>
+            <tbody id="score-body"></tbody>
+          </table>
+        </div>
+        <p class="caption">
+          180 held-out observations. Weighted score is not whole-observation
+          accuracy. Rules-only prompts omit the permitted vocabulary;
+          full-taxonomy runs provide it. These results measure the specialist,
+          not the complete agent.
+        </p>
+        <details>
+          <summary>Where do these numbers come from?</summary>
+          <pre id="sources"></pre>
+        </details>
+        <a class="next" href="#employ"
+          >Give the capability to an agent <span>↓</span></a
+        >
+      </section>
+      <section id="employ">
+        <div class="eyebrow">03 / EMPLOY THE AGENT</div>
+        <h2>Give it a task. Watch it choose.</h2>
+        <p class="section-intro">
+          NVIDIA Agent Toolkit brings models, tools, skills and runtime
+          together. Lightning chooses the next tool. Switchyard sends general
+          reasoning to the base model and structured triage to your adapter.
+        </p>
+        <div class="architecture">
+          <div class="section-title">
+            <div>
+              <span class="card-kicker">THE CONNECTIONS</span>
+              <h3>Follow the prompt. Follow the data.</h3>
+            </div>
+            <button
+              class="quiet"
+              data-dialog="policy-dialog"
+              aria-haspopup="dialog"
+            >
+              Inspect OpenShell policy ↗
+            </button>
+          </div>
+          <button
+            class="quiet expand-diagram"
+            data-dialog="diagram-dialog"
+            aria-haspopup="dialog"
+          >
+            Expand diagram ↗
+          </button>
+          <div class="wire-scroll">
+            <img
+              class="wire-chart"
+              src="/static/architecture.svg"
+              alt="OpenShell surrounds the agent harness and loop. Three separate outward paths pass through tool access, model access and filesystem policies to tools and skills, models and mounted data."
+            />
+          </div>
+          <div class="wire-legend">
+            <span><i></i>Agent access request</span
+            ><span><i class="blue"></i>Policy-permitted access</span>
+          </div>
+          <p class="caption">
+            Adapted from your OpenShell Customer Deck, slides 6 and 8. This view
+            separates the harness from the capabilities it accesses. Tools and
+            skills, models and mounted data each have their own
+            policy-controlled path. Network requests pass through the trusted
+            supervisor; mounted files use filesystem controls. Current execution
+            remains on the host.
+          </p>
+          <div class="capability-panel">
+            <div class="section-title">
+              <h3>What this agent can call</h3>
+              <span class="pill">4 REGISTERED TOOLS</span>
+            </div>
+            <p id="capability-context" class="caption">
+              Choose a run in section 3 or 4 to see which tools it actually
+              called.
+            </p>
+            <div class="capability-list">
+              <div>
+                <code>perceive</code
+                ><span
+                  >Read the selected observation from recorded text or
+                  VSS.</span
+                ><b data-tool-use="perceive">No run selected</b>
+              </div>
+              <div>
+                <code>triage</code
+                ><span
+                  >Call the Lightning specialist and validate its four-field
+                  output.</span
+                ><b data-tool-use="triage">No run selected</b>
+              </div>
+              <div>
+                <code>draft</code
+                ><span
+                  >Prepare a report from validated evidence for human
+                  review.</span
+                ><b data-tool-use="draft">No run selected</b>
+              </div>
+              <div>
+                <code>request_review</code
+                ><span>Hold the workflow when the agent requests review.</span
+                ><b data-tool-use="request_review">No run selected</b>
+              </div>
+            </div>
+            <p class="caption">
+              These are Python tools, available according to workflow state.
+              <code>finish</code> ends the loop; it is not a tool. No SKILL.md
+              skills are loaded. NeMo Gym and RL run offline, while Relay
+              instruments execution automatically.
+            </p>
+          </div>
+          <div class="architecture-sources">
+            <a
+              href="https://blogs.nvidia.com/blog/nvidia-agent-toolkit-open-models-tools-skills-secure-runtime-ai-agents/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >NVIDIA Agent Toolkit reference ↗</a
+            ><a
+              href="https://docs.nvidia.com/openshell/about/architecture"
+              target="_blank"
+              rel="noopener noreferrer"
+              >OpenShell architecture reference ↗</a
+            >
+          </div>
+          <div class="offline-loop">
+            <span class="card-kicker"
+              >LEARNING TOOLS &amp; SKILLS / TARGET ARCHITECTURE</span
+            >
+            <p>
+              <strong>Evaluate behavior</strong> uses NeMo Gym to test
+              scenarios. <strong>Improve policy</strong> launches NeMo RL
+              training and compares candidate checkpoints. OpenShell policy
+              controls access to these training jobs.
+            </p>
+            <a class="next" href="#continuous-learning"
+              >Follow the continuous-learning loop <span>↓</span></a
+            >
+          </div>
+          <details>
+            <summary>Where exactly do the inputs attach?</summary>
+            <div class="attachment-grid">
+              <article>
+                <h4>Controller</h4>
+                <p>
+                  User task + system instructions + allowed actions + current
+                  state. Previous tool results inform the next decision.
+                </p>
+              </article>
+              <article>
+                <h4>Specialist</h4>
+                <p>
+                  The shared rules-only system prompt + one observation. The
+                  adapter provides the organization’s vocabulary.
+                </p>
+              </article>
+              <article>
+                <h4>Drafting</h4>
+                <p>
+                  A report schema + the observation and its source ID. Code
+                  supplies validated grades and destinations.
+                </p>
+              </article>
+              <article>
+                <h4>OpenShell</h4>
+                <p>
+                  Runtime policy governs process, file and network access. It is
+                  separate from the model’s task instructions.
+                </p>
+              </article>
+            </div>
+          </details>
+        </div>
+        <div class="flow">
+          <span>User task</span><b>→</b><span>Workshop agent</span><b>→</b
+          ><span>VSS + model tools</span><b>→</b
+          ><span>Validation + review</span>
+        </div>
+        <div class="run-grid">
+          <div>
+            <label for="clip">OBSERVATION</label
+            ><select id="clip"></select
+            ><video
+              id="video"
+              controls
+              muted
+              loop
+              playsinline
+              preload="metadata"
+            ></video>
+            <p class="caption">
+              Local footage. Clip selection does not run a model.
+            </p>
+          </div>
+          <div class="run-controls">
+            <label for="task">WHAT SHOULD THE AGENT DO?</label>
+            <div class="presets">
+              <button
+                data-task="Describe the selected scene only. Do not classify or draft a report."
+                class="quiet"
+              >
+                Describe</button
+              ><button
+                data-task="Triage this observation using the specialist. Show the destination and confidence. Hold any invalid result for review."
+                class="quiet"
+              >
+                Triage</button
+              ><button
+                data-task="Inspect this observation, use the specialist to triage it, and draft a concise report for human review. Hold if validation fails."
+                class="quiet selected"
+              >
+                Draft report
+              </button>
+            </div>
+            <textarea id="task" rows="4">
+Inspect this observation, use the specialist to triage it, and draft a concise report for human review. Hold if validation fails.</textarea
+            ><label for="perception">PERCEPTION SOURCE</label
+            ><select id="perception">
+              <option value="recorded">
+                Recorded VSS description · live agent and models
+              </option>
+              <option value="live">
+                Live VSS perception · live agent and models
+              </option>
+            </select>
+            <p class="caption">
+              Live VSS may take several minutes. Recorded mode reuses the
+              description only; agent and specialist calls still run live.
+            </p>
+            <button id="run" class="primary">
+              Run the agent <span>↗</span>
+            </button>
+            <p id="run-status" role="status" aria-live="polite">
+              Ready when you are. No model calls have been made.
+            </p>
+          </div>
+        </div>
+        <div class="replay-controls">
+          <label for="replay"
+            >OR INSPECT A SAVED DEVELOPMENT RUN · NO LIVE MODEL CALLS</label
+          ><select id="replay">
+            <option value="">Choose recorded execution…</option>
+          </select>
+          <p class="caption" id="playback-note">
+            Saved runs preserve the original inputs, outputs and Relay events.
+          </p>
+        </div>
+        <div id="run-output" hidden>
+          <div class="section-title">
+            <h3>The evidence and the outcome</h3>
+            <span id="run-badge" class="pill">RUNNING</span>
+          </div>
+          <div class="results-grid">
+            <article class="panel">
+              <div class="panel-label">
+                01 / OBSERVATION <span id="evidence-source"></span>
+              </div>
+              <p id="description">Waiting for perception…</p>
+            </article>
+            <article class="panel">
+              <div class="panel-label">02 / SPECIALIST + POLICY</div>
+              <pre id="item">Waiting for triage…</pre>
+              <div id="gate" class="gate">Not evaluated</div>
+            </article>
+          </div>
+          <article class="report panel">
+            <div class="panel-label">03 / DRAFT FOR HUMAN REVIEW</div>
+            <p id="report">No report drafted.</p>
+          </article>
+        </div>
+        <a class="next" href="#observe"
+          >Open the execution record <span>↓</span></a
+        >
+      </section>
+      <section id="observe">
+        <div class="eyebrow">04 / INSPECT THE BEHAVIOR</div>
+        <h2>Every choice leaves a trace.</h2>
+        <p class="section-intro">
+          Follow the selected tools, model routes, response times and policy
+          checks. The short action explanations are model outputs, not proof of
+          internal reasoning.
+        </p>
+        <div class="section-title">
+          <span class="pill">NeMo Relay · real lifecycle events</span
+          ><a id="download" class="quiet" hidden>Download this run ↗</a>
+        </div>
+        <div class="trace-toolbar">
+          <div>
+            <label for="trace-replay">LOAD A RECORDED TRACE</label
+            ><select id="trace-replay">
+              <option value="">Choose an execution…</option>
+            </select>
+          </div>
+          <span id="trace-mode" class="pill">NO RUN SELECTED</span>
+        </div>
+        <div class="trace-stats" id="trace-stats">
+          Choose a saved run or execute a task in section 3.
+        </div>
+        <div id="trace-explorer" hidden>
+          <div class="section-title">
+            <h3>The agent’s choices</h3>
+            <span class="caption"
+              >Select a step to inspect its recorded output</span
+            >
+          </div>
+          <div id="decision-strip" class="decision-strip"></div>
+          <div class="trace-layout">
+            <div>
+              <div class="trace-filter">
+                <label for="trace-filter">EVENTS</label
+                ><select id="trace-filter">
+                  <option value="all">All events</option>
+                  <option value="model">Model calls</option>
+                  <option value="tool">Tool choices</option>
+                  <option value="validation">Validation + review</option>
+                </select>
+              </div>
+              <div class="waterfall-axis">
+                <span>Execution event</span
+                ><span id="trace-duration">Elapsed time →</span>
+              </div>
+              <ol id="timeline" class="waterfall"></ol>
+            </div>
+            <article class="event-inspector">
+              <span class="card-kicker" id="event-kind">EVENT DETAILS</span>
+              <h3 id="event-title">Select an event</h3>
+              <p id="event-summary"></p>
+              <pre id="event-data"></pre>
+            </article>
+          </div>
+          <p class="caption">
+            Model bars show reported call duration; diamonds mark instantaneous
+            events. Times are relative to run start. This is a view of captured
+            workflow events; raw Relay lifecycle records are available below.
+          </p>
+        </div>
+        <details>
+          <summary>Inspect raw Relay events</summary>
+          <pre id="raw-events">No events yet.</pre>
+        </details>
+        <div class="callout">
+          Routing baseline: explicit task routes through Switchyard. Automatic
+          model classification is a separate experiment. Both targets use the
+          same resident Lightning weights.
+        </div>
+        <a class="next" href="#improve"
+          >See how Relay informs learning <span>↓</span></a
+        >
+      </section>
+      <section id="improve">
+        <div class="eyebrow">05 / IMPROVE WITH EVIDENCE</div>
+        <h2>Watch a policy learn from a reward.</h2>
+        <p class="section-intro">
+          A small training experiment makes the loop visible: choose a tool
+          plan, verify the outcome in NeMo Gym, and update the policy with a
+          NeMo RL loss.
+        </p>
+        <div class="continuous-learning" id="continuous-learning">
+          <div class="section-title">
+            <div>
+              <span class="card-kicker">THE CONTINUOUS-LEARNING LOOP</span>
+              <h3>Run. Observe. Learn. Review.</h3>
+            </div>
+            <span class="pill"
+              >TARGET ARCHITECTURE · RECORDED TRAINING EXAMPLE</span
+            >
+          </div>
+          <p class="loop-intro">
+            The agent uses operational skills to do the work and learning skills
+            to improve it. Select a stage to inspect its evidence and the
+            handoff to the next stage.
+          </p>
+          <div class="loop-player">
+            <button id="learning-play" class="quiet">
+              Walk through the loop ▶</button
+            ><span id="learning-progress" role="status">Stage 1 of 6</span>
+          </div>
+          <div class="loop-map" aria-label="Continuous-learning stages">
+            <button
+              class="loop-stage loop-execute"
+              data-learning-stage="execute"
+              aria-pressed="false"
+              aria-controls="learning-detail"
+            >
+              <span>01</span><strong>Agent executes</strong
+              ><small>Operational tools</small></button
+            ><button
+              class="loop-stage loop-relay"
+              data-learning-stage="relay"
+              aria-pressed="false"
+              aria-controls="learning-detail"
+            >
+              <span>02</span><strong>Relay observes</strong
+              ><small>Evidence + failures</small></button
+            ><button
+              class="loop-stage loop-gym"
+              data-learning-stage="gym"
+              aria-pressed="false"
+              aria-controls="learning-detail"
+            >
+              <span>03</span><strong>Gym evaluates</strong
+              ><small>Evaluate behavior skill</small></button
+            ><button
+              class="loop-stage loop-rl"
+              data-learning-stage="rl"
+              aria-pressed="false"
+              aria-controls="learning-detail"
+            >
+              <span>04</span><strong>RL trains</strong
+              ><small>Improve policy skill</small></button
+            ><button
+              class="loop-stage loop-approve"
+              data-learning-stage="approve"
+              aria-pressed="false"
+              aria-controls="learning-detail"
+            >
+              <span>05</span><strong>Evaluate + approve</strong
+              ><small>Candidate release gate</small></button
+            ><button
+              class="loop-stage loop-update"
+              data-learning-stage="update"
+              aria-pressed="false"
+              aria-controls="learning-detail"
+            >
+              <span>06</span><strong>Update the agent</strong
+              ><small>Approved checkpoint</small>
+            </button>
+          </div>
+          <div class="loop-return">
+            ↻ Approved updates return to execution, where Relay observes the
+            next run.
+          </div>
+          <article class="learning-detail" id="learning-detail">
+            <div>
+              <span class="card-kicker" id="learning-kind"></span>
+              <h3 id="learning-title"></h3>
+              <p id="learning-copy"></p>
+              <p id="learning-evidence" class="learning-evidence" role="status">
+                Loading captured evidence…
+              </p>
+            </div>
+            <button class="quiet" id="learning-open">
+              Inspect evidence ↗
+            </button>
+          </article>
+          <details>
+            <summary>What is implemented in this example?</summary>
+            <p class="caption">
+              Operational runs and Relay traces are real. Gym verification and
+              CPU training of the small teaching controller are recorded. The
+              two learning skills, OpenShell job access and approved
+              production-checkpoint deployment are the target integration. This
+              walkthrough does not launch jobs or approve an update.
+            </p>
+          </details>
+        </div>
+        <div class="relay-learning" id="relay-learning">
+          <div class="section-title">
+            <div>
+              <span class="card-kicker">FROM OBSERVABILITY TO LEARNING</span>
+              <h3>Relay shows us what to teach.</h3>
+            </div>
+            <span class="pill">REAL TRACE + REAL TRAINING RECORD</span>
+          </div>
+          <p class="relay-intro">
+            A failed run becomes a concrete behavior to test. Follow one
+            missing-evidence mistake from the production trace to the teaching
+            environment’s reward rule.
+          </p>
+          <div class="learning-chain">
+            <article>
+              <span class="num">01 / RELAY</span>
+              <h4>Find the failure</h4>
+              <p>
+                Capture tool order, errors and model calls. Here, triage was
+                attempted before perception.
+              </p>
+            </article>
+            <article>
+              <span class="num">02 / ENGINEERING</span>
+              <h4>Define the contract</h4>
+              <p>
+                Turn the diagnosis into a repeatable check: collect an
+                observation before classifying it.
+              </p>
+            </article>
+            <article>
+              <span class="num">03 / GYM</span>
+              <h4>Verify fresh attempts</h4>
+              <p>
+                The trusted verifier checks each sampled plan. A missing
+                evidence dependency earns zero reward.
+              </p>
+            </article>
+            <article>
+              <span class="num">04 / RL</span>
+              <h4>Update the policy</h4>
+              <p>
+                Use group-relative advantages to change plan probabilities, then
+                measure the resulting policy.
+              </p>
+            </article>
+          </div>
+          <div class="relay-evidence-grid">
+            <article class="panel">
+              <div class="panel-label">OBSERVED / RELAY TRACE</div>
+              <h4>Triage arrived before evidence.</h4>
+              <pre id="relay-failure">Loading the recorded failure…</pre>
+              <button id="relay-source-trace" class="quiet" disabled>
+                Inspect this trace in section 4 ↗
+              </button>
+            </article>
+            <article class="panel">
+              <div class="panel-label">VERIFIED / GYM ROLLOUT</div>
+              <h4>The same failure pattern earns zero.</h4>
+              <pre id="relay-gym-example">Loading the sampled plan…</pre>
+              <button id="relay-training-example" class="quiet" disabled>
+                Inspect this training step ↓
+              </button>
+            </article>
+          </div>
+          <div class="relay-impact" id="relay-policy-impact" role="status">
+            Loading the policy comparison…
+          </div>
+          <p class="caption">
+            This is an evidence-to-test mapping. The captured teaching run did
+            not ingest Relay logs: it trained on fresh policy samples and Gym
+            rewards. Relay supports diagnosis, scenario design and later
+            comparison; it does not assign rewards or update weights.
+          </p>
+          <details>
+            <summary>What connects the records?</summary>
+            <pre id="relay-learning-provenance"></pre>
+            <p class="caption">
+              For production LLM training, also collect policy token IDs,
+              sampled log probabilities and masks. Execution traces alone are
+              not a complete training batch.
+            </p>
+          </details>
+        </div>
+        <div class="three training">
+          <article>
+            <span class="num">01 / ROLLOUT</span>
+            <h3>Try a plan</h3>
+            <p>
+              A compact controller samples tool plans for describe, triage and
+              report tasks.
+            </p>
+          </article>
+          <article>
+            <span class="num">02 / VERIFY</span>
+            <h3>Score the outcome</h3>
+            <p>
+              NeMo Gym checks the plan against the task contract and returns a
+              verifiable reward.
+            </p>
+          </article>
+          <article>
+            <span class="num">03 / UPDATE</span>
+            <h3>Change the policy</h3>
+            <p>
+              A clipped policy-gradient loss updates the controller. Inspect how
+              plan probabilities change over training.
+            </p>
+          </article>
+        </div>
+        <div class="training-demo" id="training-demo">
+          <div class="section-title">
+            <div>
+              <span class="card-kicker">THE EXPERIMENT</span>
+              <h3>A real update, small enough to inspect.</h3>
+            </div>
+            <span class="pill" id="training-badge">LOADING RECORD</span>
+          </div>
+          <p id="training-status" role="status">
+            Loading the captured experiment…
+          </p>
+          <div id="training-content" hidden>
+            <div id="training-metrics" class="training-metrics"></div>
+            <div class="training-player">
+              <button id="training-play" class="quiet">Replay training</button
+              ><label for="training-step"
+                >OPTIMIZER STEP <span id="training-step-label"></span></label
+              ><input
+                id="training-step"
+                type="range"
+                min="0"
+                max="1"
+                value="0"
+              /><button id="training-download" class="quiet">
+                Download experiment ↗
+              </button>
+            </div>
+            <div class="training-charts">
+              <article>
+                <div class="section-title">
+                  <h3>Reward over training</h3>
+                  <span class="caption">0 = failed contract · 1 = passed</span>
+                </div>
+                <div id="reward-chart"></div>
+                <p class="caption">
+                  Expected reward enumerates the tiny policy’s choices. Sampled
+                  reward varies with the plans drawn at each step.
+                </p>
+              </article>
+              <article>
+                <div class="section-title">
+                  <h3>What the controller chooses</h3>
+                </div>
+                <label for="training-intent">TASK INTENT</label
+                ><select id="training-intent"></select>
+                <div id="policy-probabilities"></div>
+                <p class="caption">
+                  Outlined bars show the starting policy; filled bars show the
+                  selected step.
+                </p>
+              </article>
+            </div>
+            <div class="section-title">
+              <h3>Inspect the sampled plans</h3>
+              <span id="rollout-step" class="pill"></span>
+            </div>
+            <div class="table-scroll">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Task</th>
+                    <th>Sampled tool plan</th>
+                    <th>Gym reward</th>
+                    <th>Verification</th>
+                  </tr>
+                </thead>
+                <tbody id="training-rollouts"></tbody>
+              </table>
+            </div>
+            <p id="training-scope" class="caption"></p>
+            <details>
+              <summary>Experiment provenance and limits</summary>
+              <pre id="training-provenance"></pre>
+            </details>
+          </div>
+        </div>
+        <div class="section-title">
+          <h3>What observation already helped us fix</h3>
+          <span class="pill">RECORDED DEVELOPMENT CHECK</span>
+        </div>
+        <div id="agent-baseline" class="callout"></div>
+        <p class="caption">
+          Same four development tasks before and after a controller schema
+          change. No weights updated. This is neither held-out evidence nor an
+          RL result.
+        </p>
+        <div class="footer-line">
+          Built on your existing workshop <span id="versions"></span>
+        </div>
+        <a class="next" href="#start">Back to the beginning <span>↑</span></a>
+      </section>
+    </main>
+    <dialog
+      id="rules-dialog"
+      class="learning-dialog"
+      aria-labelledby="rules-dialog-title"
+    >
+      <div class="dialog-top">
+        <span class="card-kicker">THE SPECIFICATION / FICTIONAL EXERCISE</span
+        ><button class="dialog-close" aria-label="Close popup" autofocus>
+          Close <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="dialog-body">
+        <h2 id="rules-dialog-title">Classification, confidence and routing.</h2>
+        <p class="dialog-lede">
+          Training labels and evaluation labels use the same task definition.
+          The running workflow also checks the output before it becomes a draft.
+        </p>
+        <div class="rule-list">
+          <article>
+            <span>R1</span>
+            <div>
+              <h3>One source cannot confirm.</h3>
+              <p>
+                A single uncorroborated observation must never receive
+                CONFIRMED. For training labels, a clear, uncorroborated
+                observation receives PROBABLE.
+              </p>
+            </div>
+          </article>
+          <article>
+            <span>R2</span>
+            <div>
+              <h3>Feed quality limits confidence.</h3>
+              <p>
+                DEGRADED or UNKNOWN requires POSSIBLE, even when corroboration
+                is available.
+              </p>
+            </div>
+          </article>
+          <article>
+            <span>R3</span>
+            <div>
+              <h3>An empty scene is a valid result.</h3>
+              <p>
+                Use no_significant_activity and ARCHIVE when nothing of note is
+                reported. Do not invent an activity to fill the form.
+              </p>
+            </div>
+          </article>
+        </div>
+        <h3>The destination is a lookup.</h3>
+        <p>
+          The adapter learns these associations. At runtime, code assigns the
+          destination from this table after validation; invalid outputs are held
+          for review.
+        </p>
+        <div class="route-grid">
+          <article>
+            <h4>J2-ANALYSIS <span>19 categories</span></h4>
+            <ul>
+              <li><code>armour_movement</code></li>
+              <li><code>mech_infantry_movement</code></li>
+              <li><code>dismounted_patrol</code></li>
+              <li><code>wheeled_logistics_convoy</code></li>
+              <li><code>engineer_activity</code></li>
+              <li><code>recovery_operation</code></li>
+              <li><code>air_defence_emplacement</code></li>
+              <li><code>artillery_emplacement</code></li>
+              <li><code>field_fortification</code></li>
+              <li><code>obstacle_emplacement</code></li>
+              <li><code>radar_emission</code></li>
+              <li><code>comms_emission</code></li>
+              <li><code>jamming_indicator</code></li>
+              <li><code>rotary_wing_transit</code></li>
+              <li><code>fixed_wing_transit</code></li>
+              <li><code>uav_transit</code></li>
+              <li><code>airfield_activity</code></li>
+              <li><code>maritime_patrol</code></li>
+              <li><code>amphibious_activity</code></li>
+            </ul>
+          </article>
+          <article>
+            <h4>J3-CURRENT-OPS <span>7 categories</span></h4>
+            <ul>
+              <li><code>bridge_damage</code></li>
+              <li><code>road_obstruction</code></li>
+              <li><code>rail_activity</code></li>
+              <li><code>power_infrastructure</code></li>
+              <li><code>pipeline_activity</code></li>
+              <li><code>port_handling</code></li>
+              <li><code>harbour_obstruction</code></li>
+            </ul>
+          </article>
+          <article>
+            <h4>CIMIC <span>4 categories</span></h4>
+            <ul>
+              <li><code>civil_displacement</code></li>
+              <li><code>civil_gathering</code></li>
+              <li><code>humanitarian_convoy</code></li>
+              <li><code>checkpoint_activity</code></li>
+            </ul>
+          </article>
+          <article>
+            <h4>ARCHIVE <span>1 categories</span></h4>
+            <ul>
+              <li><code>no_significant_activity</code></li>
+            </ul>
+          </article>
+        </div>
+        <details>
+          <summary>Read the exact rules-only prompt</summary>
+          <pre>
+Triage this observation and return only a JSON object with the fields activity_type, sensor_quality, confidence and routing.
+Rules: a single uncorroborated source cannot be given the highest confidence grade. A degraded or unclear feed caps the confidence grade. If the observation reports nothing of note, classify it as such and send it to the archive. Use this organisation's standard terms for every field.</pre
+          >
+        </details>
+        <p class="caption">
+          Source: train/scripts/jisr_rules.py · Runtime checks:
+          run/workshop/workshop_agent/contracts.py. R3 is the workshop’s label
+          here for the no-activity instruction. All reports require human
+          review.
+        </p>
+      </div>
+    </dialog>
+    <dialog
+      id="training-dialog"
+      class="learning-dialog"
+      aria-labelledby="training-dialog-title"
+    >
+      <div class="dialog-top">
+        <span class="card-kicker">COMPLETED / SUPERVISED LoRA</span
+        ><button class="dialog-close" aria-label="Close popup" autofocus>
+          Close <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="dialog-body">
+        <h2 id="training-dialog-title">
+          How the Lightning adapter was trained.
+        </h2>
+        <p class="dialog-lede">
+          The existing Lightning adapter learned from labeled examples through
+          supervised fine-tuning (SFT). Its training used PyTorch, Transformers
+          and PEFT, with NeMo AutoModel’s ChatDataset loader.
+        </p>
+        <ol class="training-steps">
+          <li>
+            <div>
+              <h3>Define the answer.</h3>
+              <p>
+                Pair an observation with the expected four-field JSON. The
+                shared rulebook supplies confidence grades and
+                category-to-destination mappings.
+              </p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <h3>Teach the organization’s vocabulary.</h3>
+              <p>
+                The rules-only prompt names the fields and constraints but omits
+                the allowed values. Examples teach the specialist the exact
+                categories, grades and destinations.
+              </p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <h3>Update a small adapter.</h3>
+              <p>
+                Keep the base model frozen and optimize LoRA weights to predict
+                the labeled response. The script uses cross-entropy loss and
+                AdamW; it does not use a reward-driven RL loop.
+              </p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <h3>Check generated answers.</h3>
+              <p>
+                Evaluate on 180 held-out observations. Compare the base and
+                specialist with matching prompts, and report whole-output
+                correctness as well as weighted field accuracy.
+              </p>
+            </div>
+          </li>
+        </ol>
+        <details>
+          <summary>Inspect the training recipe</summary>
+          <dl class="recipe">
+            <dt>Base model</dt>
+            <dd>NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16</dd>
+            <dt>LoRA</dt>
+            <dd>Rank 32 · alpha 64 · dropout 0.05</dd>
+            <dt>Target modules</dt>
+            <dd>
+              q/k/v/o_proj and in/out_proj; MoE expert projections excluded
+            </dd>
+            <dt>Optimizer</dt>
+            <dd>AdamW · learning rate 0.0002 · accumulation 8</dd>
+            <dt>Run length</dt>
+            <dd>
+              Configured by --steps (reproduction recipe default: 20 smoke steps).
+              This default is not the duration of the recorded training run.
+            </dd>
+          </dl>
+          <p class="caption">
+            Reproduction recipe: course/scripts/train_lightning.py. Its label-alignment
+            guard avoids shifting already-shifted training labels a second time.
+          </p>
+        </details>
+      </div>
+    </dialog>
+    <dialog
+      id="tools-dialog"
+      class="learning-dialog"
+      aria-labelledby="tools-dialog-title"
+    >
+      <div class="dialog-top">
+        <span class="card-kicker">THE STACK / ROLES AND STATUS</span
+        ><button class="dialog-close" aria-label="Close popup" autofocus>
+          Close <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="dialog-body">
+        <h2 id="tools-dialog-title">NVIDIA components and their roles.</h2>
+        <p class="dialog-lede">
+          Follow the handoff from teaching a capability to running it inside an
+          observable agent.
+        </p>
+        <div class="tool-list">
+          <article>
+            <span class="tool-state">ADAPTER TRAINING</span>
+            <h3>PyTorch · Transformers · PEFT</h3>
+            <p>
+              Load Lightning and train its LoRA adapter on labeled responses.
+              NeMo AutoModel’s ChatDataset prepares the training examples.
+            </p>
+          </article>
+          <article>
+            <span class="tool-state">PERCEPTION</span>
+            <h3>NVIDIA VSS</h3>
+            <p>
+              Turn video into an observation the agent can use. This workshop
+              offers recorded descriptions or a live VSS request.
+            </p>
+          </article>
+          <article>
+            <span class="tool-state">THE COMPLETE STACK</span>
+            <h3>NVIDIA Agent Toolkit</h3>
+            <p>
+              The broader stack of models, tools, skills and secure runtime. An
+              agent harness connects these capabilities; OpenShell governs
+              access from its sandbox.
+            </p>
+          </article>
+          <article>
+            <span class="tool-state">MODEL ROUTING</span>
+            <h3>NeMo Switchyard</h3>
+            <p>
+              Send reasoning to the base model and structured triage to the
+              adapter. Today these are explicit task routes; automatic model
+              selection is a future experiment.
+            </p>
+          </article>
+          <article>
+            <span class="tool-state">OBSERVABILITY</span>
+            <h3>NeMo Relay</h3>
+            <p>
+              Capture model and tool lifecycle events for inspection and replay.
+              Traces expose execution behavior; they do not themselves train the
+              model.
+            </p>
+          </article>
+          <article class="training-tool">
+            <span class="tool-state">ENVIRONMENTS</span>
+            <h3>NeMo Gym</h3>
+            <p>
+              Provide repeatable tasks, tools and verification for evaluating
+              and training the controller. Section 5 runs a real Gym verifier
+              over a compact teaching environment.
+            </p>
+            <a
+              href="https://github.com/NVIDIA-NeMo/Gym"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Explore NeMo Gym ↗</a
+            >
+          </article>
+          <article class="training-tool">
+            <span class="tool-state">POLICY TRAINING</span>
+            <h3>NeMo RL</h3>
+            <p>
+              Use scored trajectories to improve the controller’s policy
+              offline. Section 5 demonstrates real CPU updates using NeMo RL
+              loss functions; production-controller training is a separate
+              milestone.
+            </p>
+            <a
+              href="https://github.com/NVIDIA-NeMo/RL"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Explore NeMo RL ↗</a
+            >
+          </article>
+        </div>
+      </div>
+    </dialog>
+    <dialog
+      id="policy-dialog"
+      class="learning-dialog"
+      aria-labelledby="policy-dialog-title"
+    >
+      <div class="dialog-top">
+        <span class="card-kicker">OPENSHELL / ACCESS POLICY</span
+        ><button class="dialog-close" aria-label="Close popup" autofocus>
+          Close ×
+        </button>
+      </div>
+      <div class="dialog-body">
+        <h2 id="policy-dialog-title">Access is an explicit grant.</h2>
+        <p class="dialog-lede">
+          The proposed sandbox allows the workshop’s Python process to reach two
+          host services. Registered tools and Relay run within the agent
+          process; Switchyard routes model requests through the approved
+          Lightning endpoint.
+        </p>
+        <span class="pill">DEPLOYMENT DESIGN · NOT APPLIED</span>
+        <div class="permission-list">
+          <div>
+            <b>ALLOW</b><span>Lightning · port 8002</span
+            ><code>POST /v1/chat/completions</code>
+          </div>
+          <div>
+            <b>ALLOW</b><span>VSS · port 8000</span><code>POST /generate</code>
+          </div>
+          <div>
+            <b>READ</b><span>Recorded observations + configuration</span
+            ><code>Mounted read-only paths</code>
+          </div>
+          <div>
+            <b>WRITE</b><span>Captured execution records</span
+            ><code>outputs/ and /tmp</code>
+          </div>
+          <div>
+            <b>DENY</b><span>Other outbound destinations</span
+            ><code>No matching network grant</code>
+          </div>
+        </div>
+        <details open>
+          <summary>Inspect the proposed policy YAML</summary>
+          <pre>
+# Workshop deployment design; not applied to the host process.
+# Requires sandbox mounts, matching binary paths and reachable host services.
+version: 1
+filesystem_policy:
+  include_workdir: false
+  read_only: [/workspace/run/chain/descriptions, /workspace/run/workshop/configs]
+  read_write: [/workspace/run/workshop/outputs, /tmp]
+network_policies:
+  lightning:
+    endpoints:
+      - host: host.openshell.internal
+        port: 8002
+        protocol: rest
+        enforcement: enforce
+        rules:
+          - { method: POST, path: /v1/chat/completions }
+    binaries:
+      - { path: /workspace/run/workshop/.venv/bin/python }
+  vss:
+    endpoints:
+      - host: host.openshell.internal
+        port: 8000
+        protocol: rest
+        enforcement: enforce
+        rules:
+          - { method: POST, path: /generate }
+    binaries:
+      - { path: /workspace/run/workshop/.venv/bin/python }
+</pre
+          >
+        </details>
+        <p class="caption">
+          Source: run/workshop/configs/openshell-design.yaml. This excerpt needs
+          integration with the sandbox image, complete runtime read paths,
+          mounts and actual executable identity. Host services must be reachable
+          from the sandbox. OpenShell enforcement has not been verified for this
+          workshop process.
+        </p>
+        <details>
+          <summary>Compare the existing Claw policy</summary>
+          <pre>
+# Network policy for the JISR watch-floor Claw.
+#
+# This file IS the sovereignty demonstration. The agent has no route off this
+# host. Not "is instructed not to" -- cannot. Show this file on screen next to
+# the running agent.
+preset:
+  name: jisr-watchfloor-local
+  description: JISR watch-floor agent, local-only. No egress.
+
+network_policies:
+  jisr-watchfloor-local:
+    name: jisr-watchfloor-local
+    endpoints:
+      # the customized triage specialist
+      - { host: 127.0.0.1, port: 8001, access: full }
+      # VSS agent API (events, query)
+      - { host: 127.0.0.1, port: 30081, access: full }
+      # VSS UI / blueprint
+      - { host: 127.0.0.1, port: 3000, access: full }
+    binaries:
+      - { path: /usr/bin/curl }
+      - { path: /usr/local/bin/curl }
+      - { path: /usr/bin/python3 }
+      - { path: /usr/local/bin/python3 }
+</pre
+          >
+          <p class="caption">
+            Historical policy excerpt. This older preset targets ports 8001,
+            30081 and 3000; it is not the current NAT deployment policy. Its
+            localhost entries do not grant access to services on the external
+            host from a sandbox.
+          </p>
+        </details>
+        <p class="caption">
+          <a
+            href="https://docs.nvidia.com/openshell/latest/how-it-works/policies/schema"
+            target="_blank"
+            rel="noopener noreferrer"
+            >OpenShell policy schema ↗</a
+          >
+        </p>
+      </div>
+    </dialog>
+    <dialog
+      id="diagram-dialog"
+      class="learning-dialog diagram-dialog"
+      aria-labelledby="diagram-dialog-title"
+    >
+      <div class="dialog-top">
+        <h2 id="diagram-dialog-title">Agent access and OpenShell policy</h2>
+        <button class="dialog-close" aria-label="Close diagram" autofocus>
+          Close ×
+        </button>
+      </div>
+      <img
+        src="/static/architecture.svg"
+        alt="OpenShell architecture with the agent harness, its four registered tools, model access and mounted-data policy."
+      />
+    </dialog>
+    <div class="presenter-controls" aria-label="Chapter controls">
+      <button id="chapter-prev" class="quiet" aria-label="Previous chapter">
+        ← Previous</button
+      ><span id="chapter-position" aria-live="polite">01 / The system</span
+      ><progress
+        id="chapter-progress"
+        max="5"
+        value="1"
+        aria-label="Current chapter"
+      ></progress
+      ><button id="chapter-next" class="quiet" aria-label="Next chapter">
+        Next →
+      </button>
+    </div>
+    <dialog
+      id="candidate-dialog"
+      class="learning-dialog"
+      aria-labelledby="candidate-dialog-title"
+    >
+      <div class="dialog-top">
+        <span class="card-kicker">EVALUATE + APPROVE</span
+        ><button
+          class="dialog-close"
+          aria-label="Close candidate comparison"
+          autofocus
+        >
+          Close ×
+        </button>
+      </div>
+      <div class="dialog-body">
+        <h2 id="candidate-dialog-title">Compare before promoting.</h2>
+        <p class="dialog-lede">
+          A better score creates a candidate. Evaluation and human approval
+          determine whether it becomes the agent’s next policy.
+        </p>
+        <div id="candidate-comparison" class="metrics"></div>
+        <p class="caption">
+          Scores enumerate the finite teaching environment; they do not measure
+          held-out production performance.
+        </p>
+        <div class="approval-list">
+          <div>
+            <b>RECORDED</b
+            ><span>CPU teaching controller trained and checkpoint saved.</span>
+          </div>
+          <div>
+            <b>REQUIRED</b
+            ><span
+              >Evaluate the production candidate on frozen tasks, policy
+              violations and failure recovery.</span
+            >
+          </div>
+          <div>
+            <b>REQUIRED</b
+            ><span
+              >Review the evidence and approve a versioned checkpoint with a
+              rollback path.</span
+            >
+          </div>
+          <div>
+            <b>UNCHANGED</b
+            ><span
+              >Lightning and the production controller have not been
+              updated.</span
+            >
+          </div>
+        </div>
+        <details>
+          <summary>Compare recorded checkpoint identities</summary>
+          <pre id="candidate-identities">Loading captured checkpoints…</pre>
+        </details>
+      </div>
+    </dialog>
+    <script src="/static/presentation.js"></script>
+    <script src="/static/trace.js"></script>
+    <script src="/static/app.js"></script>
+    <script src="/static/training.js"></script>
+    <script src="/static/relay-learning.js"></script>
+    <script src="/static/learning-loop.js"></script>
+  </body>
+</html>

@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1460 880" role="img" aria-labelledby="title desc">
+<title id="title">NVIDIA OpenShell: workshop architecture, adapted from Customer Deck slides 6 and 8</title>
+<desc id="desc">Inputs enter the OpenShell gateway, then the agent harness inside its own sandbox. Three independent outward access lanes connect the harness to tools and skills, models, and mounted data through OpenShell policy controls outside the agent sandbox. The outer OpenShell boundary contains the gateway, sandbox, enforcement layer and policy prover. This is an intended logical access design, not a claim of deployed sandbox enforcement.</desc>
+<rect width="1460" height="880" fill="#10171a"/>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#b8eb59"/></marker><marker id="blue" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#88c9f1"/></marker></defs>
+<style>svg{background:#10171a;font-family:Arial,sans-serif}.box{fill:#182328;stroke:#44544e;stroke-width:1.5}.core{fill:#23331c;stroke:#8db95c}.trusted{fill:#162b38;stroke:#6999b5}.input{fill:#29261b;stroke:#b4a05b}.title{fill:#eef3ed;font-size:20px;font-weight:600}.sub{fill:#b1bdb7;font-size:14px}.label{fill:#b8eb59;font-size:13px;letter-spacing:1.1px}.note{fill:#b1bdb7;font-size:13px}.flow,.network{fill:none;stroke:#b8eb59;stroke-width:2;marker-end:url(#arrow)}.network{stroke:#88c9f1;marker-end:url(#blue)}.planned{stroke:#88c9f1;stroke-dasharray:5 4}.planned-edge{fill:none;stroke:#88c9f1;stroke-width:2;stroke-dasharray:5 4;marker-end:url(#blue)}.port{fill:#b8eb59;font-size:12px}</style>
+<text x="310" y="64" class="label">NVIDIA AGENT TOOLKIT / WORKSHOP ARCHITECTURE</text>
+<text x="310" y="97" class="title">Govern the agent. Connect its capabilities.</text>
+<rect x="20" y="175" width="1030" height="620" rx="18" fill="#142018" stroke="#8db95c" stroke-width="2"/>
+<text x="280" y="215" class="label">NVIDIA OPENSHELL / SECURE RUNTIME BOUNDARY</text>
+<rect x="280" y="240" width="320" height="430" rx="14" fill="none" stroke="#b1bdb7" stroke-dasharray="7 6"/>
+<text x="305" y="263" class="label">AGENT SANDBOX</text>
+<text x="685" y="263" class="label">PRIVILEGED POLICY CONTROLS</text>
+<text x="1120" y="105" class="label">CONNECTED CAPABILITIES</text>
+<text x="305" y="705" class="note">Relay instruments the agent loop.</text>
+<text x="305" y="730" class="note">Traces are captured as run records.</text>
+<rect x="21" y="755" width="1028" height="39" rx="12" fill="#b8eb59"/>
+<text x="535" y="782" text-anchor="middle" fill="#172011" font-size="19" font-weight="600">NVIDIA OpenShell</text>
+<text x="20" y="832" class="note">Based on Customer Deck slides 6 + 8. Network access is supervisor-mediated; mounted files use filesystem controls.</text>
+<text x="20" y="858" class="note">Target architecture · recorded training example. Dashed learning skills are proposed; four operational tools are registered.</text>
+
+<path class="planned-edge" data-from="tools" data-to="learning" d="M1267.5 265 L1267.5 230"/>
+<path class="flow" data-from="input" data-to="gateway" d="M132.5 125 L132.5 410"/>
+<path class="flow" data-from="gateway" data-to="agent" d="M220 455.0 L310 455.0"/>
+<path class="flow" data-from="agent" data-to="tool_policy" d="M570 335 L685 335.0"/>
+<path class="flow" data-from="agent" data-to="model_policy" d="M570 455 L685 455.0"/>
+<path class="flow" data-from="agent" data-to="file_policy" d="M570 575 L685 575.0"/>
+<path class="network" data-from="tool_policy" data-to="tools" d="M995 335.0 L1120 335.0"/>
+<path class="network" data-from="model_policy" data-to="models" d="M995 455.0 L1120 455.0"/>
+<path class="network" data-from="file_policy" data-to="data" d="M995 575.0 L1120 575.0"/>
+<g id="learning"><rect class="box planned" x="1120" y="120" width="295" height="110" rx="9"/>
+<text class="title" x="1137" y="148">Learning tools + skills</text>
+<text class="sub" x="1137" y="173">Evaluate behavior · NeMo Gym</text>
+<text class="sub" x="1137" y="193">Improve policy · NeMo RL</text>
+<text class="sub" x="1137" y="213">Target skills · gated training jobs</text>
+</g>
+<g id="input"><rect class="box input" x="45" y="35" width="175" height="90" rx="9"/>
+<text class="title" x="62" y="63">Inputs</text>
+<text class="sub" x="62" y="88">Prompt / CLI</text>
+</g>
+<g id="gateway"><rect class="box trusted" x="45" y="410" width="175" height="90" rx="9"/>
+<text class="title" x="62" y="438">Gateway</text>
+<text class="sub" x="62" y="463">Session + lifecycle</text>
+</g>
+<g id="agent"><rect class="box core" x="310" y="275" width="260" height="360" rx="9"/>
+<text x="334" y="385" class="title">Agent harness</text><text x="334" y="413" class="sub">Observe → reason → act</text><text x="334" y="497" class="sub">Prompt + working state</text><text x="334" y="523" class="sub">Evidence + tool results</text><text x="547" y="328" text-anchor="end" class="port">TOOLS</text><text x="547" y="448" text-anchor="end" class="port">INFERENCE</text><text x="547" y="568" text-anchor="end" class="port">FILES</text>
+</g>
+<g id="tool_policy"><rect class="box trusted" x="685" y="290" width="310" height="90" rx="9"/>
+<text class="title" x="702" y="318">Tool access</text>
+<text class="sub" x="702" y="343">Supervisor: endpoint + process</text>
+<text class="sub" x="702" y="363">Allowed API methods / paths</text>
+</g>
+<g id="model_policy"><rect class="box trusted" x="685" y="410" width="310" height="90" rx="9"/>
+<text class="title" x="702" y="438">Model access</text>
+<text class="sub" x="702" y="463">Supervisor: inference endpoint</text>
+<text class="sub" x="702" y="483">Provider permissions</text>
+</g>
+<g id="file_policy"><rect class="box trusted" x="685" y="530" width="310" height="90" rx="9"/>
+<text class="title" x="702" y="558">Filesystem access</text>
+<text class="sub" x="702" y="583">Read-only inputs / configuration</text>
+<text class="sub" x="702" y="603">Write: outputs + temporary files</text>
+</g>
+<g id="tools"><rect class="box " x="1120" y="265" width="295" height="140" rx="9"/>
+<text class="title" x="1137" y="293">Agent tools</text>
+<text class="sub" x="1137" y="318">perceive · observation</text>
+<text class="sub" x="1137" y="338">triage · specialist + validation</text>
+<text class="sub" x="1137" y="358">draft · prepare report</text>
+<text class="sub" x="1137" y="378">request_review · hold</text>
+</g>
+<g id="models"><rect class="box " x="1120" y="410" width="295" height="90" rx="9"/>
+<text class="title" x="1137" y="438">Models</text>
+<text class="sub" x="1137" y="463">Switchyard task routing</text>
+<text class="sub" x="1137" y="483">Lightning base / Lightning + LoRA</text>
+</g>
+<g id="data"><rect class="box " x="1120" y="530" width="295" height="90" rx="9"/>
+<text class="title" x="1137" y="558">Mounted data</text>
+<text class="sub" x="1137" y="583">Observations · rules · configuration</text>
+<text class="sub" x="1137" y="603">Captured execution records</text>
+</g>
+<g id="prover"><rect class="box trusted" x="685" y="670" width="310" height="70" rx="9"/>
+<text class="title" x="702" y="698">Policy Prover</text>
+<text class="sub" x="702" y="723">Check proposed policy changes</text>
+</g>
+</svg>

@@ -1,0 +1,8 @@
+{
+  "nemo-relay-instrument-calls": {
+    "repository": "https://github.com/NVIDIA/skills",
+    "commit": "ce1024dcf2de005dd7482c4ce95be5238d9db56c",
+    "path": "skills/nemo-relay-instrument-calls/SKILL.md",
+    "sha256": "ccb99a894d3315062781468f7a9ab777c0a7d265a136733a333b7444f049caf9"
+  }
+}

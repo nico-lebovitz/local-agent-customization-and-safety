@@ -1,0 +1,9 @@
+# Runtime verified on Linux ARM64, Python 3.12.
+nvidia-nat[langchain]==1.9.0
+nemo-relay==0.9.4
+nemo-switchyard==0.3.0
+fastapi==0.143.0
+uvicorn==0.54.0
+httpx==0.28.1
+PyYAML==6.0.3
+pytest==9.1.1

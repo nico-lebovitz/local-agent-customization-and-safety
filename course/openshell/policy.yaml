@@ -1,0 +1,25 @@
+# Teaching companion only. Validate against the installed OpenShell version.
+version: 1
+filesystem_policy:
+  include_workdir: false
+  read_only: [/usr, /lib, /etc, /opt, /home/sandbox]
+  read_write: [/tmp, /dev]
+landlock:
+  # OpenShell 0.0.85 rejects its injected file rule under hard_requirement.
+  # Require the runtime denial probes before running the agent on this version.
+  compatibility: best_effort
+process:
+  run_as_user: sandbox
+  run_as_group: sandbox
+network_policies:
+  local_model:
+    endpoints:
+      - host: host.openshell.internal
+        port: 8002
+        protocol: rest
+        enforcement: enforce
+        rules:
+          - allow: {method: GET, path: /v1/models}
+          - allow: {method: POST, path: /v1/chat/completions}
+    binaries:
+      - path: /usr/local/bin/python3.12

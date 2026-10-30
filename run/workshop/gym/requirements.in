@@ -1,0 +1,5 @@
+nemo-gym==0.6.0
+httpx==0.28.1
+pytest==9.1.1
+# Install torch separately from the CPU index; see README.md.
+torch==2.14.1+cpu

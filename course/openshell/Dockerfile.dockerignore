@@ -1,0 +1,17 @@
+**
+!course
+!course/**
+course/outputs
+!train
+!train/scripts
+!train/scripts/jisr_rules.py
+!run
+!run/workshop
+!run/workshop/workshop_agent
+!run/workshop/workshop_agent/contracts.py
+!run/chain
+!run/chain/descriptions
+!run/chain/descriptions/**
+**/.venv
+**/__pycache__
+**/.ipynb_checkpoints

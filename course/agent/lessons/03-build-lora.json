@@ -1,0 +1,176 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "03-000",
+   "metadata": {},
+   "source": [
+    "# 03 · Add a LoRA adapter\n",
+    "\n",
+    "We'll create a tiny practice model and add trainable adapter weights.\n",
+    "\n",
+    "```text\n",
+    "Base model: stays fixed\n",
+    "LoRA adapter: learns the task\n",
+    "```\n",
+    "\n",
+    "This CPU example teaches the mechanics. It is not the large model serving our demo.\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "03-001",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from pathlib import Path\n",
+    "import json, os, sys\n",
+    "import importlib.util\n",
+    "missing = [name for name in ('torch', 'peft') if importlib.util.find_spec(name) is None]\n",
+    "if missing:\n",
+    "    raise RuntimeError('Wrong notebook kernel: missing '+', '.join(missing)+\n",
+    "                       '. Select Kernel > Change Kernel > NATO course (PyTorch + PEFT), then restart and Run All. '+\n",
+    "                       'Current Python: '+sys.executable)\n",
+    "print('Kernel Python:', sys.executable)\n",
+    "ROOT = next(p for p in [Path.cwd(), *Path.cwd().parents] if (p / 'course/common.py').is_file())\n",
+    "sys.path.insert(0, str(ROOT))\n",
+    "from course.common import request, chat, rows\n",
+    "LIVE = os.environ.get('COURSE_LIVE', '1') == '1'\n",
+    "OUTPUT = ROOT / 'course/outputs'\n",
+    "OUTPUT.mkdir(exist_ok=True)\n",
+    "print('Mode:', 'LIVE local inference' if LIVE else 'OFFLINE; live cells explicitly skipped')\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "03-002",
+   "metadata": {},
+   "source": [
+    "## 1. Create the practice model\n",
+    "\n",
+    "Keep `PROFILE = 'cpu'` for this workshop. The next cell builds a small model locally.\n",
+    "\n",
+    "**Look for:** `GPT2LMHeadModel`. No model download is needed. The optional Lightning branch is for a separate training machine.\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "03-003",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "PROFILE = 'cpu'  # Change to 'lightning' only on a dedicated training allocation.\n",
+    "import torch\n",
+    "from transformers import AutoModelForCausalLM, GPT2Config, GPT2LMHeadModel\n",
+    "from peft import LoraConfig, get_peft_model\n",
+    "torch.manual_seed(17)\n",
+    "torch.set_num_threads(2)\n",
+    "BUILD = OUTPUT/PROFILE\n",
+    "BUILD.mkdir(exist_ok=True)\n",
+    "if PROFILE == 'cpu':\n",
+    "    # Byte IDs: PAD=0, EOS=1, bytes 0..255 map to 2..257.\n",
+    "    config = GPT2Config(vocab_size=258,n_positions=768,n_embd=48,n_layer=1,n_head=2,\n",
+    "                        bos_token_id=1,eos_token_id=1,pad_token_id=0)\n",
+    "    base = GPT2LMHeadModel(config)\n",
+    "    targets = ['c_attn','c_proj','c_fc']\n",
+    "else:\n",
+    "    from huggingface_hub import snapshot_download\n",
+    "    path = snapshot_download('nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16',local_files_only=True)\n",
+    "    base = AutoModelForCausalLM.from_pretrained(path,local_files_only=True,\n",
+    "        trust_remote_code=True,dtype=torch.bfloat16,device_map='cuda')\n",
+    "    targets = ['q_proj','k_proj','v_proj','o_proj','in_proj','out_proj']\n",
+    "print(type(base).__name__)\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "03-004",
+   "metadata": {},
+   "source": [
+    "## 2. Add the trainable weights\n",
+    "\n",
+    "LoRA adds small matrices to selected model layers.\n",
+    "\n",
+    "```text\n",
+    "Original weights + small learned update → adapted model\n",
+    "```\n",
+    "\n",
+    "Run the next two cells. Look for parameter names containing `lora_`, then the saved adapter configuration. Only those adapter parameters should be trainable.\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "03-005",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "adapter_config = LoraConfig(\n",
+    "    r=8 if PROFILE=='cpu' else 32,\n",
+    "    lora_alpha=16 if PROFILE=='cpu' else 64,\n",
+    "    lora_dropout=0.0 if PROFILE=='cpu' else 0.05,\n",
+    "    bias='none',task_type='CAUSAL_LM',target_modules=targets,\n",
+    "    fan_in_fan_out=(PROFILE=='cpu'),\n",
+    ")\n",
+    "model = get_peft_model(base,adapter_config)\n",
+    "model.print_trainable_parameters()\n",
+    "trainable = [(name,p) for name,p in model.named_parameters() if p.requires_grad]\n",
+    "assert trainable and all('lora_' in name for name,p in trainable)\n",
+    "for name,p in trainable[:8]: print(name,tuple(p.shape))\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "03-006",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Save the unadapted CPU base for a fair reload in notebook 05.\n",
+    "# Do not copy the large Lightning checkpoint.\n",
+    "if PROFILE=='cpu':\n",
+    "    fresh_base = GPT2LMHeadModel(config)\n",
+    "    torch.manual_seed(17)\n",
+    "    fresh_base = GPT2LMHeadModel(config)\n",
+    "    fresh_base.save_pretrained(BUILD/'base')\n",
+    "    # Check identical underlying base weights, before any optimization.\n",
+    "    assert torch.equal(fresh_base.transformer.wte.weight,model.get_base_model().transformer.wte.weight)\n",
+    "adapter_config.save_pretrained(BUILD/'adapter-config')\n",
+    "print('New configuration written to',BUILD/'adapter-config')\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "03-007",
+   "metadata": {},
+   "source": [
+    "**Try it:** change the CPU rank from `8` to `4` and compare the trainable parameter count.\n",
+    "\n",
+    "The next notebook loads this base and adapter configuration, then trains the adapter.\n"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "NATO course (PyTorch + PEFT)",
+   "language": "python",
+   "name": "nato-course"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.14.5"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}

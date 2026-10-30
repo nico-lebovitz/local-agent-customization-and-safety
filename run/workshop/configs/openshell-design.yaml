@@ -1,0 +1,29 @@
+# Workshop deployment design; not applied to the host process.
+# Requires sandbox mounts, matching binary paths and reachable host services.
+version: 1
+filesystem_policy:
+  include_workdir: false
+  read_only:
+    [/workspace/run/chain/descriptions, /workspace/run/workshop/configs]
+  read_write: [/workspace/run/workshop/outputs, /tmp]
+network_policies:
+  lightning:
+    endpoints:
+      - host: host.openshell.internal
+        port: 8002
+        protocol: rest
+        enforcement: enforce
+        rules:
+          - { method: POST, path: /v1/chat/completions }
+    binaries:
+      - { path: /workspace/run/workshop/.venv/bin/python }
+  vss:
+    endpoints:
+      - host: host.openshell.internal
+        port: 8000
+        protocol: rest
+        enforcement: enforce
+        rules:
+          - { method: POST, path: /generate }
+    binaries:
+      - { path: /workspace/run/workshop/.venv/bin/python }

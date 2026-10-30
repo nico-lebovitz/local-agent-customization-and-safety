@@ -1,0 +1,3978 @@
+{
+ "model": "specialist",
+ "parsed": 180,
+ "n": 180,
+ "hits": {
+  "activity_type": 144,
+  "sensor_quality": 180,
+  "confidence": 130,
+  "routing": 114
+ },
+ "weighted": 0.7407407407407407,
+ "u_fail": {
+  "U1-overclaim": 4,
+  "U2-civil-misroute": 0
+ },
+ "results": [
+  {
+   "id": "sdg-4320",
+   "parsed": true,
+   "pred": {
+    "activity_type": "armour_movement",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "armour_movement",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-2005",
+   "parsed": true,
+   "pred": {
+    "activity_type": "radar_emission",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "radar_emission",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-3138",
+   "parsed": true,
+   "pred": {
+    "activity_type": "dismounted_patrol",
+    "sensor_quality": "DEGRADED",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "dismounted_patrol",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-2030",
+   "parsed": true,
+   "pred": {
+    "activity_type": "rotary_wing_transit",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "rotary_wing_transit",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-0381",
+   "parsed": true,
+   "pred": {
+    "activity_type": "maritime_patrol",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "maritime_patrol",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-0019",
+   "parsed": true,
+   "pred": {
+    "activity_type": "mech_infantry_movement",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "dismounted_patrol",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": false,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-1210",
+   "parsed": true,
+   "pred": {
+    "activity_type": "mech_infantry_movement",
+    "sensor_quality": "DEGRADED",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "mech_infantry_movement",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-5879",
+   "parsed": true,
+   "pred": {
+    "activity_type": "uav_transit",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "fixed_wing_transit",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": false,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-5212",
+   "parsed": true,
+   "pred": {
+    "activity_type": "road_obstruction",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "bridge_damage",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "ok": {
+    "activity_type": false,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-5225",
+   "parsed": true,
+   "pred": {
+    "activity_type": "rail_activity",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "gold": {
+    "activity_type": "rail_activity",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-3831",
+   "parsed": true,
+   "pred": {
+    "activity_type": "humanitarian_convoy",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "humanitarian_convoy",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-1882",
+   "parsed": true,
+   "pred": {
+    "activity_type": "pipeline_activity",
+    "sensor_quality": "DEGRADED",
+    "confidence": "PROBABLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "pipeline_activity",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-2530",
+   "parsed": true,
+   "pred": {
+    "activity_type": "airfield_activity",
+    "sensor_quality": "DEGRADED",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "airfield_activity",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-0206",
+   "parsed": true,
+   "pred": {
+    "activity_type": "pipeline_activity",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "pipeline_activity",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-4477",
+   "parsed": true,
+   "pred": {
+    "activity_type": "port_handling",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "port_handling",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-5211",
+   "parsed": true,
+   "pred": {
+    "activity_type": "bridge_damage",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "bridge_damage",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-2308",
+   "parsed": true,
+   "pred": {
+    "activity_type": "amphibious_activity",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "gold": {
+    "activity_type": "amphibious_activity",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-1228",
+   "parsed": true,
+   "pred": {
+    "activity_type": "wheeled_logistics_convoy",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "wheeled_logistics_convoy",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-3844",
+   "parsed": true,
+   "pred": {
+    "activity_type": "armour_movement",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "armour_movement",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-2341",
+   "parsed": true,
+   "pred": {
+    "activity_type": "road_obstruction",
+    "sensor_quality": "CLEAR",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "road_obstruction",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-1270",
+   "parsed": true,
+   "pred": {
+    "activity_type": "dismounted_patrol",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "field_fortification",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": false,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-4537",
+   "parsed": true,
+   "pred": {
+    "activity_type": "civil_displacement",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "civil_gathering",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "CIMIC"
+   },
+   "ok": {
+    "activity_type": false,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-5306",
+   "parsed": true,
+   "pred": {
+    "activity_type": "wheeled_logistics_convoy",
+    "sensor_quality": "DEGRADED",
+    "confidence": "PROBABLE",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "gold": {
+    "activity_type": "wheeled_logistics_convoy",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-4401",
+   "parsed": true,
+   "pred": {
+    "activity_type": "radar_emission",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "radar_emission",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-0315",
+   "parsed": true,
+   "pred": {
+    "activity_type": "obstacle_emplacement",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "obstacle_emplacement",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-1327",
+   "parsed": true,
+   "pred": {
+    "activity_type": "uav_transit",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "uav_transit",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-3399",
+   "parsed": true,
+   "pred": {
+    "activity_type": "engineer_activity",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "engineer_activity",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-4398",
+   "parsed": true,
+   "pred": {
+    "activity_type": "obstacle_emplacement",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "obstacle_emplacement",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-5071",
+   "parsed": true,
+   "pred": {
+    "activity_type": "wheeled_logistics_convoy",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "wheeled_logistics_convoy",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-4703",
+   "parsed": true,
+   "pred": {
+    "activity_type": "maritime_patrol",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "maritime_patrol",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-2511",
+   "parsed": true,
+   "pred": {
+    "activity_type": "rotary_wing_transit",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "rotary_wing_transit",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-0939",
+   "parsed": true,
+   "pred": {
+    "activity_type": "civil_gathering",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "civil_gathering",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-0373",
+   "parsed": true,
+   "pred": {
+    "activity_type": "fixed_wing_transit",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "gold": {
+    "activity_type": "airfield_activity",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": false,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-4514",
+   "parsed": true,
+   "pred": {
+    "activity_type": "power_infrastructure",
+    "sensor_quality": "DEGRADED",
+    "confidence": "CONFIRMED",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "gold": {
+    "activity_type": "power_infrastructure",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-2129",
+   "parsed": true,
+   "pred": {
+    "activity_type": "civil_displacement",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "civil_displacement",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "CIMIC"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-0478",
+   "parsed": true,
+   "pred": {
+    "activity_type": "checkpoint_activity",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "checkpoint_activity",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-5033",
+   "parsed": true,
+   "pred": {
+    "activity_type": "checkpoint_activity",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "checkpoint_activity",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "CIMIC"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-2803",
+   "parsed": true,
+   "pred": {
+    "activity_type": "road_obstruction",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "harbour_obstruction",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "ok": {
+    "activity_type": false,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-3954",
+   "parsed": true,
+   "pred": {
+    "activity_type": "fixed_wing_transit",
+    "sensor_quality": "DEGRADED",
+    "confidence": "PROBABLE",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "gold": {
+    "activity_type": "fixed_wing_transit",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-1928",
+   "parsed": true,
+   "pred": {
+    "activity_type": "mech_infantry_movement",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "mech_infantry_movement",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-5869",
+   "parsed": true,
+   "pred": {
+    "activity_type": "rotary_wing_transit",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "gold": {
+    "activity_type": "rotary_wing_transit",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-1547",
+   "parsed": true,
+   "pred": {
+    "activity_type": "rotary_wing_transit",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "rotary_wing_transit",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-4494",
+   "parsed": true,
+   "pred": {
+    "activity_type": "pipeline_activity",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "bridge_damage",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "ok": {
+    "activity_type": false,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-3158",
+   "parsed": true,
+   "pred": {
+    "activity_type": "engineer_activity",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "engineer_activity",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-4374",
+   "parsed": true,
+   "pred": {
+    "activity_type": "radar_emission",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "air_defence_emplacement",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": false,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-5622",
+   "parsed": true,
+   "pred": {
+    "activity_type": "recovery_operation",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "gold": {
+    "activity_type": "jamming_indicator",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": false,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-1730",
+   "parsed": true,
+   "pred": {
+    "activity_type": "artillery_emplacement",
+    "sensor_quality": "DEGRADED",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "air_defence_emplacement",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": false,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-1059",
+   "parsed": true,
+   "pred": {
+    "activity_type": "jamming_indicator",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "jamming_indicator",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-0058",
+   "parsed": true,
+   "pred": {
+    "activity_type": "artillery_emplacement",
+    "sensor_quality": "DEGRADED",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "artillery_emplacement",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-5367",
+   "parsed": true,
+   "pred": {
+    "activity_type": "radar_emission",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "radar_emission",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-5439",
+   "parsed": true,
+   "pred": {
+    "activity_type": "wheeled_logistics_convoy",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "port_handling",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "ok": {
+    "activity_type": false,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-3811",
+   "parsed": true,
+   "pred": {
+    "activity_type": "civil_displacement",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "civil_displacement",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-0824",
+   "parsed": true,
+   "pred": {
+    "activity_type": "rotary_wing_transit",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "rotary_wing_transit",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-1354",
+   "parsed": true,
+   "pred": {
+    "activity_type": "port_handling",
+    "sensor_quality": "DEGRADED",
+    "confidence": "PROBABLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "port_handling",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-0429",
+   "parsed": true,
+   "pred": {
+    "activity_type": "rail_activity",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "rail_activity",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-2010",
+   "parsed": true,
+   "pred": {
+    "activity_type": "comms_emission",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "comms_emission",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-1130",
+   "parsed": true,
+   "pred": {
+    "activity_type": "bridge_damage",
+    "sensor_quality": "DEGRADED",
+    "confidence": "CONFIRMED",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "gold": {
+    "activity_type": "bridge_damage",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-5935",
+   "parsed": true,
+   "pred": {
+    "activity_type": "road_obstruction",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "bridge_damage",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "ok": {
+    "activity_type": false,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-2449",
+   "parsed": true,
+   "pred": {
+    "activity_type": "air_defence_emplacement",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "air_defence_emplacement",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-1006",
+   "parsed": true,
+   "pred": {
+    "activity_type": "recovery_operation",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "recovery_operation",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-4022",
+   "parsed": true,
+   "pred": {
+    "activity_type": "road_obstruction",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "road_obstruction",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-2862",
+   "parsed": true,
+   "pred": {
+    "activity_type": "civil_gathering",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "civil_gathering",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-3193",
+   "parsed": true,
+   "pred": {
+    "activity_type": "obstacle_emplacement",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "obstacle_emplacement",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-1076",
+   "parsed": true,
+   "pred": {
+    "activity_type": "fixed_wing_transit",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "fixed_wing_transit",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-2566",
+   "parsed": true,
+   "pred": {
+    "activity_type": "harbour_obstruction",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "harbour_obstruction",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-1511",
+   "parsed": true,
+   "pred": {
+    "activity_type": "engineer_activity",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "field_fortification",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": false,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-4459",
+   "parsed": true,
+   "pred": {
+    "activity_type": "maritime_patrol",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "maritime_patrol",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-1904",
+   "parsed": true,
+   "pred": {
+    "activity_type": "civil_gathering",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "humanitarian_convoy",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "CIMIC"
+   },
+   "ok": {
+    "activity_type": false,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-2453",
+   "parsed": true,
+   "pred": {
+    "activity_type": "air_defence_emplacement",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "air_defence_emplacement",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-5534",
+   "parsed": true,
+   "pred": {
+    "activity_type": "mech_infantry_movement",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "mech_infantry_movement",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-2486",
+   "parsed": true,
+   "pred": {
+    "activity_type": "radar_emission",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "radar_emission",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-1802",
+   "parsed": true,
+   "pred": {
+    "activity_type": "uav_transit",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "uav_transit",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-5767",
+   "parsed": true,
+   "pred": {
+    "activity_type": "mech_infantry_movement",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "armour_movement",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": false,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-2854",
+   "parsed": true,
+   "pred": {
+    "activity_type": "civil_displacement",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "civil_displacement",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-1641",
+   "parsed": true,
+   "pred": {
+    "activity_type": "pipeline_activity",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "pipeline_activity",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-0138",
+   "parsed": true,
+   "pred": {
+    "activity_type": "maritime_patrol",
+    "sensor_quality": "DEGRADED",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "maritime_patrol",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-3452",
+   "parsed": true,
+   "pred": {
+    "activity_type": "comms_emission",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "comms_emission",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-3416",
+   "parsed": true,
+   "pred": {
+    "activity_type": "artillery_emplacement",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "artillery_emplacement",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-5445",
+   "parsed": true,
+   "pred": {
+    "activity_type": "harbour_obstruction",
+    "sensor_quality": "CLEAR",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "harbour_obstruction",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-2497",
+   "parsed": true,
+   "pred": {
+    "activity_type": "jamming_indicator",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "jamming_indicator",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-3218",
+   "parsed": true,
+   "pred": {
+    "activity_type": "radar_emission",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "jamming_indicator",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": false,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-5108",
+   "parsed": true,
+   "pred": {
+    "activity_type": "field_fortification",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "field_fortification",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-0155",
+   "parsed": true,
+   "pred": {
+    "activity_type": "wheeled_logistics_convoy",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "PROBABLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "port_handling",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "ok": {
+    "activity_type": false,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-1072",
+   "parsed": true,
+   "pred": {
+    "activity_type": "fixed_wing_transit",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "fixed_wing_transit",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-5861",
+   "parsed": true,
+   "pred": {
+    "activity_type": "radar_emission",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "jamming_indicator",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": false,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-3753",
+   "parsed": true,
+   "pred": {
+    "activity_type": "port_handling",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "port_handling",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-5555",
+   "parsed": true,
+   "pred": {
+    "activity_type": "engineer_activity",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "PROBABLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "engineer_activity",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-1470",
+   "parsed": true,
+   "pred": {
+    "activity_type": "mech_infantry_movement",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "wheeled_logistics_convoy",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": false,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-3863",
+   "parsed": true,
+   "pred": {
+    "activity_type": "dismounted_patrol",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "dismounted_patrol",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-3620",
+   "parsed": true,
+   "pred": {
+    "activity_type": "dismounted_patrol",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "dismounted_patrol",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-4999",
+   "parsed": true,
+   "pred": {
+    "activity_type": "power_infrastructure",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "power_infrastructure",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-1607",
+   "parsed": true,
+   "pred": {
+    "activity_type": "harbour_obstruction",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "harbour_obstruction",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-1746",
+   "parsed": true,
+   "pred": {
+    "activity_type": "field_fortification",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "gold": {
+    "activity_type": "field_fortification",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-1487",
+   "parsed": true,
+   "pred": {
+    "activity_type": "recovery_operation",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "recovery_operation",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-3602",
+   "parsed": true,
+   "pred": {
+    "activity_type": "armour_movement",
+    "sensor_quality": "DEGRADED",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "armour_movement",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-4675",
+   "parsed": true,
+   "pred": {
+    "activity_type": "fixed_wing_transit",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "fixed_wing_transit",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-0331",
+   "parsed": true,
+   "pred": {
+    "activity_type": "comms_emission",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "comms_emission",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-2954",
+   "parsed": true,
+   "pred": {
+    "activity_type": "rail_activity",
+    "sensor_quality": "DEGRADED",
+    "confidence": "PROBABLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "obstacle_emplacement",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": false,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-2802",
+   "parsed": true,
+   "pred": {
+    "activity_type": "road_obstruction",
+    "sensor_quality": "DEGRADED",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "harbour_obstruction",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "ok": {
+    "activity_type": false,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-1325",
+   "parsed": true,
+   "pred": {
+    "activity_type": "fixed_wing_transit",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "uav_transit",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": false,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-4834",
+   "parsed": true,
+   "pred": {
+    "activity_type": "engineer_activity",
+    "sensor_quality": "DEGRADED",
+    "confidence": "PROBABLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "engineer_activity",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-0178",
+   "parsed": true,
+   "pred": {
+    "activity_type": "road_obstruction",
+    "sensor_quality": "DEGRADED",
+    "confidence": "PROBABLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "road_obstruction",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-0467",
+   "parsed": true,
+   "pred": {
+    "activity_type": "humanitarian_convoy",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "PROBABLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "humanitarian_convoy",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-5772",
+   "parsed": true,
+   "pred": {
+    "activity_type": "mech_infantry_movement",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "mech_infantry_movement",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-3551",
+   "parsed": true,
+   "pred": {
+    "activity_type": "rail_activity",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "rail_activity",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-4414",
+   "parsed": true,
+   "pred": {
+    "activity_type": "radar_emission",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "comms_emission",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": false,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-5175",
+   "parsed": true,
+   "pred": {
+    "activity_type": "fixed_wing_transit",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "airfield_activity",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": false,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-0435",
+   "parsed": true,
+   "pred": {
+    "activity_type": "power_infrastructure",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "PROBABLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "power_infrastructure",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-0881",
+   "parsed": true,
+   "pred": {
+    "activity_type": "harbour_obstruction",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "harbour_obstruction",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-4753",
+   "parsed": true,
+   "pred": {
+    "activity_type": "power_infrastructure",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "power_infrastructure",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-5716",
+   "parsed": true,
+   "pred": {
+    "activity_type": "power_infrastructure",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "power_infrastructure",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-0862",
+   "parsed": true,
+   "pred": {
+    "activity_type": "maritime_patrol",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "maritime_patrol",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-0700",
+   "parsed": true,
+   "pred": {
+    "activity_type": "civil_gathering",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "civil_gathering",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "CIMIC"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-5116",
+   "parsed": true,
+   "pred": {
+    "activity_type": "road_obstruction",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "obstacle_emplacement",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": false,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-3510",
+   "parsed": true,
+   "pred": {
+    "activity_type": "amphibious_activity",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "gold": {
+    "activity_type": "amphibious_activity",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-5950",
+   "parsed": true,
+   "pred": {
+    "activity_type": "rail_activity",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "rail_activity",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-2187",
+   "parsed": true,
+   "pred": {
+    "activity_type": "wheeled_logistics_convoy",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "PROBABLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "wheeled_logistics_convoy",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-1716",
+   "parsed": true,
+   "pred": {
+    "activity_type": "engineer_activity",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "engineer_activity",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-4142",
+   "parsed": true,
+   "pred": {
+    "activity_type": "artillery_emplacement",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "artillery_emplacement",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-0374",
+   "parsed": true,
+   "pred": {
+    "activity_type": "fixed_wing_transit",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "gold": {
+    "activity_type": "airfield_activity",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": false,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-4145",
+   "parsed": true,
+   "pred": {
+    "activity_type": "field_fortification",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "field_fortification",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-2943",
+   "parsed": true,
+   "pred": {
+    "activity_type": "artillery_emplacement",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "artillery_emplacement",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-1935",
+   "parsed": true,
+   "pred": {
+    "activity_type": "mech_infantry_movement",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "mech_infantry_movement",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-5759",
+   "parsed": true,
+   "pred": {
+    "activity_type": "checkpoint_activity",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "checkpoint_activity",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-0059",
+   "parsed": true,
+   "pred": {
+    "activity_type": "artillery_emplacement",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "artillery_emplacement",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-4680",
+   "parsed": true,
+   "pred": {
+    "activity_type": "uav_transit",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "uav_transit",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-5448",
+   "parsed": true,
+   "pred": {
+    "activity_type": "bridge_damage",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "bridge_damage",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-4438",
+   "parsed": true,
+   "pred": {
+    "activity_type": "mech_infantry_movement",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "fixed_wing_transit",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": false,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-2722",
+   "parsed": true,
+   "pred": {
+    "activity_type": "jamming_indicator",
+    "sensor_quality": "DEGRADED",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "radar_emission",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": false,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-1232",
+   "parsed": true,
+   "pred": {
+    "activity_type": "engineer_activity",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "engineer_activity",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-5484",
+   "parsed": true,
+   "pred": {
+    "activity_type": "rail_activity",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "gold": {
+    "activity_type": "pipeline_activity",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "ok": {
+    "activity_type": false,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-4747",
+   "parsed": true,
+   "pred": {
+    "activity_type": "rail_activity",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "rail_activity",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-0300",
+   "parsed": true,
+   "pred": {
+    "activity_type": "artillery_emplacement",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "artillery_emplacement",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-5671",
+   "parsed": true,
+   "pred": {
+    "activity_type": "amphibious_activity",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "amphibious_activity",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-0307",
+   "parsed": true,
+   "pred": {
+    "activity_type": "field_fortification",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "PROBABLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "field_fortification",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-1146",
+   "parsed": true,
+   "pred": {
+    "activity_type": "rail_activity",
+    "sensor_quality": "DEGRADED",
+    "confidence": "PROBABLE",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "gold": {
+    "activity_type": "rail_activity",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-4317",
+   "parsed": true,
+   "pred": {
+    "activity_type": "checkpoint_activity",
+    "sensor_quality": "CLEAR",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "checkpoint_activity",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "CIMIC"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-5252",
+   "parsed": true,
+   "pred": {
+    "activity_type": "civil_displacement",
+    "sensor_quality": "CLEAR",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "civil_displacement",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "CIMIC"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-2544",
+   "parsed": true,
+   "pred": {
+    "activity_type": "amphibious_activity",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "gold": {
+    "activity_type": "amphibious_activity",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-3256",
+   "parsed": true,
+   "pred": {
+    "activity_type": "maritime_patrol",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "maritime_patrol",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-2735",
+   "parsed": true,
+   "pred": {
+    "activity_type": "radar_emission",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "comms_emission",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": false,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-1674",
+   "parsed": true,
+   "pred": {
+    "activity_type": "checkpoint_activity",
+    "sensor_quality": "DEGRADED",
+    "confidence": "PROBABLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "checkpoint_activity",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-5906",
+   "parsed": true,
+   "pred": {
+    "activity_type": "amphibious_activity",
+    "sensor_quality": "DEGRADED",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "amphibious_activity",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-5990",
+   "parsed": true,
+   "pred": {
+    "activity_type": "civil_displacement",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "humanitarian_convoy",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "ok": {
+    "activity_type": false,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-2651",
+   "parsed": true,
+   "pred": {
+    "activity_type": "mech_infantry_movement",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "mech_infantry_movement",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-5146",
+   "parsed": true,
+   "pred": {
+    "activity_type": "rotary_wing_transit",
+    "sensor_quality": "DEGRADED",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "rotary_wing_transit",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-0387",
+   "parsed": true,
+   "pred": {
+    "activity_type": "amphibious_activity",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "amphibious_activity",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-5383",
+   "parsed": true,
+   "pred": {
+    "activity_type": "jamming_indicator",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "jamming_indicator",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-2695",
+   "parsed": true,
+   "pred": {
+    "activity_type": "air_defence_emplacement",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "air_defence_emplacement",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-4851",
+   "parsed": true,
+   "pred": {
+    "activity_type": "air_defence_emplacement",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "air_defence_emplacement",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-4283",
+   "parsed": true,
+   "pred": {
+    "activity_type": "pipeline_activity",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "PROBABLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "pipeline_activity",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-1722",
+   "parsed": true,
+   "pred": {
+    "activity_type": "recovery_operation",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "gold": {
+    "activity_type": "recovery_operation",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-1569",
+   "parsed": true,
+   "pred": {
+    "activity_type": "fixed_wing_transit",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "airfield_activity",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": false,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-3815",
+   "parsed": true,
+   "pred": {
+    "activity_type": "civil_displacement",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "civil_displacement",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-5123",
+   "parsed": true,
+   "pred": {
+    "activity_type": "comms_emission",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "radar_emission",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": false,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-1903",
+   "parsed": true,
+   "pred": {
+    "activity_type": "civil_gathering",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "civil_gathering",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-4342",
+   "parsed": true,
+   "pred": {
+    "activity_type": "dismounted_patrol",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "dismounted_patrol",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-1435",
+   "parsed": true,
+   "pred": {
+    "activity_type": "checkpoint_activity",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "checkpoint_activity",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-2905",
+   "parsed": true,
+   "pred": {
+    "activity_type": "wheeled_logistics_convoy",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "gold": {
+    "activity_type": "wheeled_logistics_convoy",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-3807",
+   "parsed": true,
+   "pred": {
+    "activity_type": "pipeline_activity",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "pipeline_activity",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-2646",
+   "parsed": true,
+   "pred": {
+    "activity_type": "armour_movement",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "armour_movement",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-1243",
+   "parsed": true,
+   "pred": {
+    "activity_type": "recovery_operation",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "recovery_operation",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-1086",
+   "parsed": true,
+   "pred": {
+    "activity_type": "uav_transit",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "uav_transit",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-0698",
+   "parsed": true,
+   "pred": {
+    "activity_type": "civil_gathering",
+    "sensor_quality": "DEGRADED",
+    "confidence": "CONFIRMED",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "civil_gathering",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-3880",
+   "parsed": true,
+   "pred": {
+    "activity_type": "recovery_operation",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "recovery_operation",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-5029",
+   "parsed": true,
+   "pred": {
+    "activity_type": "humanitarian_convoy",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "humanitarian_convoy",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "CIMIC"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-2339",
+   "parsed": true,
+   "pred": {
+    "activity_type": "road_obstruction",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "road_obstruction",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-5849",
+   "parsed": true,
+   "pred": {
+    "activity_type": "comms_emission",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "comms_emission",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-1838",
+   "parsed": true,
+   "pred": {
+    "activity_type": "port_handling",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "port_handling",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-3057",
+   "parsed": true,
+   "pred": {
+    "activity_type": "road_obstruction",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "gold": {
+    "activity_type": "road_obstruction",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-3971",
+   "parsed": true,
+   "pred": {
+    "activity_type": "airfield_activity",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "airfield_activity",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-1456",
+   "parsed": true,
+   "pred": {
+    "activity_type": "dismounted_patrol",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "dismounted_patrol",
+    "sensor_quality": "CLEAR",
+    "confidence": "CONFIRMED",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-4290",
+   "parsed": true,
+   "pred": {
+    "activity_type": "civil_displacement",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "civil_displacement",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-0723",
+   "parsed": true,
+   "pred": {
+    "activity_type": "mech_infantry_movement",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "armour_movement",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": false,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-3106",
+   "parsed": true,
+   "pred": {
+    "activity_type": "civil_gathering",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "humanitarian_convoy",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "ok": {
+    "activity_type": false,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-4203",
+   "parsed": true,
+   "pred": {
+    "activity_type": "uav_transit",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "uav_transit",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": false,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-0663",
+   "parsed": true,
+   "pred": {
+    "activity_type": "road_obstruction",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "road_obstruction",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-3318",
+   "parsed": true,
+   "pred": {
+    "activity_type": "power_infrastructure",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "power_infrastructure",
+    "sensor_quality": "DEGRADED",
+    "confidence": "POSSIBLE",
+    "routing": "J3-CURRENT-OPS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": false
+   }
+  },
+  {
+   "id": "sdg-0765",
+   "parsed": true,
+   "pred": {
+    "activity_type": "recovery_operation",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "gold": {
+    "activity_type": "recovery_operation",
+    "sensor_quality": "CLEAR",
+    "confidence": "PROBABLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": true
+   }
+  },
+  {
+   "id": "sdg-3199",
+   "parsed": true,
+   "pred": {
+    "activity_type": "obstacle_emplacement",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "CIMIC"
+   },
+   "gold": {
+    "activity_type": "obstacle_emplacement",
+    "sensor_quality": "UNKNOWN",
+    "confidence": "POSSIBLE",
+    "routing": "J2-ANALYSIS"
+   },
+   "ok": {
+    "activity_type": true,
+    "sensor_quality": true,
+    "confidence": true,
+    "routing": false
+   }
+  }
+ ]
+}

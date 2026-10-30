@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Model weights & large artifacts — never commit
+*.safetensors
+*.bin
+*.nemo
+*.gguf
+checkpoints/
+run/models/
+
+# Local scratch
+scratch/
+*.log
+train/adapters/
+
+# demo clips are not redistributable (Pexels licence)
+run/chain/clips/*.mp4
+
+# Agentic workshop local execution records and test caches
+run/workshop/outputs/
+.pytest_cache/
+
+# Machine-specific workshop lifecycle inventory, tokens and logs
+.workshop/
+
+# Slide decks are excluded from the workshop distribution.
+/deck/

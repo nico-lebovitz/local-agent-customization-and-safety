@@ -1,0 +1,257 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "04-000",
+   "metadata": {},
+   "source": [
+    "# 04 · Train the adapter\n",
+    "\n",
+    "First run notebooks **02 and 03**. We'll train the small CPU adapter for 40 steps.\n",
+    "\n",
+    "```text\n",
+    "Example → prediction → loss → adapter update\n",
+    "```\n",
+    "\n",
+    "Loss measures how far the model is from the expected answer. The base weights stay fixed.\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "04-001",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from pathlib import Path\n",
+    "import json, os, sys\n",
+    "import importlib.util\n",
+    "missing = [name for name in ('torch', 'peft') if importlib.util.find_spec(name) is None]\n",
+    "if missing:\n",
+    "    raise RuntimeError('Wrong notebook kernel: missing '+', '.join(missing)+\n",
+    "                       '. Select Kernel > Change Kernel > NATO course (PyTorch + PEFT), then restart and Run All. '+\n",
+    "                       'Current Python: '+sys.executable)\n",
+    "print('Kernel Python:', sys.executable)\n",
+    "ROOT = next(p for p in [Path.cwd(), *Path.cwd().parents] if (p / 'course/common.py').is_file())\n",
+    "sys.path.insert(0, str(ROOT))\n",
+    "from course.common import request, chat, rows\n",
+    "LIVE = os.environ.get('COURSE_LIVE', '1') == '1'\n",
+    "OUTPUT = ROOT / 'course/outputs'\n",
+    "OUTPUT.mkdir(exist_ok=True)\n",
+    "print('Mode:', 'LIVE local inference' if LIVE else 'OFFLINE; live cells explicitly skipped')\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "04-002",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import torch, random\n",
+    "from transformers import AutoModelForCausalLM, AutoTokenizer\n",
+    "from peft import LoraConfig, get_peft_model\n",
+    "PROFILE = 'cpu'  # Must match notebook 03; Lightning requires dedicated GPU memory.\n",
+    "BUILD = OUTPUT/PROFILE\n",
+    "train_rows = [json.loads(line) for line in (OUTPUT/'student-data/train.jsonl').read_text().splitlines()]\n",
+    "val_rows = [json.loads(line) for line in (OUTPUT/'student-data/validation.jsonl').read_text().splitlines()]\n",
+    "torch.manual_seed(17); random.seed(17); torch.set_num_threads(2)\n",
+    "if PROFILE=='cpu':\n",
+    "    base = AutoModelForCausalLM.from_pretrained(BUILD/'base',local_files_only=True)\n",
+    "    tokenizer = None\n",
+    "else:\n",
+    "    from huggingface_hub import snapshot_download\n",
+    "    local_path = snapshot_download('nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16',local_files_only=True)\n",
+    "    tokenizer = AutoTokenizer.from_pretrained(local_path,local_files_only=True,trust_remote_code=True)\n",
+    "    base = AutoModelForCausalLM.from_pretrained(local_path,local_files_only=True,\n",
+    "        trust_remote_code=True,dtype=torch.bfloat16,device_map='cuda')\n",
+    "model = get_peft_model(base,LoraConfig.from_pretrained(BUILD/'adapter-config'))\n",
+    "device = next(model.parameters()).device\n",
+    "print('Training on',device,'profile',PROFILE)\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "04-003",
+   "metadata": {},
+   "source": [
+    "## 1. Prepare a training batch\n",
+    "\n",
+    "The next cell combines examples and marks which tokens should count toward the loss.\n",
+    "\n",
+    "```text\n",
+    "Question tokens → ignored\n",
+    "Answer tokens   → scored\n",
+    "Padding         → ignored\n",
+    "```\n",
+    "\n",
+    "**Look for:** the batch shapes and the number of supervised tokens.\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "04-004",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def encode(row):\n",
+    "    messages = row['messages']\n",
+    "    if PROFILE=='cpu':\n",
+    "        prefix = 'Observation: '+messages[1]['content']+'\\nAnswer: '\n",
+    "        answer = messages[-1]['content']\n",
+    "        prompt_ids = [b+2 for b in prefix.encode()]\n",
+    "        answer_ids = [b+2 for b in answer.encode()]+[1]\n",
+    "        return prompt_ids+answer_ids, [-100]*len(prompt_ids)+answer_ids\n",
+    "    prefix = tokenizer.apply_chat_template(messages[:-1],tokenize=False,add_generation_prompt=True,enable_thinking=False)\n",
+    "    full = tokenizer.apply_chat_template(messages,tokenize=False,add_generation_prompt=False)\n",
+    "    assert full.startswith(prefix)\n",
+    "    encoded = tokenizer(full,add_special_tokens=False,return_offsets_mapping=True)\n",
+    "    labels = [token if end>len(prefix) else -100\n",
+    "              for token,(_,end) in zip(encoded['input_ids'],encoded['offset_mapping'])]\n",
+    "    return encoded['input_ids'],labels\n",
+    "\n",
+    "def batch(rows):\n",
+    "    encoded = [encode(row) for row in rows]\n",
+    "    width = max(len(ids) for ids,labels in encoded)\n",
+    "    pad = 0 if PROFILE=='cpu' else tokenizer.pad_token_id\n",
+    "    if pad is None: pad = tokenizer.eos_token_id\n",
+    "    ids = torch.full((len(rows),width),pad,dtype=torch.long,device=device)\n",
+    "    labels = torch.full_like(ids,-100)\n",
+    "    mask = torch.zeros_like(ids)\n",
+    "    for i,(tokens,targets) in enumerate(encoded):\n",
+    "        ids[i,:len(tokens)] = torch.tensor(tokens,device=device)\n",
+    "        labels[i,:len(tokens)] = torch.tensor(targets,device=device)\n",
+    "        mask[i,:len(tokens)] = 1\n",
+    "    return {'input_ids':ids,'attention_mask':mask,'labels':labels}\n",
+    "example_batch = batch(train_rows[:2])\n",
+    "print({key:tuple(value.shape) for key,value in example_batch.items()})\n",
+    "print('Supervised tokens:',(example_batch['labels']!=-100).sum().item())\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "04-005",
+   "metadata": {},
+   "source": [
+    "## 2. Measure, train, and save\n",
+    "\n",
+    "Run the next three cells:\n",
+    "\n",
+    "1. Measure loss before training.\n",
+    "2. Update the adapter for 40 steps.\n",
+    "3. Save the adapter and measure loss again.\n",
+    "\n",
+    "Example result:\n",
+    "\n",
+    "```text\n",
+    "Loss before → loss after\n",
+    "Frozen base check passed\n",
+    "New adapter saved\n",
+    "```\n",
+    "\n",
+    "Lower loss is useful evidence of learning. It does not yet prove that generated answers are good.\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "04-006",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "parameters = [p for p in model.parameters() if p.requires_grad]\n",
+    "optimizer = torch.optim.AdamW(parameters,lr=3e-3 if PROFILE=='cpu' else 2e-4)\n",
+    "# Keep one frozen tensor as a check without duplicating the full model.\n",
+    "frozen_name,frozen_parameter = next((name,p) for name,p in model.named_parameters() if not p.requires_grad)\n",
+    "frozen_before = frozen_parameter.detach().flatten()[:128].cpu().clone()\n",
+    "@torch.no_grad()\n",
+    "def evaluate():\n",
+    "    model.eval()\n",
+    "    values = [model(**batch([row])).loss.item() for row in val_rows]\n",
+    "    return sum(values)/len(values)\n",
+    "before = evaluate()\n",
+    "print('Validation loss before:',before)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "04-007",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "STEPS = 40 if PROFILE=='cpu' else 20  # Smoke budget; tune based on evaluation.\n",
+    "ACCUMULATION = 2 if PROFILE=='cpu' else 8\n",
+    "history = []\n",
+    "model.train()\n",
+    "for step in range(STEPS):\n",
+    "    optimizer.zero_grad()\n",
+    "    losses = []\n",
+    "    for microstep in range(ACCUMULATION):\n",
+    "        selected = [random.choice(train_rows)]\n",
+    "        output = model(**batch(selected))\n",
+    "        loss = output.loss\n",
+    "        assert torch.isfinite(loss)\n",
+    "        (loss/ACCUMULATION).backward()\n",
+    "        losses.append(loss.item())\n",
+    "    norm = torch.nn.utils.clip_grad_norm_(parameters,1.0)\n",
+    "    assert torch.isfinite(norm)\n",
+    "    optimizer.step()\n",
+    "    history.append({'step':step,'loss':sum(losses)/len(losses),'gradient_norm':norm.item()})\n",
+    "    if step%10==0: print(history[-1])\n",
+    "after = evaluate()\n",
+    "assert torch.equal(frozen_before,frozen_parameter.detach().flatten()[:128].cpu())\n",
+    "print('Validation loss:',before,'→',after,'| frozen base check passed')\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "04-008",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "candidate = BUILD/'student-adapter'\n",
+    "model.save_pretrained(candidate)\n",
+    "if tokenizer is not None: tokenizer.save_pretrained(candidate/'tokenizer')\n",
+    "metrics = {'profile':PROFILE,'validation_before':before,'validation_after':after,\n",
+    "           'steps':STEPS,'history':history,'base_frozen':True}\n",
+    "(BUILD/'training-metrics.json').write_text(json.dumps(metrics,indent=2))\n",
+    "print('Your new adapter:',candidate)\n",
+    "for file in candidate.iterdir(): print(file.name,file.stat().st_size)\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "04-009",
+   "metadata": {},
+   "source": [
+    "**Try it:** change the learning rate, rerun, and compare loss. Change one setting at a time.\n",
+    "\n",
+    "Keep the CPU profile here. Notebook 05 checks what the saved adapter actually changes.\n"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "NATO course (PyTorch + PEFT)",
+   "language": "python",
+   "name": "nato-course"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.14.5"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}

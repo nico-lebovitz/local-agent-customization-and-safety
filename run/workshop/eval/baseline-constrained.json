@@ -1,0 +1,73 @@
+{
+  "kind": "development smoke baseline, not a held-out benchmark",
+  "perception": "recorded",
+  "models": "live",
+  "versions": {
+    "nvidia-nat": "1.9.0",
+    "nemo-relay": "0.9.4",
+    "nemo-switchyard": "0.3.0"
+  },
+  "rl_training": false,
+  "results": [
+    {
+      "episode": "describe-market",
+      "run_id": "706beb99f0624398b64ab128a64eecf7",
+      "success": true,
+      "reward": 1,
+      "failures": [],
+      "tool_calls": 1,
+      "extra_calls": 0,
+      "scope": "workflow contract only; prose factuality requires separate review",
+      "latency_s": 1.635,
+      "model_calls": 2,
+      "relay_events": 18,
+      "source": "eval/records/706beb99f0624398b64ab128a64eecf7.json"
+    },
+    {
+      "episode": "triage-market",
+      "run_id": "06f5c7600c9b46abbe0277f5302f7d5f",
+      "success": true,
+      "reward": 1,
+      "failures": [],
+      "tool_calls": 2,
+      "extra_calls": 0,
+      "scope": "workflow contract only; prose factuality requires separate review",
+      "latency_s": 2.623,
+      "model_calls": 4,
+      "relay_events": 31,
+      "source": "eval/records/06f5c7600c9b46abbe0277f5302f7d5f.json"
+    },
+    {
+      "episode": "report-market",
+      "run_id": "512ef5b0d44c4cab8340f1fcda5018be",
+      "success": true,
+      "reward": 1,
+      "failures": [],
+      "tool_calls": 3,
+      "extra_calls": 0,
+      "scope": "workflow contract only; prose factuality requires separate review",
+      "latency_s": 4.69,
+      "model_calls": 6,
+      "relay_events": 44,
+      "source": "eval/records/512ef5b0d44c4cab8340f1fcda5018be.json"
+    },
+    {
+      "episode": "describe-port",
+      "run_id": "9ad89cb7380747a2bc6c1071c20869eb",
+      "success": true,
+      "reward": 1,
+      "failures": [],
+      "tool_calls": 1,
+      "extra_calls": 0,
+      "scope": "workflow contract only; prose factuality requires separate review",
+      "latency_s": 1.346,
+      "model_calls": 2,
+      "relay_events": 18,
+      "source": "eval/records/9ad89cb7380747a2bc6c1071c20869eb.json"
+    }
+  ],
+  "successes": 4,
+  "episodes": 4,
+  "date": "2026-10-08",
+  "change": "Explicit current state and constrained available-action schema; no training"
+}

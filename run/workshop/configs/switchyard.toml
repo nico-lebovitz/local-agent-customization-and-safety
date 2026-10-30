@@ -1,0 +1,26 @@
+schema_version = 1
+
+[llm_clients.lightning]
+format = "openai_chat"
+base_url = "http://127.0.0.1:8002/v1"
+
+[targets.base]
+id = "base"
+llm_client = "lightning"
+extra_body = { chat_template_kwargs = { enable_thinking = false } }
+
+[targets.specialist]
+id = "specialist"
+llm_client = "lightning"
+extra_body = { chat_template_kwargs = { enable_thinking = false } }
+
+# Explicit task routes are the measured baseline. No cross-contract fallback.
+[routes.reason]
+id = "workshop-reason"
+type = "passthrough"
+target = "base"
+
+[routes.triage]
+id = "workshop-triage"
+type = "passthrough"
+target = "specialist"

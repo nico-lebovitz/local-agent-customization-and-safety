@@ -1,0 +1,184 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "07-000",
+   "metadata": {},
+   "source": [
+    "# 07 · Route a question to the right model\n",
+    "\n",
+    "Switchyard gives our two models named routes:\n",
+    "\n",
+    "```text\n",
+    "General question       → workshop-reason → base\n",
+    "Classify an observation → workshop-triage → specialist\n",
+    "```\n",
+    "\n",
+    "We choose the route explicitly in this first example. Run the next cells and compare the actual model IDs and answers.\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "07-001",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from pathlib import Path\n",
+    "import json, os, sys\n",
+    "import importlib.util\n",
+    "missing = [name for name in ('torch', 'peft') if importlib.util.find_spec(name) is None]\n",
+    "if missing:\n",
+    "    raise RuntimeError('Wrong notebook kernel: missing '+', '.join(missing)+\n",
+    "                       '. Select Kernel > Change Kernel > NATO course (PyTorch + PEFT), then restart and Run All. '+\n",
+    "                       'Current Python: '+sys.executable)\n",
+    "print('Kernel Python:', sys.executable)\n",
+    "ROOT = next(p for p in [Path.cwd(), *Path.cwd().parents] if (p / 'course/common.py').is_file())\n",
+    "sys.path.insert(0, str(ROOT))\n",
+    "from course.common import request, chat, rows\n",
+    "LIVE = os.environ.get('COURSE_LIVE', '1') == '1'\n",
+    "OUTPUT = ROOT / 'course/outputs'\n",
+    "OUTPUT.mkdir(exist_ok=True)\n",
+    "print('Mode:', 'LIVE local inference' if LIVE else 'OFFLINE; live cells explicitly skipped')\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "07-002",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from run.workshop.workshop_agent.contracts import validate_item, RULES_PROMPT\n",
+    "from course.agent.routing_trace import model_router\n",
+    "\n",
+    "def classify_observation(observation):\n",
+    "    raw = chat('specialist',[\n",
+    "        {'role':'system','content':RULES_PROMPT},\n",
+    "        {'role':'user','content':observation}],json_output=True)\n",
+    "    item = json.loads(raw)\n",
+    "    return {'item':item,'gate':validate_item(item,source_count=1)}\n",
+    "\n",
+    "observation = (ROOT/'run/chain/descriptions/civil-market.txt').read_text()\n",
+    "if LIVE:\n",
+    "    # The same client interface now sends requests through a real Switchyard server.\n",
+    "    direct_chat = chat\n",
+    "    with model_router() as router:\n",
+    "        chat = router\n",
+    "        try:\n",
+    "            general = chat('base', [{'role':'user','content':\n",
+    "                'In one sentence, why should a draft report cite its observation?'}], max_tokens=100)\n",
+    "            result = classify_observation(observation)\n",
+    "            routing_results = router.calls\n",
+    "        finally:\n",
+    "            chat = direct_chat\n",
+    "    for call in routing_results:\n",
+    "        print(call['route'], '→', call['model'], '|', call['finish_reason'], '|', call['seconds'], 'seconds')\n",
+    "        print(call['answer'], '\\n')\n",
+    "    print('Specialist checks:', result['gate'])\n",
+    "    (OUTPUT/'routing-results.json').write_text(json.dumps(routing_results,indent=2))\n",
+    "else:\n",
+    "    print('SKIPPED: live Switchyard requests')\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "07-003",
+   "metadata": {},
+   "source": [
+    "## 1. Check the model's proposal\n",
+    "\n",
+    "The model suggests an answer. Code checks whether it is allowed.\n",
+    "\n",
+    "```text\n",
+    "One source + PROBABLE  → can pass\n",
+    "One source + CONFIRMED → rejected\n",
+    "Wrong routing         → corrected by the routing table\n",
+    "```\n",
+    "\n",
+    "Run the next cell to see both a correction and a rejection. These rules do not prove that the model understood the scene correctly.\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "07-004",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "valid = {'activity_type':'civil_gathering','sensor_quality':'CLEAR',\n",
+    "         'confidence':'PROBABLE','routing':'J2-ANALYSIS'}\n",
+    "print('Routing overridden:', validate_item(valid,source_count=1))\n",
+    "invalid = {**valid,'confidence':'CONFIRMED'}\n",
+    "print('Rejected:', validate_item(invalid,source_count=1))\n",
+    "assert validate_item(valid,1)['destination'] == 'CIMIC'\n",
+    "assert not validate_item(invalid,1)['valid']\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "07-005",
+   "metadata": {},
+   "source": [
+    "## 2. Stop tools running in the wrong order\n",
+    "\n",
+    "A draft needs evidence and a valid classification first.\n",
+    "\n",
+    "```text\n",
+    "Draft before evidence → rejected\n",
+    "```\n",
+    "\n",
+    "The next cell deliberately tries that invalid action. Look for `Expected rejection`.\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "07-006",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from course.agent.runtime import execute, allowed_actions\n",
+    "state = {'clip':'civil-market','released':False}\n",
+    "print('Available:', allowed_actions(state,'draft-report'))\n",
+    "try:\n",
+    "    execute({'tool':'draft'},state,'draft-report')\n",
+    "except ValueError as exc:\n",
+    "    print('Expected rejection:',exc)\n",
+    "else:\n",
+    "    raise AssertionError('Draft must require evidence and valid triage')\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "07-007",
+   "metadata": {},
+   "source": [
+    "**Try it:** change the invalid example and see which rule catches it.\n",
+    "\n",
+    "The agent chooses a tool; the application checks whether the tool is allowed to run.\n"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "NATO course (PyTorch + PEFT)",
+   "language": "python",
+   "name": "nato-course"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.14.5"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}

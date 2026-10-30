@@ -1,0 +1,1 @@
+Filesystem policy test: image ownership permits writes; Landlock must deny them.

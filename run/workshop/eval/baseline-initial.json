@@ -1,0 +1,81 @@
+{
+  "kind": "development smoke baseline, not a held-out benchmark",
+  "perception": "recorded",
+  "models": "live",
+  "versions": {
+    "nvidia-nat": "1.9.0",
+    "nemo-relay": "0.9.4",
+    "nemo-switchyard": "0.3.0"
+  },
+  "rl_training": false,
+  "results": [
+    {
+      "episode": "describe-market",
+      "run_id": "75029086b0e948baa682dc54778d0c33",
+      "success": false,
+      "reward": 0,
+      "failures": [
+        "episode did not complete",
+        "wrong disposition"
+      ],
+      "tool_calls": 1,
+      "extra_calls": 0,
+      "scope": "workflow contract only; prose factuality requires separate review",
+      "latency_s": 1.112,
+      "model_calls": 2,
+      "relay_events": 18,
+      "source": "eval/records/75029086b0e948baa682dc54778d0c33.json"
+    },
+    {
+      "episode": "triage-market",
+      "run_id": "dddb5bc4073b4d649ce1a1719abacd69",
+      "success": false,
+      "reward": 0,
+      "failures": [
+        "episode did not complete",
+        "wrong disposition",
+        "missing or out-of-order tool: triage",
+        "wrong destination"
+      ],
+      "tool_calls": 2,
+      "extra_calls": 0,
+      "scope": "workflow contract only; prose factuality requires separate review",
+      "latency_s": 1.586,
+      "model_calls": 3,
+      "relay_events": 27,
+      "source": "eval/records/dddb5bc4073b4d649ce1a1719abacd69.json"
+    },
+    {
+      "episode": "report-market",
+      "run_id": "d23e3fad3bbe477a8d500b2cbc30c51a",
+      "success": true,
+      "reward": 1,
+      "failures": [],
+      "tool_calls": 3,
+      "extra_calls": 0,
+      "scope": "workflow contract only; prose factuality requires separate review",
+      "latency_s": 4.205,
+      "model_calls": 6,
+      "relay_events": 44,
+      "source": "eval/records/d23e3fad3bbe477a8d500b2cbc30c51a.json"
+    },
+    {
+      "episode": "describe-port",
+      "run_id": "28f1516485eb4820a90acf15c4b62b97",
+      "success": true,
+      "reward": 1,
+      "failures": [],
+      "tool_calls": 1,
+      "extra_calls": 0,
+      "scope": "workflow contract only; prose factuality requires separate review",
+      "latency_s": 1.292,
+      "model_calls": 2,
+      "relay_events": 18,
+      "source": "eval/records/28f1516485eb4820a90acf15c4b62b97.json"
+    }
+  ],
+  "successes": 2,
+  "episodes": 4,
+  "date": "2026-10-08",
+  "change": "Initial controller prompt"
+}

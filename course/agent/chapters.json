@@ -1,0 +1,208 @@
+{
+  "02-training-data": {
+    "skill": "workshop-training-data",
+    "task": "Build the example training data, check its labels, and show one fresh wording suggestion for review.",
+    "actions": [
+      "inspect-data",
+      "build-data",
+      "check-data"
+    ],
+    "work": "build-data",
+    "outputs": [
+      "student-data/train.jsonl",
+      "student-data/validation.jsonl"
+    ],
+    "inputs": {},
+    "example": "24 training examples; 3 validation examples; no shared observations",
+    "note": "The tool builds the lesson's labeled examples. Model-generated wording stays separate for review."
+  },
+  "03-build-lora": {
+    "skill": "workshop-build-lora",
+    "task": "Create a small CPU model, attach a new LoRA adapter, and check which parameters can change.",
+    "actions": [
+      "inspect-model",
+      "attach-lora",
+      "check-lora"
+    ],
+    "work": "attach-lora",
+    "outputs": [
+      "cpu/base/config.json",
+      "cpu/adapter-config/adapter_config.json"
+    ],
+    "inputs": {},
+    "example": "Only LoRA parameters are trainable",
+    "note": "This is a tiny practice model, not the running Lightning model."
+  },
+  "04-train-adapter": {
+    "skill": "workshop-train-adapter",
+    "task": "Train the small CPU adapter for 40 steps, save it, and compare loss before and after.",
+    "actions": [
+      "inspect-inputs",
+      "train-adapter",
+      "check-training"
+    ],
+    "work": "train-adapter",
+    "outputs": [
+      "cpu/student-adapter/adapter_model.safetensors",
+      "cpu/training-metrics.json"
+    ],
+    "inputs": {
+      "student-data": "02-training-data",
+      "cpu/base": "03-build-lora",
+      "cpu/adapter-config": "03-build-lora"
+    },
+    "example": "40 training steps completed; adapter saved; frozen-weight check passed",
+    "note": "The fixed CPU recipe runs on the host. It does not train or restart the serving models."
+  },
+  "05-attach-and-serve": {
+    "skill": "workshop-reload-adapter",
+    "task": "Reload the CPU adapter, check that it changes model output, and compare the existing serving aliases.",
+    "actions": [
+      "inspect-adapter",
+      "reload-adapter",
+      "check-reload"
+    ],
+    "work": "reload-adapter",
+    "outputs": [
+      "lesson-summary.json"
+    ],
+    "inputs": {
+      "cpu/base": "03-build-lora",
+      "cpu/student-adapter": "04-train-adapter",
+      "student-data": "02-training-data"
+    },
+    "example": "Adapter reload changes logits; base and specialist both answer",
+    "note": "The CPU adapter is tested locally. The deployed specialist is a separate, existing adapter."
+  },
+  "06-evaluate": {
+    "skill": "workshop-evaluate",
+    "task": "Run the small evaluation and report actual scores, including malformed or incorrect answers.",
+    "actions": [
+      "inspect-cases",
+      "evaluate",
+      "check-results"
+    ],
+    "work": "evaluate",
+    "outputs": [
+      "student-candidate-evaluation.json",
+      "fresh-evaluation.json",
+      "evaluation-manifest.json"
+    ],
+    "inputs": {
+      "cpu/base": "03-build-lora",
+      "cpu/student-adapter": "04-train-adapter",
+      "student-data": "02-training-data"
+    },
+    "example": "Candidate score: 0/3 can be a valid result; it means the model needs work",
+    "note": "PASS means the evaluation ran and recorded its results, not that the model is accurate."
+  },
+  "07-specialist-tool": {
+    "skill": "workshop-specialist-tool",
+    "task": "Use Switchyard to answer one general question with base and classify one observation with specialist; check routing and tool rules.",
+    "actions": [
+      "inspect-tool",
+      "test-tool",
+      "check-tool"
+    ],
+    "work": "test-tool",
+    "outputs": [
+      "lesson-summary.json",
+      "routing-results.json"
+    ],
+    "inputs": {},
+    "example": "General \u2192 base; classification \u2192 specialist; actual model IDs checked",
+    "note": "The model proposes an answer. Code decides whether that answer passes the rules."
+  },
+  "08-agent-skills": {
+    "skill": "workshop-write-skills",
+    "task": "Create the lesson's draft-report and describe-observation skills, then discover and load them.",
+    "actions": [
+      "inspect-skills",
+      "write-skills",
+      "check-skills"
+    ],
+    "work": "write-skills",
+    "outputs": [
+      "student-skills/draft-report/SKILL.md",
+      "student-skills/describe-observation/SKILL.md"
+    ],
+    "inputs": {},
+    "example": "Two skill files created; names, instructions, and version hashes checked",
+    "note": "The tool writes the lesson templates. Edit the skill text to change what the next agent run is told to do."
+  },
+  "09-agent-loop": {
+    "skill": "workshop-run-loop",
+    "task": "Use the NVIDIA Relay skill to check the instrumented agent exercise: run it through Switchyard, capture tool/model events, and record an injected missing-evidence failure.",
+    "actions": [
+      "inspect-skill",
+      "run-loop",
+      "check-run"
+    ],
+    "work": "run-loop",
+    "outputs": [
+      "agent-run.json",
+      "student-agent.py",
+      "relay-events.json",
+      "agent-routing.json",
+      "failed-agent-run.json",
+      "failed-relay-events.json"
+    ],
+    "inputs": {
+      "student-skills": "08-agent-skills"
+    },
+    "example": "perceive \u2192 triage \u2192 draft \u2192 finish, or request_review when a check fails",
+    "note": "The prepared code wraps model/tool calls using managed Relay APIs. Check actual lifecycle events, including the injected failure. OpenClaw launches the lesson; the inner loop uses base.",
+    "supporting_skills": [
+      "nemo-relay-instrument-calls"
+    ]
+  },
+  "10-openshell-policy": {
+    "skill": "workshop-policy-check",
+    "task": "Prepare the lesson policy files and test allowed and denied operations in the existing OpenClaw sandbox.",
+    "actions": [
+      "inspect-policy",
+      "probe-policy",
+      "check-policy"
+    ],
+    "work": "probe-policy",
+    "outputs": [
+      "student-policy.yaml",
+      "student-sandbox/Dockerfile",
+      "policy-probes.json"
+    ],
+    "inputs": {
+      "student-agent.py": "09-agent-loop",
+      "student-skills": "08-agent-skills"
+    },
+    "example": "List models: allowed; /health: denied; source write: denied; scratch write: allowed",
+    "note": "The live probes test the existing demo sandbox's policy. The newly written student policy is a separate exercise file, not deployed by this demo."
+  },
+  "11-trace-and-improve": {
+    "skill": "workshop-review-trace",
+    "task": "Inspect the failed Relay trace, verify the matching Gym reward rule, train a fresh tiny CPU policy with NeMo RL loss functions, and compare the result.",
+    "actions": [
+      "inspect-trace",
+      "test-regression",
+      "check-regression"
+    ],
+    "work": "test-regression",
+    "outputs": [
+      "my-regression-case.json",
+      "regression-result.json",
+      "gym-rl/failure-case.json",
+      "gym-rl/comparison.json",
+      "gym-rl/rollouts.jsonl",
+      "gym-rl/checkpoint.json",
+      "gym-rl/demo.json"
+    ],
+    "inputs": {
+      "agent-run.json": "09-agent-loop",
+      "student-skills": "08-agent-skills",
+      "student-agent.py": "09-agent-loop",
+      "failed-agent-run.json": "09-agent-loop",
+      "failed-relay-events.json": "09-agent-loop"
+    },
+    "example": "Missing evidence \u2192 reward 0; fresh RL updates \u2192 compare plan probabilities and replay",
+    "note": "40 CPU updates train a 12-parameter plan policy. Trace evidence explains the verifier rule; training uses fresh on-policy samples. No Lightning weights change."
+  }
+}
