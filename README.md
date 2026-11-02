@@ -4,6 +4,63 @@ Participant materials for the browser demo and eleven [course notebooks](course/
 The examples use fictional observations to teach model specialization, tools, skills,
 agent loops, sandbox policy, tracing, and a small CPU reinforcement-learning exercise.
 
+## Quick start: browser demo
+
+This release includes the newer workshop UI on **port 7861**.
+Install [uv](https://docs.astral.sh/uv/getting-started/installation/), then run
+from the repository root:
+
+```bash
+bash scripts/install.sh demo
+bash scripts/start-demo.sh
+```
+
+Open **http://127.0.0.1:7861**. Recorded traces and training results can be explored
+without model servers. The Run action makes live inference calls and needs the
+Lightning service described below. Video playback requires separately supplied clips.
+Stop the server with Ctrl-C. On a remote machine, forward port 7861 over SSH.
+
+The root [requirements.txt](requirements.txt) includes the demo's pinned dependency
+lock. The installer creates a Python 3.12 environment, syncs it, checks dependencies,
+and verifies that the server imports. It can download Python and packages through uv.
+Rerunning it synchronizes these project environments, removing packages outside
+their locks. Preview commands without installing anything:
+
+```bash
+bash scripts/install.sh all --dry-run
+```
+
+## Install the course too
+
+```bash
+bash scripts/install.sh all
+.workshop/jupyter/bin/python -m jupyterlab --config=scripts/jupyter_config.py \
+  --ip=127.0.0.1 --port=8890 --ServerApp.port_retries=0 --ServerApp.root_dir="$PWD"
+```
+
+`all` installs the demo, course, Jupyter, and Gym environments and registers the
+course kernel. `course` installs only the latter three. Open the printed Jupyter
+login link, select **NATO course (PyTorch + PEFT)**, and start with notebook 01.
+Live notebook sections require the services and model assets listed below.
+
+## Start the existing workshop Spark
+
+On the original, already-provisioned machine, use its original checkout:
+
+```bash
+bash scripts/workshop.sh preflight
+bash scripts/workshop.sh up
+bash scripts/workshop.sh links
+```
+
+`up` starts the existing Nano controller, Lightning base/specialist service,
+OpenShell gateway, saved workshop sandboxes, UI on 7861, and Jupyter on 8890.
+`up --live-video` additionally starts the configured VSS/Cosmos stack.
+It does not install dependencies, create model containers, or open an OpenClaw TUI.
+The launcher expects the original container identities, model adapter, and clips,
+even when using recorded observations. Do not use it as a fresh-clone installer.
+See the [lifecycle guide](scripts/README.md).
+
 ## Choose a starting point
 
 - **Explore the browser demo:** follow [run/workshop/README.md](run/workshop/README.md).

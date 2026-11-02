@@ -9,13 +9,14 @@ For the original provisioned Spark, see [the lifecycle guide](../../scripts/READ
 From the repository root:
 
 ~~~bash
-uv venv run/workshop/.venv --python 3.12
-uv pip sync --python run/workshop/.venv/bin/python run/workshop/requirements.lock
-cd run/workshop
-.venv/bin/python -m uvicorn workshop_agent.server:app --host 127.0.0.1 --port 7861
+bash scripts/install.sh demo
+bash scripts/start-demo.sh
 ~~~
 
 Open http://127.0.0.1:7861. Keep the process running in your terminal or session manager.
+Install [uv](https://docs.astral.sh/uv/getting-started/installation/) first.
+The installer uses the root `requirements.txt`, which includes this directory's
+`requirements.lock`. It installs Python dependencies; it does not provision models.
 For a remote Spark, forward port 7861 over SSH. Models must already be running for live inference; VSS is needed only for live perception;
 this application does not start, stop, or reconfigure those containers.
 

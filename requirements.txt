@@ -1,0 +1,3 @@
+# Newer workshop UI (port 7861), Python 3.12.
+# Course/Gym use separate environments: bash scripts/install.sh all
+-r run/workshop/requirements.lock
