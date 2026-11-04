@@ -201,14 +201,15 @@
         </div>
         <details class="evidence-drawer">
           <summary>What supports VSS behind the scenes?</summary>
+          <p>Sources: <a href="https://build.nvidia.com/nvidia/video-search-and-summarization/blueprintcard">NVIDIA VSS blueprint</a>, <a href="https://build.nvidia.com/spark/vss">DGX Spark guide</a>, and <a href="https://docs.nvidia.com/vss">NVIDIA VSS documentation</a>. Current blueprint models may differ from this workshop.</p>
           <p>
             VST manages video access: clips, snapshots, and the video list. The
             local deployment also includes stream and sensor services, Redis and
-            PostgreSQL, and Phoenix for VSS tracing. NVIDIA NIM services serve
-            the Nano and Cosmos models.
+            PostgreSQL, and Phoenix for VSS tracing. NVIDIA NIM is an upstream model-serving option. The illustrated
+            Nano/Cosmos deployment must be verified against its actual container images.
           </p>
           <p>
-            This walkthrough covers the installed base profile. Search and
+            This walkthrough illustrates the workshop base-profile path. Search and
             alerts are separate profiles. The workshop agent uses NeMo Relay for
             its own traces, shown in the next section.
           </p>

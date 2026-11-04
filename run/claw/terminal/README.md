@@ -16,7 +16,7 @@ openshell gateway list
 openshell status
 ```
 
-The workshop was tested with OpenShell **0.0.85**. Current upstream instructions
+The workshop was tested with OpenShell **0.0.85**; use [NVIDIA’s v0.0.85 source](https://github.com/NVIDIA/OpenShell/tree/v0.0.85) as the release reference alongside [policy.yaml](policy.yaml). Current upstream instructions
 describe a newer release; use a matching CLI/gateway pair and review policy schema
 changes before upgrading. A CLI installation alone does not provide a running
 gateway. If no gateway is registered, follow the upstream setup before continuing.
@@ -141,7 +141,7 @@ openshell policy set nato-openclaw-demo --policy run/claw/terminal/policy.yaml -
 
 These commands change the network policy of one sandbox. Filesystem and process
 policy changes may require recreating it; consult the
-[policy documentation](https://docs.nvidia.com/openshell/latest/sandboxes/policies)
+[policy documentation](https://docs.nvidia.com/openshell/how-it-works/policies/overview)
 for your installed version. Do not use a global policy for this exercise.
 
 Notebook 10 adds filesystem probes and records the results. Its generated student

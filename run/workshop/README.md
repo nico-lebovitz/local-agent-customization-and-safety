@@ -142,3 +142,20 @@ integration, not callable training or deployment tools.
 
 For an agent running under an applied policy, use the
 [OpenClaw sandbox exercise](../claw/terminal/README.md).
+
+## NVIDIA video blueprint and deployment evidence
+
+Official starting points are the [VSS blueprint card](https://build.nvidia.com/nvidia/video-search-and-summarization/blueprintcard), [DGX Spark VSS guide](https://build.nvidia.com/spark/vss), and [NVIDIA VSS architecture and component documentation](https://docs.nvidia.com/vss). Browse related agent instructions in the [NVIDIA skills catalog](https://build.nvidia.com/skills). The browser workflow has no skill loader; notebook 09 separately loads the pinned Relay skill.
+
+The UI illustrates the original workshop path: Nano 9B v2 plans video-tool calls, VST supplies clip access, and Cosmos Reason2 interprets frames. These are external deployment descriptions, not a container manifest included in this clone. The current blueprint card lists newer models; its defaults must not be substituted silently for the workshop model IDs. NIM is an upstream serving option; the Python client only verifies the configured HTTP API, not the serving engine.
+
+Before claiming the live stack is reproduced, record:
+
+- VSS release or Git commit, deployment profile, Compose configuration, container image tags/digests, and VST version.
+- Nano/Cosmos model IDs, revisions, precision, serving engine, and the separate Lightning checkpoint and adapter hashes.
+- The deployed OpenAPI schema: this client calls `POST /generate` with `input_message` and accepts a JSON string or a string-valued `value` field. This contract is specific to the configured deployment.
+- A clip-name-to-video-ID mapping and a saved successful response for the selected clip. The client asks by clip name; a healthy endpoint alone does not prove the agent selected the correct footage.
+
+Use [runtime.py](workshop_agent/runtime.py) for the exact request/response handling and [the lifecycle script](../../scripts/workshop.py) for expected original-machine container names. No release/digest is invented when the deployment record is unavailable. Recorded mode reads local descriptions and calls none of these video services.
+
+For the agent layer, [NVIDIA’s Switchyard TOML reference](https://nvidia-nemo.github.io/Switchyard/reference/toml_schema/) describes our passthrough routes, [Relay 0.9.4](https://docs.nvidia.com/nemo/relay/v0.9.4/instrument-applications/instrument-tool-call) describes managed tool calls, and the [NAT migration notice](https://docs.nvidia.com/nemo/agent-toolkit/latest/resources/migration-guide.html) records its deprecation. This pinned NAT demo is not a new-project framework recommendation.

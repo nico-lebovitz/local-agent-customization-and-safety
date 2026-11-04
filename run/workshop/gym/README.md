@@ -1,5 +1,7 @@
 # Gym + RL teaching experiment
 
+**CPU training is for demonstration purposes only.** For actual Lightning supervised LoRA training, follow [train_lightning.py](../../../course/scripts/train_lightning.py) and [notebook 04](../../../course/04-train-adapter.ipynb). For the full Gym/NeMo RL exercise, follow the optional setup walkthrough in [notebook 11](../../../course/11-trace-and-improve.ipynb): task splits, Agent and Resources servers, trainer integration, GPU allocation and held-out evaluation. This requires additional implementation and a separate training environment; the twelve-logit CPU checkpoint cannot be loaded into Lightning.
+
 This exercise trains a small CPU policy: 12 trainable logits choose one of four fixed tool plans for three request intents. It teaches the reward → group advantage → policy update loop. It does not train the Lightning adapter, production agent, or a language model.
 
 ## What runs
@@ -33,7 +35,7 @@ Expected reward is computed by enumerating all 12 intent/plan combinations in th
 3. Run the full NeMo RL training stack on an isolated GPU worker/checkpoint; budget room for training state and rollout generation. The CPU exercise adds no GPU workload.
 4. Evaluate held-out tasks and review reward exploits before replacing the production controller. A successful finite teaching task does not validate the production workflow.
 
-Official references: [Gym Resources servers](https://docs.nvidia.com/nemo/gym/main/environment-tutorials/), [Gym external agents](https://docs.nvidia.com/nemo/gym/main/agent-server/), [NeMo RL + Gym integration](https://docs.nvidia.com/nemo/rl/nightly/design-docs/nemo-gym-integration.html).
+Official references: [Gym Resources servers](https://docs.nvidia.com/nemo/gym/v0.6.0/environment-tutorials/), [Gym external agents](https://docs.nvidia.com/nemo/gym/v0.6.0/agent-server/), [NeMo RL + Gym integration](https://docs.nvidia.com/nemo/rl/nightly/design-docs/nemo-gym-integration.html).
 
 ## How Relay supports the learning story
 

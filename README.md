@@ -1,6 +1,10 @@
 # Agentic AI workshop
 
+**Training scope:** CPU training in notebooks 03–04 and 11 is for demonstration purposes only. Actual Lightning GPU fine-tuning follows [train_lightning.py](course/scripts/train_lightning.py), with environment requirements and commands in [notebook 04](course/04-train-adapter.ipynb). [Notebook 11](course/11-trace-and-improve.ipynb) documents the optional full Gym/NeMo RL exercise, including tasks, verifiers, trainer integration and held-out evaluation. These GPU paths are opt-in; they do not run with Run All.
+
 Participant materials for the browser demo and eleven [course notebooks](course/README.md).
+The manual notebooks expose executable API, training, evaluation, routing, and agent-loop code.
+Notebook 05 also includes an optional, documented [NIM LoRA serving example](course/05-attach-and-serve.ipynb); it is not executed by Run All.
 The examples use fictional observations to teach model specialization, tools, skills,
 agent loops, sandbox policy, tracing, and a small CPU reinforcement-learning exercise.
 
@@ -68,6 +72,14 @@ See the [lifecycle guide](scripts/README.md).
 - **Work through the notebooks:** follow [course/README.md](course/README.md) in order.
 - **Operate the original workshop Spark:** see [scripts/README.md](scripts/README.md).
   Its lifecycle launcher manages an existing deployment and is not an installer.
+
+## NVIDIA documentation, skills, and blueprints
+
+The [course source map](course/README.md#nvidia-source-map) connects each integration to NVIDIA documentation and the exact local implementation. Browse [official NVIDIA agent skills](https://build.nvidia.com/skills); notebook 09 includes `nemo-relay-instrument-calls`, while `nemo-automodel-recipe-development` is an optional review reference. Workshop-specific skills are authored in this repository.
+
+For video, see the [VSS blueprint on build.nvidia.com](https://build.nvidia.com/nvidia/video-search-and-summarization/blueprintcard), [DGX Spark VSS playbook](https://build.nvidia.com/spark/vss), and [NVIDIA VSS documentation](https://docs.nvidia.com/vss). Those pages describe upstream options, not proof of the installed workshop profile. The [demo deployment evidence guide](run/workshop/README.md#nvidia-video-blueprint-and-deployment-evidence) explains the required version and API records.
+
+Model references: [Lightning NVFP4](https://build.nvidia.com/nvidia/nemotron-3.5-lightning-30b-a3b/modelcard), [Lightning BF16](https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16), and [Nano 9B v2 FP8](https://huggingface.co/nvidia/NVIDIA-Nemotron-Nano-9B-v2-FP8). Record the deployed checkpoint revision and adapter hash separately from API model aliases. The course’s CPU adapter belongs to a different practice model.
 
 ## Services and assets
 
