@@ -1,5 +1,7 @@
 # Agentic AI workshop
 
+**Built for NVIDIA DGX Spark: Linux ARM64 (aarch64), GB10, 128 GB unified memory.** Other hardware is not validated for the full workshop. Start with the [fresh-Spark setup guide](SPARK-SETUP.md) for hardware/storage requirements, Docker/GPU setup, model downloads, Lightning specialist provisioning, Nano tool calling, OpenShell, UI and Jupyter. The [model-service launcher](scripts/model_services.py) provides `plan`, `preflight`, `start` and `check` commands. This fresh-machine path still needs an end-to-end qualification on a clean Spark.
+
 **Training scope:** CPU training in notebooks 03–04 and 11 is for demonstration purposes only. Actual Lightning GPU fine-tuning follows [train_lightning.py](course/scripts/train_lightning.py), with environment requirements and commands in [notebook 04](course/04-train-adapter.ipynb). [Notebook 11](course/11-trace-and-improve.ipynb) documents the optional full Gym/NeMo RL exercise, including tasks, verifiers, trainer integration and held-out evaluation. These GPU paths are opt-in; they do not run with Run All.
 
 Participant materials for the browser demo and eleven [course notebooks](course/README.md).
@@ -103,7 +105,7 @@ The serving model used in the workshop was NVIDIA Nemotron 3.5 Lightning 30B-A3B
 adapter must be provisioned separately. The CPU adapter built in the course cannot
 be loaded into Lightning. A dedicated-GPU reproduction recipe is provided at
 `course/scripts/train_lightning.py`; it requires a separate NeMo AutoModel environment.
-This repository does not install the model-serving or VSS deployment.
+The [fresh-Spark guide](SPARK-SETUP.md) and `scripts/model_services.py` now provide model-serving launch instructions. VSS remains an optional separate deployment.
 
 The tested environments were Linux ARM64 on a Spark, Python 3.12 for the browser
 server, and Python 3.14 for the CPU course and Gym environments. Lock files capture
@@ -112,7 +114,7 @@ those environments; installation on other platforms has not been verified.
 ## Provision services before running the course
 
 The environment setup below installs notebook dependencies. Provision these
-external services separately before attempting the live exercises:
+external services using the [fresh-Spark setup guide](SPARK-SETUP.md) before attempting the live exercises. The following summarizes their contracts:
 
 1. Obtain the Lightning model/tokenizer and a compatible JISR adapter. Review the
    [vLLM LoRA serving guide](https://docs.vllm.ai/en/latest/features/lora/) for a

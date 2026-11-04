@@ -11,8 +11,16 @@ bash scripts/install.sh all        # also install course, Jupyter, and Gym
 Install uv first. `install.sh all --dry-run` previews every command. These scripts
 work from any current directory and keep environments inside the checkout.
 The installer checks Python versions before syncing an existing environment.
-Model serving, GPU drivers, Docker, OpenShell, model downloads, and licensed clips
-are separate prerequisites; see the [root setup guide](../README.md).
+For model serving, GPU drivers, Docker, OpenShell, model downloads and clip requirements, follow the [fresh-Spark setup guide](../SPARK-SETUP.md).
+
+```bash
+python3 scripts/model_services.py plan       # prints commands; no changes
+python3 scripts/model_services.py preflight  # requires assets and free ports
+python3 scripts/model_services.py start      # loopback APIs; see guide for sandbox access
+python3 scripts/model_services.py check      # discovery, generation and Nano tool-call probes
+```
+
+The launcher targets Linux ARM64 on a 128 GB DGX Spark. It uses separate `workshop-lightning` and `workshop-nano` containers and refuses existing names/occupied ports. It does not install drivers, download models, train an adapter or provision OpenShell. The guide supplies those stages. No fresh-machine end-to-end validation has yet been performed.
 
 ## Original Spark lifecycle
 

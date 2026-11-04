@@ -20,7 +20,7 @@ These eleven notebooks are the current course. Run the executable teaching cells
 
 ## Running the course
 
-Follow the environment and service prerequisites in the [repository README](../README.md). Use the **NATO course (PyTorch + PEFT)** Jupyter kernel. The video in 09 uses Jupyter’s file endpoint with the repository root as its root directory (the workshop server on port 8890).
+On a new machine, first follow the [fresh-Spark setup guide](../SPARK-SETUP.md). This course targets Linux ARM64 on a 128 GB DGX Spark. Then follow the environment and service prerequisites in the [repository README](../README.md). Use the **NATO course (PyTorch + PEFT)** Jupyter kernel. The video in 09 uses Jupyter’s file endpoint with the repository root as its root directory (the workshop server on port 8890).
 
 Run each notebook’s manual steps first. At the terminal step, exit the previous TUI with `/exit`, run the preparation and launch cells, then paste only the generated task into OpenClaw. The terminal opens on the workshop computer’s desktop. After the agent finishes, return to Jupyter and run the results cell. Run All cannot complete that interactive handoff for you.
 
